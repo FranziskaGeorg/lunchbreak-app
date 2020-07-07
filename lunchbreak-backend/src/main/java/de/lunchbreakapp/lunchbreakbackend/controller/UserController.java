@@ -32,7 +32,7 @@ public class UserController {
         userService.addSampleUsersToDb();
     }
 
-    @GetMapping
+    @GetMapping("dailymatch")
     public User getRandomUser() {
         return userService.getRandomUser();
     }
