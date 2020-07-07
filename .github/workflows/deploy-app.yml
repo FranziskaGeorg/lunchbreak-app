@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lunchbreak-app.jar
-          path: bandaid-backend/target/bandaid-app.jar
+          path: lunchbreak-backend/target/lunchbreak-app.jar
 
   deploy:
     name: deploy to heroku
