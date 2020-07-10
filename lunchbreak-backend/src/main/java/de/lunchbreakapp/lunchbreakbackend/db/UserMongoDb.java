@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.db;
 
-import de.lunchbreakapp.lunchbreakbackend.model.User;
+import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserMongoDb extends PagingAndSortingRepository<User, String> {
+public interface UserMongoDb extends PagingAndSortingRepository<LunchBreakUser, String> {
 }
