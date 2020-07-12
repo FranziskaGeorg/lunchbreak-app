@@ -14,9 +14,8 @@ import java.util.Map;
 @Service
 public class JWTUtils {
 
-    //@Value("${auth.jwt.secret}")
-    //private String secret;
-    private final String secret = "top-secret";
+    @Value("${auth.jwt.secret}")
+    private String secret;
 
     public String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
