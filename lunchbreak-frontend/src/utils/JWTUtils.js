@@ -1,6 +1,6 @@
 const jwtDecode = require('jwt-decode');
 
-const key = 'planning-user-token';
+const key = 'lunchbreak-user-token';
 
 export function getJWTToken() {
     return localStorage.getItem(key);

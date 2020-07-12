@@ -1,31 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {getRandomColleagueFetch} from "../utils/FetchUtils";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
-
 export default function MatchCard() {
-    const classes = useStyles();
     const [dailyMatch, setDailyMatch] = useState({});
 
     useEffect(() => {
@@ -39,7 +20,7 @@ export default function MatchCard() {
     }
 
     return (
-        <Card className={classes.root}>
+        <Card>
             <CardContent>
                 <Typography variant="h5" component="h2">
                     {dailyMatch.firstName}
@@ -49,8 +30,8 @@ export default function MatchCard() {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={handleShuffleClick}>Neu mischen</Button>
-                <Button size="small">Lunchen gehen</Button>
+                <Button variant="contained" size="small" color="secondary" onClick={handleShuffleClick}>Neu mischen</Button>
+                <Button variant="contained" size="small" color="secondary">Lunchen gehen</Button>
             </CardActions>
         </Card>
     )
