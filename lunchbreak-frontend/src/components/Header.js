@@ -3,18 +3,18 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import {useLocation} from "react-router";
 import {UserStateContext} from "../context/user/UserContext";
-import LunchBreakTheme from "../theme/LunchBreakTheme";
-import useTheme from "@material-ui/core/styles/useTheme";
+import logo from '../images/happytoast.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    logo: {
+        marginRight: theme.spacing(0.5),
+        width: '12%',
+        height: '12%'
     },
     title: {
         flexGrow: 1,
@@ -32,13 +32,13 @@ export default function Header() {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static" color="primary">
+                <AppBar position="static" color="info">
                     <Toolbar>
                         {location.pathname === '/dailymatch' &&
-                        <Typography variant="h4" className={classes.title}>
+                        <Typography variant="h4" color="primary" className={classes.title}>
                             Lunchen mit...
                         </Typography>}
-                        <Button color="inherit">Login</Button>
+                        <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
                     </Toolbar>
                 </AppBar>
             </div>
