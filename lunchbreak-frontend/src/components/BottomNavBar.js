@@ -7,6 +7,7 @@ import {FaUtensils, FaUser, FaCalendarAlt, FaPaperPlane, FaSignOutAlt} from "rea
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from "@material-ui/core/Grid";
 import {useLocation} from "react-router";
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,6 +29,7 @@ export default function BottomNavBar() {
                 <Toolbar>
                     <Grid container justify="space-between">
                         <Grid item>
+                            <Link to="/dailymatch">
                             {location.pathname === '/dailymatch' ?
                                 <SvgIcon color="error">
                                     <FaUtensils/>
@@ -35,15 +37,18 @@ export default function BottomNavBar() {
                                 <SvgIcon color="primary">
                                     <FaUtensils/>
                                 </SvgIcon>}
+                            </Link>
                         </Grid>
                         <Grid item>
-                            {location.pathname === '/profile' ?
-                                <SvgIcon color="error">
-                                    <FaUser/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaUser/>
-                                </SvgIcon>}
+                            <Link to="/profile">
+                                {location.pathname === '/profile' ?
+                                    <SvgIcon color="error">
+                                        <FaUser/>
+                                    </SvgIcon> :
+                                    <SvgIcon color="primary">
+                                        <FaUser/>
+                                    </SvgIcon>}
+                            </Link>
                         </Grid>
                         <Grid item>
                             {location.pathname === '/history' ?

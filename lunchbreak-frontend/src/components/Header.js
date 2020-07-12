@@ -37,6 +37,10 @@ export default function Header() {
                     <Typography variant="h4" color="primary" className={classes.title}>
                         Lunchen mit...
                     </Typography>}
+                    {location.pathname === '/profile' &&
+                    <Typography variant="h4" color="primary" className={classes.title}>
+                        Dein Profil
+                    </Typography>}
                     <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
                 </Toolbar>
             </AppBar>
