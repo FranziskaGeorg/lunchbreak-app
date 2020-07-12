@@ -12,6 +12,7 @@ import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import BottomNavBar from "./components/BottomNavBar";
 
 function Navigation() {
     const dispatch = useContext(UserDispatchContext);
@@ -30,6 +31,7 @@ function Navigation() {
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
             </Switch>
         </Container>
+        <BottomNavBar/>
     </BrowserRouter>
 }
 
