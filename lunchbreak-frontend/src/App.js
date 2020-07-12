@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from 'react';
 import './App.css';
-import MatchCard from "./components/MatchCard";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import UserContextProvider, {LOGIN_SUCCESS} from "./context/user/UserContextProvider";
 import PrivateRoute from "./pages/PrivateRoute";
 import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
+import DailyMatch from "./pages/DailyMatch";
 
 function Navigation() {
     const dispatch = useContext(UserDispatchContext);
@@ -20,7 +20,7 @@ function Navigation() {
     return <BrowserRouter>
         <Switch>
             <Route path="/login" component={LoginPage} exact/>
-            <PrivateRoute path="/dailymatch" component={MatchCard} exact/>
+            <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
         </Switch>
     </BrowserRouter>
 }
