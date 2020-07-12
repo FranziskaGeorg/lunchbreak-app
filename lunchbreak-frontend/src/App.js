@@ -7,6 +7,7 @@ import PrivateRoute from "./pages/PrivateRoute";
 import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
 import DailyMatch from "./pages/DailyMatch";
+import ProfilePage from "./pages/ProfilePage";
 import Header from "./components/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
@@ -29,6 +30,7 @@ function Navigation() {
             <Switch>
                 <Route path="/login" component={LoginPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
+                <PrivateRoute path="/profile" component={ProfilePage} exact/>
             </Switch>
         </Container>
         <BottomNavBar/>
