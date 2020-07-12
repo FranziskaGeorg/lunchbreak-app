@@ -20,7 +20,7 @@ function Navigation() {
     return <BrowserRouter>
         <Switch>
             <Route path="/login" component={LoginPage} exact/>
-            <PrivateRoute path="/" component={MatchCard} exact/>
+            <PrivateRoute path="/dailymatch" component={MatchCard} exact/>
         </Switch>
     </BrowserRouter>
 }
