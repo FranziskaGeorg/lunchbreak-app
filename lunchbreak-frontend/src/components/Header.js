@@ -10,6 +10,7 @@ import logo from '../images/happytoast.png';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        marginBottom: theme.spacing(2)
     },
     logo: {
         marginRight: theme.spacing(0.5),

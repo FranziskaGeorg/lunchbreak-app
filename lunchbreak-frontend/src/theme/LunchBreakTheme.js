@@ -10,7 +10,7 @@ const LunchBreakTheme = createMuiTheme({
             {
                 main: '#b3d5d4' // light turquoise
             },
-        success:
+        error:
             {
                 main: '#dfa528' // sandy yellow
             },
