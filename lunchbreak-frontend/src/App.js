@@ -8,6 +8,8 @@ import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
 import DailyMatch from "./pages/DailyMatch";
 import Header from "./components/Header";
+import LunchBreakTheme from "./theme/LunchBreakTheme";
+import {ThemeProvider} from '@material-ui/styles';
 
 function Navigation() {
     const dispatch = useContext(UserDispatchContext);
@@ -29,8 +31,10 @@ function Navigation() {
 
 export default function App() {
     return (
-        <UserContextProvider>
-            <Navigation/>
-        </UserContextProvider>
+        <ThemeProvider theme={LunchBreakTheme}>
+            <UserContextProvider>
+                <Navigation/>
+            </UserContextProvider>
+        </ThemeProvider>
     )
 }

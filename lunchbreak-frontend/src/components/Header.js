@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {useLocation} from "react-router";
 import {UserStateContext} from "../context/user/UserContext";
+import LunchBreakTheme from "../theme/LunchBreakTheme";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,10 +32,10 @@ export default function Header() {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar position="static" color="primary">
                     <Toolbar>
                         {location.pathname === '/dailymatch' &&
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h4" className={classes.title}>
                             Lunchen mit...
                         </Typography>}
                         <Button color="inherit">Login</Button>
