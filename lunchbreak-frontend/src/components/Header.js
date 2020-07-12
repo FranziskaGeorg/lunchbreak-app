@@ -8,7 +8,7 @@ import {UserStateContext} from "../context/user/UserContext";
 import logo from '../images/happytoast.png';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    appBar: {
         flexGrow: 1,
         marginBottom: theme.spacing(2)
     },
@@ -26,23 +26,20 @@ export default function Header() {
     const classes = useStyles();
 
     let location = useLocation();
-    console.log(location);
 
     const {authStatus} = useContext(UserStateContext);
     if (authStatus === 'SUCCESS') {
 
         return (
-            <div className={classes.root}>
-                <AppBar position="static" color="info">
-                    <Toolbar>
-                        {location.pathname === '/dailymatch' &&
-                        <Typography variant="h4" color="primary" className={classes.title}>
-                            Lunchen mit...
-                        </Typography>}
-                        <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
-                    </Toolbar>
-                </AppBar>
-            </div>
+            <AppBar position="static" color="info" className={classes.appBar}>
+                <Toolbar>
+                    {location.pathname === '/dailymatch' &&
+                    <Typography variant="h4" color="primary" className={classes.title}>
+                        Lunchen mit...
+                    </Typography>}
+                    <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
+                </Toolbar>
+            </AppBar>
         );
     }
     return (
