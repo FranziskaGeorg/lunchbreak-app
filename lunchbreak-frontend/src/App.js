@@ -10,6 +10,8 @@ import DailyMatch from "./pages/DailyMatch";
 import Header from "./components/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 function Navigation() {
     const dispatch = useContext(UserDispatchContext);
@@ -22,10 +24,12 @@ function Navigation() {
 
     return <BrowserRouter>
         <Header/>
-        <Switch>
-            <Route path="/login" component={LoginPage} exact/>
-            <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
-        </Switch>
+        <Container maxWidth={'md'} component="main">
+            <Switch>
+                <Route path="/login" component={LoginPage} exact/>
+                <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
+            </Switch>
+        </Container>
     </BrowserRouter>
 }
 
@@ -33,6 +37,7 @@ export default function App() {
     return (
         <ThemeProvider theme={LunchBreakTheme}>
             <UserContextProvider>
+                <CssBaseline />
                 <Navigation/>
             </UserContextProvider>
         </ThemeProvider>
