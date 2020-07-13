@@ -13,8 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 
-@RequestMapping("auth/login")
 @RestController
+@RequestMapping("auth/login")
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
