@@ -6,7 +6,7 @@ import de.lunchbreakapp.lunchbreakbackend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("register")
+@RequestMapping("auth/register")
 public class RegistrationController {
 
     private final UserService userService;
