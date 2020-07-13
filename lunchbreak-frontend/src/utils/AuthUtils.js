@@ -12,13 +12,13 @@ export async function performLogin(username, password) {
     return await response.text();
 }
 
-export async function performRegistration({registrationData}) {
+export async function performRegistration(registrationData) {
     const response = await fetch('/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ registrationData }),
+        body: JSON.stringify(registrationData),
     });
     if (response.status !== 200) {
         throw new Error(`Registration failed: ${response.statusText}`);

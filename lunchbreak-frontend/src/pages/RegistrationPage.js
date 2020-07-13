@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useReducer} from "react";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
+import {performRegistration} from "../utils/AuthUtils";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
@@ -13,6 +14,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RegistrationPage() {
     const classes = useStyles();
+    const [userInput, setUserInput] = useReducer(
+        (state, newState) => ({...state, ...newState}),
+        {
+            firstName: '',
+            lastName: '',
+            username: '',
+            email: '',
+            password: '',
+            matchingPassword: ''
+        }
+    )
+
+    function handleInputChange(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+        setUserInput({[field]: value});
+    }
+
+    function handleRegistrationClick() {
+        performRegistration(userInput)
+            .then(data => console.log(data));
+    }
 
     return (
         <Grid container
@@ -38,62 +61,83 @@ export default function RegistrationPage() {
                         <TextField
                             required
                             id="filled-required"
+                            name="firstName"
                             label="Vorname"
                             variant="filled"
+                            value={userInput.firstName}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             required
                             id="filled-required"
+                            name="lastName"
                             label="Nachname"
                             variant="filled"
+                            value={userInput.lastName}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             required
                             id="filled-required"
+                            name="username"
                             label="Nutzername"
                             variant="filled"
+                            value={userInput.username}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             required
                             id="filled-required"
+                            name="email"
                             label="E-Mail-Adresse"
                             variant="filled"
+                            value={userInput.email}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             required
                             id="filled-required"
+                            name="password"
                             label="Passwort"
                             type="password"
                             variant="filled"
+                            value={userInput.password}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
                             required
                             id="filled-required"
+                            name="matchingPassword"
                             label="Passwort wiederholen"
                             type="password"
                             variant="filled"
+                            value={userInput.matchingPassword}
+                            onChange={handleInputChange}
                         />
                     </Grid>
                     <Grid item>
                         <Button
-                            variant="contained">
+                            variant="contained"
+                            onClick={handleRegistrationClick}
+                        >
                             Account erstellen
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button
                             variant="contained"
-                            href="/login">
+                            href="/login"
+                        >
                             Abbrechen
                         </Button>
                     </Grid>
