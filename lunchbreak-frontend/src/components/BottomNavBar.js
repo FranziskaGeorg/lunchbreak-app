@@ -8,6 +8,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from "@material-ui/core/Grid";
 import {useLocation} from "react-router";
 import {Link} from 'react-router-dom';
+import LogoutIcon from "./LogoutIcon";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -69,13 +70,7 @@ export default function BottomNavBar() {
                                 </SvgIcon>}
                         </Grid>
                         <Grid item>
-                            {location.pathname === '/logout' ?
-                                <SvgIcon color="error">
-                                    <FaSignOutAlt/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaSignOutAlt/>
-                                </SvgIcon>}
+                            <LogoutIcon/>
                         </Grid>
                     </Grid>
                 </Toolbar>
