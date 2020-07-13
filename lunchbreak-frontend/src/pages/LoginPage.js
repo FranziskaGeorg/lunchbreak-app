@@ -11,7 +11,7 @@ import {getDecodedJWTToken, setJWTToken} from "../utils/JWTUtils";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(4)
     },
 }));
 
@@ -42,11 +42,11 @@ export default function LoginPage() {
     }
 
     return (
-        <Grid
-            className={classes.gridContainer}
-            container
-            alignContent="center"
-            justify="center"
+        <Grid container
+              direction="column"
+              alignContent="center"
+              justify="center"
+              spacing={2}
         >
             <Grid item>
                 <div>
@@ -65,7 +65,12 @@ export default function LoginPage() {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
-                <Button onClick={login}>Login</Button>
+            </Grid>
+            <Grid item>
+                <Button variant="contained" onClick={login}>Login</Button>
+            </Grid>
+            <Grid item>
+                <Button variant="contained" onClick={login}>Noch keinen Account? Hier registrieren!</Button>
             </Grid>
         </Grid>
     );
