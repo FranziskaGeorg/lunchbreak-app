@@ -24,21 +24,21 @@ export default function LoginPage() {
     const classes = useStyles();
 
     function login() {
-        dispatch({ type: LOGIN });
+        dispatch({type: LOGIN});
         performLogin(username, password)
             .then((data) => {
                 setJWTToken(data);
                 const userData = getDecodedJWTToken();
-                dispatch({ type: LOGIN_SUCCESS, payload: userData });
+                dispatch({type: LOGIN_SUCCESS, payload: userData});
             })
             .catch(() => {
-                dispatch({ type: LOGIN_FAILED });
+                dispatch({type: LOGIN_FAILED});
             });
     }
 
-    const { authStatus } = useContext(UserStateContext);
+    const {authStatus} = useContext(UserStateContext);
     if (authStatus === 'SUCCESS') {
-        return <Redirect to={'/dailymatch'} />;
+        return <Redirect to={'/dailymatch'}/>;
     }
 
     return (
@@ -77,8 +77,8 @@ export default function LoginPage() {
             <Grid item>
                 <Button
                     variant="contained"
-                    onClick={login}>
-                    Noch keinen Account? Hier registrieren!
+                    href="/register">
+                    Noch keinen Account? Hier geht's zur Registrierung.
                 </Button>
             </Grid>
         </Grid>
