@@ -43,6 +43,7 @@ export default function LoginPage() {
 
     return (
         <Grid container
+              className={classes.gridContainer}
               direction="column"
               alignContent="center"
               justify="center"
@@ -67,10 +68,18 @@ export default function LoginPage() {
                 </div>
             </Grid>
             <Grid item>
-                <Button variant="contained" onClick={login}>Login</Button>
+                <Button
+                    variant="contained"
+                    onClick={login}>
+                    Login
+                </Button>
             </Grid>
             <Grid item>
-                <Button variant="contained" onClick={login}>Noch keinen Account? Hier registrieren!</Button>
+                <Button
+                    variant="contained"
+                    onClick={login}>
+                    Noch keinen Account? Hier registrieren!
+                </Button>
             </Grid>
         </Grid>
     );
