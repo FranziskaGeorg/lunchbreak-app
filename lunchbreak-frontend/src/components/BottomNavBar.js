@@ -8,6 +8,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from "@material-ui/core/Grid";
 import {useLocation} from "react-router";
 import {Link} from 'react-router-dom';
+import LogoutButton from "./LogoutButton";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -20,70 +21,49 @@ const useStyles = makeStyles((theme) => ({
 export default function BottomNavBar() {
     const classes = useStyles();
     let location = useLocation();
-
     const {authStatus} = useContext(UserStateContext);
-    if (authStatus === 'SUCCESS') {
 
+    function NavBarButton({currentPath, icon}) {
         return (
-            <AppBar color="info" className={classes.appBar}>
-                <Toolbar>
-                    <Grid container justify="space-between">
-                        <Grid item>
-                            <Link to="/dailymatch">
-                            {location.pathname === '/dailymatch' ?
-                                <SvgIcon color="error">
-                                    <FaUtensils/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaUtensils/>
-                                </SvgIcon>}
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link to="/profile">
-                                {location.pathname === '/profile' ?
-                                    <SvgIcon color="error">
-                                        <FaUser/>
-                                    </SvgIcon> :
-                                    <SvgIcon color="primary">
-                                        <FaUser/>
-                                    </SvgIcon>}
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            {location.pathname === '/history' ?
-                                <SvgIcon color="error">
-                                    <FaCalendarAlt/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaCalendarAlt/>
-                                </SvgIcon>}
-                        </Grid>
-                        <Grid item>
-                            {location.pathname === '/news' ?
-                                <SvgIcon color="error">
-                                    <FaPaperPlane/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaPaperPlane/>
-                                </SvgIcon>}
-                        </Grid>
-                        <Grid item>
-                            {location.pathname === '/logout' ?
-                                <SvgIcon color="error">
-                                    <FaSignOutAlt/>
-                                </SvgIcon> :
-                                <SvgIcon color="primary">
-                                    <FaSignOutAlt/>
-                                </SvgIcon>}
-                        </Grid>
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-        );
+            <Link to={currentPath}>
+                {location.pathname === currentPath ?
+                    <SvgIcon color="error">
+                        {icon}
+                    </SvgIcon> :
+                    <SvgIcon color="primary">
+                        {icon}
+                    </SvgIcon>}
+            </Link>
+        )
+    }
+
+    if (authStatus !== 'SUCCESS') {
+        return (
+            <>
+            </>
+        )
     }
     return (
-        <>
-        </>
+        <AppBar color="info" className={classes.appBar}>
+            <Toolbar>
+                <Grid container justify="space-between">
+                    <Grid item>
+                        <NavBarButton currentPath={"/dailymatch"} icon={<FaUtensils/>}/>
+                    </Grid>
+                    <Grid item>
+                        <NavBarButton currentPath={"/profile"} icon={<FaUser/>}/>
+                    </Grid>
+                    <Grid item>
+                        <NavBarButton currentPath={"/history"} icon={<FaCalendarAlt/>}/>
+                    </Grid>
+                    <Grid item>
+                        <NavBarButton currentPath={"/news"} icon={<FaPaperPlane/>}/>
+                    </Grid>
+                    <Grid item>
+                        <LogoutButton/>
+                    </Grid>
+                </Grid>
+            </Toolbar>
+        </AppBar>
     );
 }
