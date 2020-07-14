@@ -8,7 +8,10 @@ import ProfileForm from "../components/profile/ProfileForm";
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4)
+        paddingBottom: theme.spacing(1)
+    },
+    card: {
+        marginBottom: theme.spacing(10)
     }
 }));
 
@@ -16,7 +19,7 @@ export default function ProfilePage() {
     const classes = useStyles();
 
     return (
-        <Card>
+        <Card className={classes.card}>
             <Grid container
                   className={classes.gridContainer}
                   direction="column"

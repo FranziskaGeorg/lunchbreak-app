@@ -5,6 +5,7 @@ import InputTextField from "./InputTextField";
 import DropdownField from "./DropdownField";
 import CheckboxForm from "./CheckboxForm";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
@@ -24,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
     },
     nextTopic: {
         paddingTop: theme.spacing(2)
+    },
+    button: {
+        backgroundColor: "#dfa528",
+        color: "#ffffff",
+        fontFamily: "Arimo",
+        fontWeight: "bold",
+        textTransform: "none",
+        marginRight: theme.spacing(2)
     }
 }));
 
@@ -84,6 +93,22 @@ export default function ProfileForm({handleInputChange, profileInput}) {
             </Grid>
             <Grid item>
                 <CheckboxForm/>
+            </Grid>
+            <Grid item className={classes.nextTopic}>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    size="large"
+                    >
+                    Verwerfen
+                </Button>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    size="large"
+                >
+                    Speichern
+                </Button>
             </Grid>
         </>
     )
