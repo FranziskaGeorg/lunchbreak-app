@@ -24,30 +24,36 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
     const classes = useStyles();
-
-    let location = useLocation();
-
+    const location = useLocation();
     const {authStatus} = useContext(UserStateContext);
-    if (authStatus === 'SUCCESS') {
 
+    function HeaderTitle({currentPath, titleText}) {
+        if (location.pathname === currentPath) {
+            return (
+                <Typography variant="h4" color="primary" className={classes.title}>
+                    {titleText}
+                </Typography>
+            );
+        }
         return (
-            <AppBar position="static" color="info" className={classes.appBar}>
-                <Toolbar>
-                    {location.pathname === '/dailymatch' &&
-                    <Typography variant="h4" color="primary" className={classes.title}>
-                        Lunchen mit...
-                    </Typography>}
-                    {location.pathname === '/profile' &&
-                    <Typography variant="h4" color="primary" className={classes.title}>
-                        Dein Profil
-                    </Typography>}
-                    <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
-                </Toolbar>
-            </AppBar>
-        );
+            <>
+            </>
+        )
+    }
+
+    if (authStatus !== 'SUCCESS') {
+        return (
+            <>
+            </>
+        )
     }
     return (
-        <>
-        </>
+        <AppBar position="static" color="info" className={classes.appBar}>
+            <Toolbar>
+                <HeaderTitle currentPath="/dailymatch" titleText="Lunchen mit..."/>
+                <HeaderTitle currentPath="/profile" titleText="Dein Profil"/>
+                <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
+            </Toolbar>
+        </AppBar>
     );
 }
