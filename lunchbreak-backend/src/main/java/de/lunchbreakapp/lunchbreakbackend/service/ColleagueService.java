@@ -9,17 +9,13 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ColleagueService {
 
-    private final ColleagueMongoDb colleagueMongoDb;
     private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public ColleagueService(ColleagueMongoDb colleagueMongoDb, MongoTemplate mongoTemplate) {
-        this.colleagueMongoDb = colleagueMongoDb;
+    public ColleagueService(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
@@ -29,21 +25,5 @@ public class ColleagueService {
         AggregationResults<Colleague> output = mongoTemplate.aggregate(aggregation, "colleagues", Colleague.class);
         return output.getMappedResults().get(0);
     }
-
-    /*public Optional<Colleague> getColleague(String id) {
-        return colleagueMongoDb.findById(id);
-    }
-
-    public void addSampleColleaguesToDb() {
-        Colleague colleague1 = new Colleague("1", "Franzi", "Georg");
-        Colleague colleague2 = new Colleague("2", "Peter", "Parker");
-        Colleague colleague3 = new Colleague("3", "Tony", "Montana");
-        Colleague colleague4 = new Colleague("4", "Elvis", "Presley");
-        colleagueMongoDb.deleteAll();
-        colleagueMongoDb.save(colleague1);
-        colleagueMongoDb.save(colleague2);
-        colleagueMongoDb.save(colleague3);
-        colleagueMongoDb.save(colleague4);
-    }*/
 
 }

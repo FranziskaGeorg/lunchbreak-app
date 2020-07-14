@@ -52,7 +52,7 @@ export default function LoginPage() {
             <Grid item>
                 <div>
                     <TextField
-                        label="Username"
+                        label="E-Mail-Adresse"
                         type="text"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}

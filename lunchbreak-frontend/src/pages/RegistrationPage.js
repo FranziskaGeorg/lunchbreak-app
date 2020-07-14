@@ -20,7 +20,6 @@ export default function RegistrationPage() {
             firstName: '',
             lastName: '',
             username: '',
-            email: '',
             password: '',
             matchingPassword: ''
         }
@@ -84,20 +83,9 @@ export default function RegistrationPage() {
                             required
                             id="filled-required"
                             name="username"
-                            label="Nutzername"
-                            variant="filled"
-                            value={userInput.username}
-                            onChange={handleInputChange}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="email"
                             label="E-Mail-Adresse"
                             variant="filled"
-                            value={userInput.email}
+                            value={userInput.username}
                             onChange={handleInputChange}
                         />
                     </Grid>

@@ -1,9 +1,11 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
-import de.lunchbreakapp.lunchbreakbackend.model.RegistrationData;
+import de.lunchbreakapp.lunchbreakbackend.model.dto.RegistrationData;
 import de.lunchbreakapp.lunchbreakbackend.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("auth/register")
@@ -16,7 +18,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public void registration(@RequestBody RegistrationData data) {
+    public void registration(@RequestBody @Valid RegistrationData data) {
         LunchBreakUser newUser = new LunchBreakUser(data.getUsername(), data.getPassword(), "user");
         userService.saveNewUserToDb(newUser);
     }
