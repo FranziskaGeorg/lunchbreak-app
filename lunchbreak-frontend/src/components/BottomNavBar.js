@@ -3,7 +3,7 @@ import {UserStateContext} from "../context/user/UserContext";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {FaUtensils, FaUser, FaCalendarAlt, FaPaperPlane, FaSignOutAlt} from "react-icons/all";
+import {FaUtensils, FaUser, FaCalendarAlt, FaPaperPlane} from "react-icons/all";
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Grid from "@material-ui/core/Grid";
 import {useLocation} from "react-router";
