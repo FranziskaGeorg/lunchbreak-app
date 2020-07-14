@@ -38,26 +38,33 @@ export default function LunchdayCheckboxes() {
             </FormLabel>
             <FormGroup>
                 <FormControlLabel
-                    control={<Checkbox checked={monday} onChange={handleLunchdayChange} name="monday"/>}
+                    control={<Checkbox checked={monday}
+                                       onChange={handleLunchdayChange}
+                                       name="monday"/>}
                     label="Montag"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={tuesday} onChange={handleLunchdayChange}
+                    control={<Checkbox checked={tuesday}
+                                       onChange={handleLunchdayChange}
                                        name="tuesday"/>}
                     label="Dienstag"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={wednesday} onChange={handleLunchdayChange}
+                    control={<Checkbox checked={wednesday}
+                                       onChange={handleLunchdayChange}
                                        name="wednesday"/>}
                     label="Mittwoch"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={thursday} onChange={handleLunchdayChange}
+                    control={<Checkbox checked={thursday}
+                                       onChange={handleLunchdayChange}
                                        name="thursday"/>}
                     label="Donnerstag"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={friday} onChange={handleLunchdayChange} name="friday"/>}
+                    control={<Checkbox checked={friday}
+                                       onChange={handleLunchdayChange}
+                                       name="friday"/>}
                     label="Freitag"
                 />
             </FormGroup>

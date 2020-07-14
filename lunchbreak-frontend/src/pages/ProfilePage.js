@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import LunchdayCheckboxes from "../components/profile/LunchdayCheckboxes";
+import ContactDetailsForm from "../components/profile/ContactDetailsForm";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
@@ -220,49 +221,12 @@ export default function ProfilePage() {
                             onChange={handleInputChange}
                         />
                     </Grid>
-                    <Grid item
-                          className={classes.nextTopic}
-                    >
+                    <Grid item className={classes.nextTopic}>
                         <Typography variant="h5">
                             Kontaktdaten
                         </Typography>
                     </Grid>
-                    <Grid item>
-                        <TextField
-                            required
-                            margin="dense"
-                            className={classes.inputField}
-                            InputProps={{
-                                classes: {
-                                    notchedOutline: classes.notchedOutline
-                                }
-                            }}
-                            id="outlined-required"
-                            variant="outlined"
-                            name="email"
-                            label="E-Mail-Adresse"
-                            value={profileInput.email}
-                            onChange={handleInputChange}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            required
-                            margin="dense"
-                            className={classes.inputField}
-                            InputProps={{
-                                classes: {
-                                    notchedOutline: classes.notchedOutline
-                                }
-                            }}
-                            id="outlined-required"
-                            variant="outlined"
-                            name="phoneNumber"
-                            label="Handynummer"
-                            value={profileInput.phoneNumber}
-                            onChange={handleInputChange}
-                        />
-                    </Grid>
+                    <ContactDetailsForm handleInputChange={handleInputChange} profileInput={profileInput}/>
                     <Grid item className={classes.nextTopic}>
                         <Typography variant="h5">
                             Deine Lunchdays
