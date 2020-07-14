@@ -1,6 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
-import de.lunchbreakapp.lunchbreakbackend.model.LoginData;
+import de.lunchbreakapp.lunchbreakbackend.model.dto.LoginData;
 import de.lunchbreakapp.lunchbreakbackend.security.JWTUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 
-@RequestMapping("auth/login")
 @RestController
+@RequestMapping("auth/login")
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;

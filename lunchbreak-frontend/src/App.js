@@ -14,6 +14,7 @@ import {ThemeProvider} from '@material-ui/styles';
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import BottomNavBar from "./components/BottomNavBar";
+import RegistrationPage from "./pages/RegistrationPage";
 
 function Navigation() {
     const dispatch = useContext(UserDispatchContext);
@@ -29,6 +30,7 @@ function Navigation() {
         <Container maxWidth={'md'} component="main">
             <Switch>
                 <Route path="/login" component={LoginPage} exact/>
+                <Route path="/register" component={RegistrationPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>
             </Switch>

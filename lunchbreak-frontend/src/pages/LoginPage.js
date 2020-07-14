@@ -11,7 +11,7 @@ import {getDecodedJWTToken, setJWTToken} from "../utils/JWTUtils";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(4)
     },
 }));
 
@@ -24,34 +24,35 @@ export default function LoginPage() {
     const classes = useStyles();
 
     function login() {
-        dispatch({ type: LOGIN });
+        dispatch({type: LOGIN});
         performLogin(username, password)
             .then((data) => {
                 setJWTToken(data);
                 const userData = getDecodedJWTToken();
-                dispatch({ type: LOGIN_SUCCESS, payload: userData });
+                dispatch({type: LOGIN_SUCCESS, payload: userData});
             })
             .catch(() => {
-                dispatch({ type: LOGIN_FAILED });
+                dispatch({type: LOGIN_FAILED});
             });
     }
 
-    const { authStatus } = useContext(UserStateContext);
+    const {authStatus} = useContext(UserStateContext);
     if (authStatus === 'SUCCESS') {
-        return <Redirect to={'/dailymatch'} />;
+        return <Redirect to={'/dailymatch'}/>;
     }
 
     return (
-        <Grid
-            className={classes.gridContainer}
-            container
-            alignContent="center"
-            justify="center"
+        <Grid container
+              className={classes.gridContainer}
+              direction="column"
+              alignContent="center"
+              justify="center"
+              spacing={2}
         >
             <Grid item>
                 <div>
                     <TextField
-                        label="Username"
+                        label="E-Mail-Adresse"
                         type="text"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
@@ -65,7 +66,20 @@ export default function LoginPage() {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </div>
-                <Button onClick={login}>Login</Button>
+            </Grid>
+            <Grid item>
+                <Button
+                    variant="contained"
+                    onClick={login}>
+                    Login
+                </Button>
+            </Grid>
+            <Grid item>
+                <Button
+                    variant="contained"
+                    href="/register">
+                    Noch keinen Account? Hier geht's zur Registrierung.
+                </Button>
             </Grid>
         </Grid>
     );
