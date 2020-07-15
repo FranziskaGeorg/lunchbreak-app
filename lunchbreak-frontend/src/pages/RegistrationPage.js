@@ -1,10 +1,12 @@
-import React, {useReducer} from "react";
+import React, {useReducer, useState} from "react";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import {performRegistration} from "../utils/AuthUtils";
+import InputPasswordField from "../components/inputFields/InputPasswordField";
+import InputTextField from "../components/inputFields/InputTextField";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
@@ -14,24 +16,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RegistrationPage() {
     const classes = useStyles();
-    const [userInput, setUserInput] = useReducer(
-        (state, newState) => ({...state, ...newState}),
-        {
-            firstName: '',
-            lastName: '',
-            username: '',
-            password: '',
-            matchingPassword: ''
-        }
-    )
 
-    function handleInputChange(event) {
-        const field = event.target.name;
-        const value = event.target.value;
-        setUserInput({[field]: value});
-    }
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [matchingPassword, setMatchingPassword] = useState('');
 
     function handleRegistrationClick() {
+        const userInput = {firstName, lastName, username, password, matchingPassword};
         performRegistration(userInput)
             .then(data => console.log(data));
     }
@@ -57,61 +50,23 @@ export default function RegistrationPage() {
                       spacing={2}
                 >
                     <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="firstName"
-                            label="Vorname"
-                            variant="filled"
-                            value={userInput.firstName}
-                            onChange={handleInputChange}
-                        />
+                        <InputTextField fieldName="firstName" label="Vorname" value={firstName}
+                                        setValue={setFirstName}/>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="lastName"
-                            label="Nachname"
-                            variant="filled"
-                            value={userInput.lastName}
-                            onChange={handleInputChange}
-                        />
+                        <InputTextField fieldName="lastName" label="Nachname" value={lastName} setValue={setLastName}/>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="username"
-                            label="E-Mail-Adresse"
-                            variant="filled"
-                            value={userInput.username}
-                            onChange={handleInputChange}
-                        />
+                        <InputTextField fieldName="username" label="E-Mail-Adresse" value={username}
+                                        setValue={setUsername}/>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="password"
-                            label="Passwort"
-                            type="password"
-                            variant="filled"
-                            value={userInput.password}
-                            onChange={handleInputChange}
-                        />
+                        <InputPasswordField fieldName="password" label="Passwort" value={password}
+                                            setValue={setPassword}/>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            required
-                            id="filled-required"
-                            name="matchingPassword"
-                            label="Passwort wiederholen"
-                            type="password"
-                            variant="filled"
-                            value={userInput.matchingPassword}
-                            onChange={handleInputChange}
-                        />
+                        <InputPasswordField fieldName="matchingPassword" label="Passwort wiederholen"
+                                            value={matchingPassword} setValue={setMatchingPassword}/>
                     </Grid>
                     <Grid item>
                         <Button
