@@ -40,6 +40,7 @@ function Navigation() {
 }
 
 export default function App() {
+
     return (
         <ThemeProvider theme={LunchBreakTheme}>
             <UserContextProvider>

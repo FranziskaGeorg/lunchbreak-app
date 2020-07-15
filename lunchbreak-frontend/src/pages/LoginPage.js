@@ -1,5 +1,4 @@
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import React, {useContext, useState} from "react";
 import {Redirect} from "react-router-dom";
@@ -8,20 +7,44 @@ import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../context/user/UserContextPro
 import {UserDispatchContext, UserStateContext} from "../context/user/UserContext";
 import {performLogin} from "../utils/AuthUtils";
 import {getDecodedJWTToken, setJWTToken} from "../utils/JWTUtils";
+import Card from "@material-ui/core/Card";
+import Typography from "@material-ui/core/Typography";
+import InputTextField from "../components/inputFields/InputTextField";
+import InputPasswordField from "../components/inputFields/InputPasswordField";
 
 const useStyles = makeStyles((theme) => ({
-    gridContainer: {
-        paddingTop: theme.spacing(4)
+    gridBigContainer: {
+        height: "60vh",
+        paddingTop: "40%",
     },
+    gridContainer: {
+        padding: theme.spacing(4)
+    },
+    buttonContained: {
+        backgroundColor: "#dfa528",
+        color: "#ffffff",
+        fontFamily: "Arimo",
+        fontWeight: "bold",
+        textTransform: "none"
+    },
+    buttonNonContained: {
+        color: "primary",
+        fontFamily: "Arimo",
+        textTransform: "none",
+        textAlign: "center"
+    },
+    nextTopic: {
+        paddingTop: theme.spacing(3)
+    }
 }));
 
 export default function LoginPage() {
+    const classes = useStyles();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useContext(UserDispatchContext);
-
-    const classes = useStyles();
 
     function login() {
         dispatch({type: LOGIN});
@@ -43,44 +66,51 @@ export default function LoginPage() {
 
     return (
         <Grid container
-              className={classes.gridContainer}
-              direction="column"
-              alignContent="center"
+              className={classes.gridBigContainer}
+              direction="row"
               justify="center"
-              spacing={2}
         >
-            <Grid item>
-                <div>
-                    <TextField
-                        label="E-Mail-Adresse"
-                        type="text"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        label="Password"
-                        type="password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                </div>
-            </Grid>
-            <Grid item>
-                <Button
-                    variant="contained"
-                    onClick={login}>
-                    Login
-                </Button>
-            </Grid>
-            <Grid item>
-                <Button
-                    variant="contained"
-                    href="/register">
-                    Noch keinen Account? Hier geht's zur Registrierung.
-                </Button>
-            </Grid>
+            <Card className={classes.card}>
+                <Grid item>
+                    <Grid container
+                          className={classes.gridContainer}
+                          direction="column"
+                          alignItems="center"
+                          justify="center"
+                    >
+                        <Grid item>
+                            <Typography variant="h4" color="primary" align="center">
+                                Welcome to LunchBreak
+                            </Typography>
+                        </Grid>
+                        <Grid item className={classes.nextTopic}>
+                            <InputTextField fieldName="username" label="E-Mail-Adresse" value={username}
+                                            setValue={setUsername}/>
+                        </Grid>
+                        <Grid item>
+                            <InputPasswordField fieldName="password" label="Passwort" value={password}
+                                            setValue={setPassword}/>
+                        </Grid>
+                        <Grid item className={classes.nextTopic}>
+                            <Button
+                                className={classes.buttonContained}
+                                variant="contained"
+                                size="large"
+                                onClick={login}>
+                                Login
+                            </Button>
+                        </Grid>
+                        <Grid item className={classes.nextTopic}>
+                            <Button
+                                className={classes.buttonNonContained}
+                                color="primary"
+                                href="/register">
+                                Noch keinen Account? Hier geht's zur Registrierung.
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Card>
         </Grid>
     );
 }

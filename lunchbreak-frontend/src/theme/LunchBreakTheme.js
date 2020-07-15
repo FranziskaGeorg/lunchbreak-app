@@ -20,7 +20,7 @@ const LunchBreakTheme = createMuiTheme({
             },
         background:
             {
-                //default: '#f8f8f8' // light grey
+                // default: '#f8f8f8' // light grey
                 default: "#eef5f6" // light turquoise
             }
     },
@@ -37,13 +37,8 @@ const LunchBreakTheme = createMuiTheme({
         p: {
             fontFamily: 'Arimo'
         }
-    },
-
-    overrides: {
-        MuiFilledInput: {
-            color: "yellow"
-        }
     }
+
 });
 
 export default LunchBreakTheme;
