@@ -11,6 +11,7 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import InputTextField from "../components/inputFields/InputTextField";
 import InputPasswordField from "../components/inputFields/InputPasswordField";
+import ButtonYellowBig from "../components/buttons/ButtonYellowBig";
 
 const useStyles = makeStyles((theme) => ({
     gridBigContainer: {
@@ -19,13 +20,6 @@ const useStyles = makeStyles((theme) => ({
     },
     gridContainer: {
         padding: theme.spacing(4)
-    },
-    buttonContained: {
-        backgroundColor: "#dfa528",
-        color: "#ffffff",
-        fontFamily: "Arimo",
-        fontWeight: "bold",
-        textTransform: "none"
     },
     buttonNonContained: {
         color: "primary",
@@ -70,7 +64,7 @@ export default function LoginPage() {
               direction="row"
               justify="center"
         >
-            <Card className={classes.card}>
+            <Card>
                 <Grid item>
                     <Grid container
                           className={classes.gridContainer}
@@ -92,13 +86,7 @@ export default function LoginPage() {
                                             setValue={setPassword}/>
                         </Grid>
                         <Grid item className={classes.nextTopic}>
-                            <Button
-                                className={classes.buttonContained}
-                                variant="contained"
-                                size="large"
-                                onClick={login}>
-                                Login
-                            </Button>
+                            <ButtonYellowBig handleClick={login} buttonText="Login"/>
                         </Grid>
                         <Grid item className={classes.nextTopic}>
                             <Button
