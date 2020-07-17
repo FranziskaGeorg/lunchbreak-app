@@ -76,14 +76,6 @@ export default function LoginForm() {
                     })}
             >
                 {props => {
-                    const {
-                        values,
-                        touched,
-                        errors,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit
-                    } = props;
                     return (
                         <Form>
                             <Grid item className={classes.nextTopic}>
