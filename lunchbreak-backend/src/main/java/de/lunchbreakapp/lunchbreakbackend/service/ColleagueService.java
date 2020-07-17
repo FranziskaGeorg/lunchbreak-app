@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ColleagueService {
 
@@ -40,6 +42,10 @@ public class ColleagueService {
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays("");
         colleagueMongoDb.save(newColleague);
+    }
+
+    public Optional<Colleague> getColleagueById(String id) {
+        return colleagueMongoDb.findById(id);
     }
 
 }
