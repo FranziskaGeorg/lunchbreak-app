@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -17,8 +18,10 @@ const useStyles = makeStyles((theme) => ({
 export default function RegistrationForm() {
     const classes = useStyles();
 
+    const history = useHistory();
+
     function cancel() {
-        window.location.href = "/login";
+        history.push = "/login";
     }
 
     return (
