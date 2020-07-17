@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ProfileForm({handleInputChange, profileInput}) {
+export default function ProfileForm() {
     const classes = useStyles();
 
     const [firstName, setFirstName] = useState('');
