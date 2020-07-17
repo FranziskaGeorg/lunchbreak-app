@@ -1,5 +1,5 @@
 import Grid from "@material-ui/core/Grid";
-import React, {useContext} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card";
 import LoginForm from "../components/inputForms/LoginForm";
