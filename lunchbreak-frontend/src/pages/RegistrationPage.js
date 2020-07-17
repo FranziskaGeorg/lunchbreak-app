@@ -63,11 +63,21 @@ export default function RegistrationPage() {
 
                                 validationSchema={Yup.object().shape({
                                     firstName: Yup.string()
-                                        .required("Pflichtfeld")
-                                        .min(8, "Min. 8 Zeichen"),
+                                        .required("Pflichtfeld"),
                                     lastName: Yup.string()
+                                        .required("Pflichtfeld"),
+                                    username: Yup.string()
                                         .required("Pflichtfeld")
-                                        .min(8, "Min. 8 Zeichen"),
+                                        .email("Keine valide E-Mail-Adresse"),
+                                    password: Yup.string()
+                                        .required("Pflichtfeld")
+                                        .min(8, "Min. 8 Zeichen")
+                                        .matches(
+                                            /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/,
+                                            "Min. ein Groß- sowie Kleinbuchstabe und min. eine Zahl"),
+                                    matchingPassword: Yup.string()
+                                        .required("Pflichtfeld")
+                                        .oneOf([Yup.ref("password"), null], "Passwörter stimmen nicht überein")
                                 })}
                         >
                             {props => {
@@ -122,3 +132,11 @@ export default function RegistrationPage() {
         </Grid>
     )
 }
+
+/*when("password", {
+    is: passwordValue => (passwordValue && passwordValue.length > 0 ? true : false),
+    then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Passwörter stimmen nicht überein"
+    )
+}*/
