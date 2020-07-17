@@ -34,8 +34,9 @@ const LunchBreakTheme = createMuiTheme({
             fontWeight: "bold",
             color: "#575757"
         },
-        p: {
-            fontFamily: 'Arimo'
+        caption: {
+            fontFamily: 'Arimo',
+            color: '#dfa528'
         }
     }
 
