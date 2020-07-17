@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
     notchedOutline: {
         borderColor: "#eef5f6 !important",
-    },
+    }
 }));
 
 export default function InputTextFieldValidated({fieldType, fieldName, label, formikProps}) {
@@ -44,7 +45,7 @@ export default function InputTextFieldValidated({fieldType, fieldName, label, fo
             onBlur={formikProps.handleBlur}
         />
     {formikProps.errors[fieldName] && formikProps.touched[fieldName] && (
-        <div className="input-feedback">{formikProps.errors[fieldName]}</div>
+        <Typography variant="caption">{formikProps.errors[fieldName]}</Typography>
     )}
     </>
     )
