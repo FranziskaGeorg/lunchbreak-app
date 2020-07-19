@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -52,9 +54,8 @@ public class ColleagueService {
         return colleagueMongoDb.findByUsername(username);
     }
 
-    public Colleague updateColleague(String firstName, String lastName, String job, String subsidiary, String favoriteFood,
+    public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
                                      String hobbies, String phoneNumber, String lunchdays) {
-        Colleague updatedColleague = new Colleague();
         updatedColleague.setFirstName(firstName);
         updatedColleague.setLastName(lastName);
         updatedColleague.setJob(job);
