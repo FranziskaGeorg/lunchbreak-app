@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
@@ -8,7 +8,11 @@ import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useHistory} from "react-router";
-import {REGISTRATION, REGISTRATION_SUCCESS} from "../../context/user/UserContextProvider";
+import {
+    REGISTRATION,
+    REGISTRATION_FAILED,
+    REGISTRATION_SUCCESS
+} from "../../context/user/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 
@@ -25,15 +29,18 @@ export default function RegistrationForm() {
 
     const dispatch = useContext(UserDispatchContext);
 
+    const {registrationStatus} = useContext(UserStateContext);
+
     function register(userInput) {
         dispatch({type: REGISTRATION});
         performRegistration(userInput)
             .then(data => {
                 dispatch({type: REGISTRATION_SUCCESS, payload: data});
             })
+            .catch(() => {
+                dispatch({type: REGISTRATION_FAILED});
+            });
     }
-
-    const {registrationStatus} = useContext(UserStateContext);
 
     function cancel() {
         history.push = "/login";

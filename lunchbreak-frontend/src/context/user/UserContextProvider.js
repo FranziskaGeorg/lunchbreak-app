@@ -6,6 +6,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const REGISTRATION = 'REGISTRATION';
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
+export const REGISTRATION_FAILED = 'REGISTRATION_FAILED';
 
 export const LOGOUT = 'LOGOUT';
 const initialState = {
@@ -34,6 +35,8 @@ function reducer(state, action) {
                 registrationStatus: 'SUCCESS',
                 userData: action.payload,
             };
+        case REGISTRATION_FAILED:
+            return { ...state, registrationStatus: 'FAILED' };
         default:
             return state;
     }
