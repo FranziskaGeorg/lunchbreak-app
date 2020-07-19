@@ -4,6 +4,7 @@ import React, { useReducer } from 'react';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const REGISTRATION = 'REGISTRATION';
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
 
 export const LOGOUT = 'LOGOUT';
@@ -25,10 +26,12 @@ function reducer(state, action) {
             return { ...state, authStatus: 'FAILED' };
         case LOGOUT:
             return { ...initialState };
+        case REGISTRATION:
+            return { ...state, registrationStatus: 'PENDING' };
         case REGISTRATION_SUCCESS:
             return {
                 ...state,
-                authStatus: 'SUCCESS',
+                registrationStatus: 'SUCCESS',
                 userData: action.payload,
             };
         default:

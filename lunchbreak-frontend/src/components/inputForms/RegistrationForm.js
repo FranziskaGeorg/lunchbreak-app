@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
@@ -8,8 +8,9 @@ import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useHistory} from "react-router";
-import {LOGIN_SUCCESS} from "../../context/user/UserContextProvider";
-import {UserDispatchContext} from "../../context/user/UserContext";
+import {REGISTRATION, REGISTRATION_SUCCESS} from "../../context/user/UserContextProvider";
+import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
+import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -20,17 +21,19 @@ const useStyles = makeStyles((theme) => ({
 export default function RegistrationForm() {
     const classes = useStyles();
 
+    const history = useHistory();
+
     const dispatch = useContext(UserDispatchContext);
 
     function register(userInput) {
+        dispatch({type: REGISTRATION});
         performRegistration(userInput)
             .then(data => {
-                dispatch({type: LOGIN_SUCCESS, payload: data});
-                console.log("Hallo" + data)
-            });
+                dispatch({type: REGISTRATION_SUCCESS, payload: data});
+            })
     }
 
-    const history = useHistory();
+    const {registrationStatus} = useContext(UserStateContext);
 
     function cancel() {
         history.push = "/login";
@@ -110,6 +113,7 @@ export default function RegistrationForm() {
                     )
                 }}
             </Formik>
+            <PopupRegistrationSuccess openStatus={registrationStatus === 'SUCCESS'}/>
         </>
     )
 }
