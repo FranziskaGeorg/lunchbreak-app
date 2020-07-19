@@ -6,7 +6,7 @@ import DropdownField from "../inputFields/DropdownField";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {initProfileDataFetch} from "../../utils/FetchUtils";
+import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
@@ -45,17 +45,26 @@ export default function ProfileForm() {
     const [job, setJob] = useState('');
     const [favoriteFood, setFavoriteFood] = useState('');
     const [hobbies, setHobbies] = useState('');
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [lunchdays, setLunchdays] = useState('');
+
+    const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber, lunchdays}
 
     useEffect(() => {
         initProfileDataFetch()
-            .then((data) => {
+            .then(data => {
                 setFirstName(data.firstName);
                 setLastName(data.lastName);
-                setEmail(data.username);
+                setUsername(data.username);
+                setLunchdays("placeholder");
             })
     }, [])
+
+    function handleSave() {
+        saveProfileDataFetch(profileInput)
+            .then(data => console.log(data));
+    }
 
     return (
         <>
@@ -90,7 +99,7 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item>
-                <InputTextField fieldName="email" label="E-Mail-Adresse" value={email} setValue={setEmail}/>
+                <InputTextField fieldName="username" label="E-Mail-Adresse" value={username} setValue={setUsername}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
@@ -114,6 +123,7 @@ export default function ProfileForm() {
                 </Button>
                 <Button
                     className={classes.button}
+                    onClick={handleSave}
                     variant="contained"
                     size="large"
                 >
