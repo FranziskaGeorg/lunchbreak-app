@@ -14,9 +14,9 @@ export async function getRandomColleagueFetch() {
     return await response.json();
 }
 
-export async function initProfileDataFetch(id) {
+export async function initProfileDataFetch() {
     const token = getJWTToken();
-    const response = await fetch("/api/profile/" + id, {
+    const response = await fetch("/api/profile", {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
