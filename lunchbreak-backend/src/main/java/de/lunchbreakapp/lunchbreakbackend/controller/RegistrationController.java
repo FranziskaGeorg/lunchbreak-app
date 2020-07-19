@@ -26,7 +26,6 @@ public class RegistrationController {
         LunchBreakUser newUser = new LunchBreakUser(data.getUsername(), data.getPassword(), "user");
         userService.saveNewUserToDb(newUser);
         Colleague newColleague = colleagueService.saveNewColleagueToDb(data.getUsername(), data.getFirstName(), data.getLastName());
-        System.out.println(newColleague);
         return newColleague;
     }
 

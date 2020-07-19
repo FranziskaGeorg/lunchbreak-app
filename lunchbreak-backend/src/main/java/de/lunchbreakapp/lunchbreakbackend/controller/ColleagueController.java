@@ -47,7 +47,6 @@ public class ColleagueController {
         String usernameFromToken = jwtUtils.extractUserName(token);
         Optional <Colleague> optionalColleague = colleagueService.getColleagueByUsername(usernameFromToken);
         if (optionalColleague.isPresent()) {
-            System.out.println(optionalColleague.get());
             return optionalColleague;
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + usernameFromToken + " does not exist.");
