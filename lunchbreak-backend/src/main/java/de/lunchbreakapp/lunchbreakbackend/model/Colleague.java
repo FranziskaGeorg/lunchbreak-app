@@ -14,7 +14,14 @@ public class Colleague {
 
     @Id
     private String id;
+    private String username;
     private String firstName;
     private String lastName;
+    private String job;
+    private String subsidiary;
+    private String favoriteFood;
+    private String hobbies;
+    private String phoneNumber;
+    private String lunchdays;
 
 }
