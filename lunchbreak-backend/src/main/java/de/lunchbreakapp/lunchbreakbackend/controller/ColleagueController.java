@@ -52,4 +52,15 @@ public class ColleagueController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + usernameFromToken + " does not exist.");
     }
 
+    @PostMapping
+    public void saveProfileChanges(@RequestBody Colleague profileData) {
+        Optional <Colleague> optionalColleague = colleagueService.getColleagueByUsername(profileData.getUsername());
+        if (optionalColleague.isPresent()) {
+            colleagueService.updateColleague(profileData.getFirstName(), profileData.getLastName(), profileData.getJob(),
+                    profileData.getSubsidiary(), profileData.getFavoriteFood(), profileData.getHobbies(), profileData.getPhoneNumber(),
+                    profileData.getLunchdays());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + profileData.getUsername() + " does not exist.");
+    }
+
 }

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.core.query.Update.update;
+
 @Service
 public class ColleagueService {
 
@@ -50,6 +54,20 @@ public class ColleagueService {
 
     public Optional<Colleague> getColleagueByUsername(String username) {
         return colleagueMongoDb.findByUsername(username);
+    }
+
+    public Colleague updateColleague(String firstName, String lastName, String job, String subsidiary, String favoriteFood,
+                                     String hobbies, String phoneNumber, String lunchdays) {
+        Colleague updatedColleague = new Colleague();
+        updatedColleague.setFirstName(firstName);
+        updatedColleague.setLastName(lastName);
+        updatedColleague.setJob(job);
+        updatedColleague.setSubsidiary(subsidiary);
+        updatedColleague.setFavoriteFood(favoriteFood);
+        updatedColleague.setHobbies(hobbies);
+        updatedColleague.setPhoneNumber(phoneNumber);
+        updatedColleague.setLunchdays(lunchdays);
+        return colleagueMongoDb.save(updatedColleague);
     }
 
 }
