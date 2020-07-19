@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
@@ -8,6 +8,8 @@ import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useHistory} from "react-router";
+import {LOGIN_SUCCESS} from "../../context/user/UserContextProvider";
+import {UserDispatchContext} from "../../context/user/UserContext";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -17,6 +19,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RegistrationForm() {
     const classes = useStyles();
+
+    const dispatch = useContext(UserDispatchContext);
+
+    function register(userInput) {
+        performRegistration(userInput)
+            .then(data => {
+                dispatch({type: LOGIN_SUCCESS, payload: data});
+                console.log("Hallo" + data)
+            });
+    }
 
     const history = useHistory();
 
@@ -39,10 +51,7 @@ export default function RegistrationForm() {
                     password: '',
                     matchingPassword: ''
                 }}
-                    onSubmit={(values) => {
-                        performRegistration(values)
-                            .then(data => console.log(data));
-                    }}
+                    onSubmit={(values) => register(values)}
 
                     validationSchema={Yup.object().shape({
                         firstName: Yup.string()

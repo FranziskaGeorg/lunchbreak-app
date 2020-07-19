@@ -67,10 +67,7 @@ export default function LoginForm() {
                     username: '',
                     password: ''
                 }}
-                    onSubmit={(values) => {
-                        login(values.username, values.password);
-                        console.log(values);
-                    }}
+                    onSubmit={(values) => login(values.username, values.password)}
 
                     validationSchema={Yup.object().shape({
                         username: Yup.string()
