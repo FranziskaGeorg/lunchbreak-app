@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
-import DropdownField from "./DropdownField";
-import CheckboxForm from "./CheckboxForm";
+import DropdownField from "../inputFields/DropdownField";
+import CheckboxForm from "../inputFields/CheckboxForm";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 

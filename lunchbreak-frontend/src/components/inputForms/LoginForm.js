@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     },
     nextTopic: {
         paddingTop: theme.spacing(3)
+    },
+    centerButton: {
+        textAlign: "center"
     }
 }));
 
@@ -53,10 +56,12 @@ export default function LoginForm() {
     }
 
     return (
-        <Grid item>
-            <Typography variant="h4" color="primary" align="center">
-                Welcome to LunchBreak
-            </Typography>
+        <>
+            <Grid item>
+                <Typography variant="h4" color="primary" align="center">
+                    Welcome to LunchBreak
+                </Typography>
+            </Grid>
             <Formik initialValues={
                 {
                     username: '',
@@ -86,22 +91,22 @@ export default function LoginForm() {
                                 <InputTextFieldValidated fieldType="password" fieldName="password"
                                                          label="Passwort" formikProps={props}/>
                             </Grid>
-                            <Grid item className={classes.nextTopic}>
-                                <ButtonYellowBig handleClick={props.handleSubmit}
-                                                 buttonText="Login"/>
-                            </Grid>
-                            <Grid item className={classes.nextTopic}>
-                                <Button
-                                    className={classes.buttonNonContained}
-                                    color="primary"
-                                    onClick={goToRegistration}>
-                                    Noch keinen Account? Hier geht's zur Registrierung.
-                                </Button>
-                            </Grid>
+                                <Grid item className={classes.nextTopic}>
+                                    <ButtonYellowBig handleClick={props.handleSubmit}
+                                                     buttonText="Login"/>
+                                </Grid>
+                                <Grid item className={classes.nextTopic}>
+                                    <Button
+                                        className={classes.buttonNonContained}
+                                        color="primary"
+                                        onClick={goToRegistration}>
+                                        Noch keinen Account? Hier geht's zur Registrierung.
+                                    </Button>
+                                </Grid>
                         </Form>
                     )
                 }}
             </Formik>
-        </Grid>
+        </>
     )
 }

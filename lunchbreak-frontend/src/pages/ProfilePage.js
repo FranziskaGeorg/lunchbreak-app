@@ -3,7 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import ProfileForm from "../components/profile/ProfileForm";
+import ProfileForm from "../components/inputForms/ProfileForm";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
