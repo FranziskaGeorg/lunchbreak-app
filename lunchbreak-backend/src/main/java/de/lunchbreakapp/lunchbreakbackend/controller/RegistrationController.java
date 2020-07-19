@@ -1,5 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
+import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.RegistrationData;
 import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
@@ -21,10 +22,11 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public void registration(@RequestBody @Valid RegistrationData data) {
+    public Colleague registration(@RequestBody @Valid RegistrationData data) {
         LunchBreakUser newUser = new LunchBreakUser(data.getUsername(), data.getPassword(), "user");
         userService.saveNewUserToDb(newUser);
-        colleagueService.saveNewColleagueToDb(data.getUsername(), data.getFirstName(), data.getLastName());
+        Colleague newColleague = colleagueService.saveNewColleagueToDb(data.getUsername(), data.getFirstName(), data.getLastName());
+        return newColleague;
     }
 
 }

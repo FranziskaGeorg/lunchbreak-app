@@ -8,12 +8,12 @@ import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
 import DailyMatch from "./pages/DailyMatch";
 import ProfilePage from "./pages/ProfilePage";
-import Header from "./components/Header";
+import Header from "./components/navigation/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import BottomNavBar from "./components/BottomNavBar";
+import BottomNavBar from "./components/navigation/BottomNavBar";
 import RegistrationPage from "./pages/RegistrationPage";
 
 function Navigation() {

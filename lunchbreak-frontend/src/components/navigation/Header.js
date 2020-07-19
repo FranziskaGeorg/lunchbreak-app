@@ -4,8 +4,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import {useLocation} from "react-router";
-import {UserStateContext} from "../context/user/UserContext";
-import logo from '../images/happytoast.png';
+import {UserStateContext} from "../../context/user/UserContext";
+import logo from '../../images/happytoast.png';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {

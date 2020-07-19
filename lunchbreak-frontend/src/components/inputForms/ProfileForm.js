@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
-import DropdownField from "./DropdownField";
-import CheckboxForm from "./CheckboxForm";
+import DropdownField from "../inputFields/DropdownField";
+import CheckboxForm from "../inputFields/CheckboxForm";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import {initProfileDataFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
@@ -46,6 +47,15 @@ export default function ProfileForm() {
     const [hobbies, setHobbies] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+
+    useEffect(() => {
+        initProfileDataFetch()
+            .then((data) => {
+                setFirstName(data.firstName);
+                setLastName(data.lastName);
+                setEmail(data.username);
+            })
+    }, [])
 
     return (
         <>
@@ -99,7 +109,7 @@ export default function ProfileForm() {
                     className={classes.button}
                     variant="contained"
                     size="large"
-                    >
+                >
                     Verwerfen
                 </Button>
                 <Button

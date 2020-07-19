@@ -30,7 +30,7 @@ public class ColleagueService {
         return output.getMappedResults().get(0);
     }
 
-    public void saveNewColleagueToDb(String username, String firstName, String lastName) {
+    public Colleague saveNewColleagueToDb(String username, String firstName, String lastName) {
         Colleague newColleague = new Colleague();
         newColleague.setUsername(username);
         newColleague.setFirstName(firstName);
@@ -41,11 +41,15 @@ public class ColleagueService {
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays("");
-        colleagueMongoDb.save(newColleague);
+        return colleagueMongoDb.save(newColleague);
     }
 
     public Optional<Colleague> getColleagueById(String id) {
         return colleagueMongoDb.findById(id);
+    }
+
+    public Optional<Colleague> getColleagueByUsername(String username) {
+        return colleagueMongoDb.findByUsername(username);
     }
 
 }

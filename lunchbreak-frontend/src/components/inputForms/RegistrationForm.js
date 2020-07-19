@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
@@ -8,6 +8,13 @@ import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useHistory} from "react-router";
+import {
+    REGISTRATION,
+    REGISTRATION_FAILED,
+    REGISTRATION_SUCCESS
+} from "../../context/user/UserContextProvider";
+import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
+import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -19,6 +26,21 @@ export default function RegistrationForm() {
     const classes = useStyles();
 
     const history = useHistory();
+
+    const dispatch = useContext(UserDispatchContext);
+
+    const {registrationStatus} = useContext(UserStateContext);
+
+    function register(userInput) {
+        dispatch({type: REGISTRATION});
+        performRegistration(userInput)
+            .then(data => {
+                dispatch({type: REGISTRATION_SUCCESS, payload: data});
+            })
+            .catch(() => {
+                dispatch({type: REGISTRATION_FAILED});
+            });
+    }
 
     function cancel() {
         history.push = "/login";
@@ -39,10 +61,7 @@ export default function RegistrationForm() {
                     password: '',
                     matchingPassword: ''
                 }}
-                    onSubmit={(values) => {
-                        performRegistration(values)
-                            .then(data => console.log(data));
-                    }}
+                    onSubmit={(values) => register(values)}
 
                     validationSchema={Yup.object().shape({
                         firstName: Yup.string()
@@ -101,6 +120,7 @@ export default function RegistrationForm() {
                     )
                 }}
             </Formik>
+            <PopupRegistrationSuccess openStatus={registrationStatus === 'SUCCESS'}/>
         </>
     )
 }
