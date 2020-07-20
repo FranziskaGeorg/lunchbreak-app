@@ -50,7 +50,7 @@ class RegistrationControllerTest {
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/register";
-        ResponseEntity<Colleague> postResponse = restTemplate.postForEntity(url, new RegistrationData("Theo", "Tester", "test@test.de", "testpw123"), Colleague.class);
+        ResponseEntity<Colleague> postResponse = restTemplate.postForEntity(url, new RegistrationData("Theo", "Tester", "test@test.de", "Testpw123"), Colleague.class);
         HttpStatus responseStatus = postResponse.getStatusCode();
 
         // THEN
@@ -68,7 +68,7 @@ class RegistrationControllerTest {
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/register";
-        ResponseEntity<Colleague> postResponse = restTemplate.postForEntity(url, new RegistrationData("Theo", "Tester", "theo@tester.de", "testpw"), Colleague.class);
+        ResponseEntity<Colleague> postResponse = restTemplate.postForEntity(url, new RegistrationData("Theo", "Tester", "theo@tester.de", "Testpw1"), Colleague.class);
         HttpStatus responseStatus = postResponse.getStatusCode();
 
         // THEN
