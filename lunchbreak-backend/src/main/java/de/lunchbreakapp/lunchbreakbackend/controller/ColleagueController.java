@@ -31,13 +31,13 @@ public class ColleagueController {
     }
 
     @GetMapping("profile")
-    public Optional<Colleague> getColleagueByUsername(HttpServletRequest httpServletRequest) {
+    public Colleague getColleagueByUsername(HttpServletRequest httpServletRequest) {
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
         String token = authorizationHeader.replace("Bearer", "").trim();
         String usernameFromToken = jwtUtils.extractUserName(token);
         Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(usernameFromToken);
         if (optionalColleague.isPresent()) {
-            return optionalColleague;
+            return optionalColleague.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + usernameFromToken + " does not exist.");
     }
