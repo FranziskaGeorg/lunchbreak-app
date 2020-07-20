@@ -21,22 +21,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegistrationControllerTest {
 
     @LocalServerPort
-    public int port;
+    private int port;
 
     @Autowired
-    public TestRestTemplate restTemplate;
+    private TestRestTemplate restTemplate;
 
     @Autowired
-    public PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserMongoDb userDb;
+    private UserMongoDb userDb;
 
     @Autowired
-    public ColleagueMongoDb colleagueDb;
+    private ColleagueMongoDb colleagueDb;
 
     @Autowired
-    public JWTUtils jwtUtils;
+    private JWTUtils jwtUtils;
 
     @BeforeEach
     public void resetDb() {
