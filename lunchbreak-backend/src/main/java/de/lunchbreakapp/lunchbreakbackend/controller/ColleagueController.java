@@ -30,16 +30,6 @@ public class ColleagueController {
         return colleagueService.getRandomColleague();
     }
 
-    /*@GetMapping("profile/{id}")
-    public Optional<Colleague> getColleagueById(@PathVariable String id) {
-        Optional <Colleague> optionalColleague = colleagueService.getColleagueById(id);
-        if (optionalColleague.isPresent()) {
-            System.out.println(optionalColleague.get());
-            return optionalColleague;
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with id " + id + " does not exist.");
-    }*/
-
     @GetMapping("profile")
     public Optional<Colleague> getColleagueByUsername(HttpServletRequest httpServletRequest) {
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
