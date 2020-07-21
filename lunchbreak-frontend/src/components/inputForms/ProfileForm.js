@@ -7,6 +7,7 @@ import CheckboxForm from "../inputFields/CheckboxForm";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
+import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
@@ -47,9 +48,6 @@ export default function ProfileForm() {
     const [hobbies, setHobbies] = useState('');
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [lunchdays, setLunchdays] = useState('');
-
-    const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber, lunchdays}
 
     useEffect(() => {
         initProfileDataFetch()
@@ -57,11 +55,15 @@ export default function ProfileForm() {
                 setFirstName(data.firstName);
                 setLastName(data.lastName);
                 setUsername(data.username);
-                setLunchdays("placeholder");
+                setJob(data.job);
+                setFavoriteFood(data.favoriteFood);
+                setHobbies(data.hobbies);
+                setPhoneNumber(data.phoneNumber);
             })
     }, [])
 
     function handleSave() {
+        const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber}
         saveProfileDataFetch(profileInput)
             .then(data => console.log(data));
     }
@@ -99,7 +101,7 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item>
-                <InputTextField fieldName="username" label="E-Mail-Adresse" value={username} setValue={setUsername}/>
+                <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username} setValue={setUsername}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
@@ -109,9 +111,6 @@ export default function ProfileForm() {
                 <Typography variant="h5">
                     Deine Lunchdays
                 </Typography>
-            </Grid>
-            <Grid item>
-                <CheckboxForm/>
             </Grid>
             <Grid item className={classes.nextTopic}>
                 <Button
@@ -133,3 +132,9 @@ export default function ProfileForm() {
         </>
     )
 }
+
+/*
+<Grid item>
+    <CheckboxForm/>
+</Grid>
+*/

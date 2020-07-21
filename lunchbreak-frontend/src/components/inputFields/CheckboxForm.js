@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import {initProfileDataFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -22,6 +23,13 @@ export default function CheckboxForm() {
         thursday: false,
         friday: false
     })
+
+    useEffect(() => {
+        initProfileDataFetch()
+            .then(data => {
+                setLunchdays(data.lunchdays);
+            })
+    }, [])
 
     const {monday, tuesday, wednesday, thursday, friday} = lunchdays;
 
