@@ -22,6 +22,6 @@ public class Colleague {
     private String favoriteFood;
     private String hobbies;
     private String phoneNumber;
-    private String lunchdays;
+    private LunchdayList lunchdays;
 
 }

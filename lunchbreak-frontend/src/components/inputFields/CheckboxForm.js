@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -12,31 +12,22 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function CheckboxForm() {
+export default function CheckboxForm({lunchdays, setLunchdays}) {
     const classes = useStyles();
-
-    const [lunchdays, setLunchdays] = useState({
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false
-    })
-
-    const {monday, tuesday, wednesday, thursday, friday} = lunchdays;
 
     function handleLunchdayChange(event) {
         setLunchdays({...lunchdays, [event.target.name]: event.target.checked});
+        console.log(lunchdays);
     }
 
     function LunchdayCheckbox({checked, fieldName, label}) {
         return (
-        <FormControlLabel
-            control={<Checkbox checked={checked}
-                               onChange={handleLunchdayChange}
-                               name={fieldName}/>}
-            label={label}
-        />
+            <FormControlLabel
+                control={<Checkbox checked={checked}
+                                   onChange={handleLunchdayChange}
+                                   name={fieldName}/>}
+                label={label}
+            />
         )
     }
 
@@ -45,14 +36,14 @@ export default function CheckboxForm() {
             <FormLabel
                 component="legend"
                 className={classes.nextTopic}>
-                Markiere die Tage, an denen Du grundsätzlich lunchen gehen möchtest/kannst
+                Markiere die Tage, an denen Du lunchen gehen möchtest/kannst
             </FormLabel>
             <FormGroup>
-                <LunchdayCheckbox checked={monday} fieldName="monday" label="Montag"/>
-                <LunchdayCheckbox checked={tuesday} fieldName="tuesday" label="Dienstag"/>
-                <LunchdayCheckbox checked={wednesday} fieldName="wednesday" label="Mittwoch"/>
-                <LunchdayCheckbox checked={thursday} fieldName="thursday" label="Donnerstag"/>
-                <LunchdayCheckbox checked={friday} fieldName="tuesday" label="Freitag"/>
+                <LunchdayCheckbox checked={lunchdays.monday} fieldName="monday" label="Montag"/>
+                <LunchdayCheckbox checked={lunchdays.tuesday} fieldName="tuesday" label="Dienstag"/>
+                <LunchdayCheckbox checked={lunchdays.wednesday} fieldName="wednesday" label="Mittwoch"/>
+                <LunchdayCheckbox checked={lunchdays.thursday} fieldName="thursday" label="Donnerstag"/>
+                <LunchdayCheckbox checked={lunchdays.friday} fieldName="friday" label="Freitag"/>
             </FormGroup>
         </FormControl>
     )

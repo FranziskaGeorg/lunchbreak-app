@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -21,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DropdownField() {
+export default function DropdownField({subsidiary, setSubsidiary}) {
     const classes = useStyles();
-
-    const [subsidiary, setSubsidiary] = useState('');
 
     const subsidiaries = [
         {

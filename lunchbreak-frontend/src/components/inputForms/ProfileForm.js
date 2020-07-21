@@ -3,53 +3,40 @@ import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
 import DropdownField from "../inputFields/DropdownField";
-import CheckboxForm from "../inputFields/CheckboxForm";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
+import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
+import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import {useHistory} from "react-router";
+import CheckboxForm from "../inputFields/CheckboxForm";
 
 const useStyles = makeStyles((theme) => ({
-    inputField: {
-        backgroundColor: "#eef5f6",
-        '@media (max-width: 599px)': {
-            width: "75vw"
-        },
-        '@media (min-width:600px)': {
-            width: "50vw"
-        },
-        '@media (min-width:960px)': {
-            width: "25vw"
-        }
-    },
-    notchedOutline: {
-        borderColor: "#eef5f6 !important",
-    },
     nextTopic: {
         paddingTop: theme.spacing(2)
-    },
-    button: {
-        backgroundColor: "#dfa528",
-        color: "#ffffff",
-        fontFamily: "Arimo",
-        fontWeight: "bold",
-        textTransform: "none",
-        marginRight: theme.spacing(2)
     }
 }));
 
 export default function ProfileForm() {
     const classes = useStyles();
 
+    const history = useHistory();
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [job, setJob] = useState('');
+    const [subsidiary, setSubsidiary] = useState('');
     const [favoriteFood, setFavoriteFood] = useState('');
     const [hobbies, setHobbies] = useState('');
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [lunchdays, setLunchdays] = useState('');
 
-    const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber, lunchdays}
+    const [lunchdays, setLunchdays] = useState({
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false
+    })
 
     useEffect(() => {
         initProfileDataFetch()
@@ -57,11 +44,17 @@ export default function ProfileForm() {
                 setFirstName(data.firstName);
                 setLastName(data.lastName);
                 setUsername(data.username);
-                setLunchdays("placeholder");
+                setJob(data.job);
+                setSubsidiary(data.subsidiary);
+                setFavoriteFood(data.favoriteFood);
+                setHobbies(data.hobbies);
+                setPhoneNumber(data.phoneNumber);
+                setLunchdays(data.lunchdays)
             })
     }, [])
 
     function handleSave() {
+        const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
         saveProfileDataFetch(profileInput)
             .then(data => console.log(data));
     }
@@ -83,7 +76,7 @@ export default function ProfileForm() {
                 <InputTextField fieldName="job" label="Tätigkeit bei CONET" value={job} setValue={setJob}/>
             </Grid>
             <Grid item>
-                <DropdownField/>
+                <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="favoriteFood" label="Lieblingsessen bzw. -essensrichtung"
@@ -99,7 +92,8 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item>
-                <InputTextField fieldName="username" label="E-Mail-Adresse" value={username} setValue={setUsername}/>
+                <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
+                                        setValue={setUsername}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
@@ -111,24 +105,13 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item>
-                <CheckboxForm/>
+                <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
             </Grid>
             <Grid item className={classes.nextTopic}>
-                <Button
-                    className={classes.button}
-                    variant="contained"
-                    size="large"
-                >
-                    Verwerfen
-                </Button>
-                <Button
-                    className={classes.button}
-                    onClick={handleSave}
-                    variant="contained"
-                    size="large"
-                >
-                    Speichern
-                </Button>
+                <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
+                                 buttonText="Verwerfen"/>
+                <ButtonYellowBig handleClick={handleSave}
+                                 buttonText="Speichern"/>
             </Grid>
         </>
     )
