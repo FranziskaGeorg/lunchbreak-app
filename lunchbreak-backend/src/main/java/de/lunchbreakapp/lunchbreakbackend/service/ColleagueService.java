@@ -61,10 +61,6 @@ public class ColleagueService {
         return colleagueMongoDb.save(newColleague);
     }
 
-    public Optional<Colleague> getColleagueById(String id) {
-        return colleagueMongoDb.findById(id);
-    }
-
     public Optional<Colleague> getColleagueByUsername(String username) {
         return colleagueMongoDb.findByUsername(username);
     }
