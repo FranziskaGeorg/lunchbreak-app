@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import {initProfileDataFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -37,7 +36,7 @@ export default function CheckboxForm({lunchdays, setLunchdays}) {
             <FormLabel
                 component="legend"
                 className={classes.nextTopic}>
-                Markiere die Tage, an denen Du grundsätzlich lunchen gehen möchtest/kannst
+                Markiere die Tage, an denen Du lunchen gehen möchtest/kannst
             </FormLabel>
             <FormGroup>
                 <LunchdayCheckbox checked={lunchdays.monday} fieldName="monday" label="Montag"/>
