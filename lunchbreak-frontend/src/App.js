@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import UserContextProvider, {LOGIN_SUCCESS} from "./context/user/UserContextProvider";
+import UserContextProvider, {LOGIN_FAILED, LOGIN_SUCCESS} from "./context/user/UserContextProvider";
 import PrivateRoute from "./pages/PrivateRoute";
 import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
@@ -22,7 +22,7 @@ function Navigation() {
     useEffect(() => {
         if (isJWTTokenValid()) {
             dispatch({type: LOGIN_SUCCESS, payload: getDecodedJWTToken()});
-        }
+        } else {dispatch({type: LOGIN_FAILED})}
     }, [dispatch]);
 
     return <BrowserRouter>

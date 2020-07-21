@@ -24,14 +24,16 @@ export default function PrivateRoute({component: Component, ...rest}) {
         <Route
             {...rest}
             render={(props) => {
-                if (authStatus !== 'SUCCESS') {
+                if (authStatus === 'FAILED' || !authStatus) {
                     return <Redirect to={'/login'}/>;
                 }
-
-                if (new Date().getTime() / 1000 >= userData.exp) {
-                    return <Redirect to={'/login'}/>;
+                if (authStatus === 'SUCCESS') {
+                    if (new Date().getTime() / 1000 >= userData.exp) {
+                        return <Redirect to={'/login'}/>;
+                    }
+                    return <Component {...props} />;
                 }
-                return <Component {...props} />;
+                return <div>LOADING...</div>
             }}
         />
     );

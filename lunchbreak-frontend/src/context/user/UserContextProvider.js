@@ -10,7 +10,7 @@ export const REGISTRATION_FAILED = 'REGISTRATION_FAILED';
 
 export const LOGOUT = 'LOGOUT';
 const initialState = {
-    authStatus: undefined,
+    authStatus: 'PENDING',
 };
 
 function reducer(state, action) {
@@ -26,7 +26,7 @@ function reducer(state, action) {
         case LOGIN_FAILED:
             return { ...state, authStatus: 'FAILED' };
         case LOGOUT:
-            return { ...initialState };
+            return { };
         case REGISTRATION:
             return { ...state, registrationStatus: 'PENDING' };
         case REGISTRATION_SUCCESS:
