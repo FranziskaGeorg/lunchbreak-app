@@ -42,10 +42,6 @@ export default function RegistrationForm() {
             });
     }
 
-    function cancel() {
-        history.push = "/login";
-    }
-
     return (
         <>
             <Grid item>
@@ -65,15 +61,18 @@ export default function RegistrationForm() {
 
                     validationSchema={Yup.object().shape({
                         firstName: Yup.string()
-                            .required("Pflichtfeld"),
+                            .required("Pflichtfeld")
+                            .min(2, "Min. 2 Zeichen"),
                         lastName: Yup.string()
-                            .required("Pflichtfeld"),
+                            .required("Pflichtfeld")
+                            .min(2, "Min. 2 Zeichen"),
                         username: Yup.string()
                             .required("Pflichtfeld")
                             .email("Keine valide E-Mail-Adresse"),
                         password: Yup.string()
                             .required("Pflichtfeld")
                             .min(8, "Min. 8 Zeichen")
+                            .max(15, "Max. 15 Zeichen")
                             .matches(
                                 /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])/,
                                 "Min. ein Groß- sowie Kleinbuchstabe und min. eine Zahl"),
@@ -113,7 +112,7 @@ export default function RegistrationForm() {
                                                      buttonText="Account erstellen"/>
                                 </Grid>
                                 <Grid item className={classes.nextTopic}>
-                                    <ButtonYellowBig handleClick={cancel} buttonText="Abbrechen"/>
+                                    <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
                                 </Grid>
                             </Grid>
                         </Form>
