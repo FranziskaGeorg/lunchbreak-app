@@ -1,6 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
+import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.security.JWTUtils;
 import de.lunchbreakapp.lunchbreakbackend.security.JwtAuthFilter;
 import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
@@ -26,8 +27,8 @@ public class ColleagueController {
     }
 
     @GetMapping("dailymatch")
-    public Colleague getRandomColleague() {
-        return colleagueService.getRandomColleague();
+    public Colleague getMatchingColleague(LunchdayList lunchdays) {
+        return colleagueService.getMatchingColleague(lunchdays);
     }
 
     /*@GetMapping("profile/{id}")

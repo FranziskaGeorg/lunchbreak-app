@@ -8,8 +8,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.SampleOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,7 +27,20 @@ public class ColleagueService {
         this.colleagueMongoDb = colleagueMongoDb;
     }
 
-    public Colleague getRandomColleague() {
+    public Colleague getMatchingColleague(LunchdayList lunchdays) {
+        Query lunchdayQuery = new Query();
+        lunchdayQuery.addCriteria(
+                new Criteria().andOperator(
+                        Criteria.where("lunchdays.monday").ne(lunchdays.getMonday()),
+                        Criteria.where("lunchdays.tuesday").ne(lunchdays.getTuesday()),
+                        Criteria.where("lunchdays.wednesday").ne(lunchdays.getWednesday()),
+                        Criteria.where("lunchdays.thursday").ne(lunchdays.getThursday()),
+                        Criteria.where("lunchdays.friday").ne(lunchdays.getFriday()))
+        );
+        List<Colleague> notMatchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
+        mongoTemplate.remove(notMatchingColleagues);
+        System.out.println(mongoTemplate);
+
         SampleOperation matchStage = Aggregation.sample(1);
         Aggregation aggregation = Aggregation.newAggregation(matchStage);
         AggregationResults<Colleague> output = mongoTemplate.aggregate(aggregation, "colleagues", Colleague.class);
@@ -41,7 +57,7 @@ public class ColleagueService {
         newColleague.setFavoriteFood("");
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
-        newColleague.setLunchdays(null);
+        newColleague.setLunchdays(new LunchdayList(false, false, false, false, false));
         return colleagueMongoDb.save(newColleague);
     }
 
