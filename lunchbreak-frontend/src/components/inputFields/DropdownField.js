@@ -21,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DropdownField() {
+export default function DropdownField({subsidiary, setSubsidiary}) {
     const classes = useStyles();
-
-    const [subsidiary, setSubsidiary] = useState('');
 
     const subsidiaries = [
         {

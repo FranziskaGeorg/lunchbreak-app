@@ -1,4 +1,4 @@
-package de.lunchbreakapp.lunchbreakbackend.db;
+package de.lunchbreakapp.lunchbreakbackend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
+import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -40,7 +41,7 @@ public class ColleagueService {
         newColleague.setFavoriteFood("");
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
-        newColleague.setLunchdays("");
+        newColleague.setLunchdays(null);
         return colleagueMongoDb.save(newColleague);
     }
 
@@ -53,7 +54,7 @@ public class ColleagueService {
     }
 
     public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
-                                     String hobbies, String phoneNumber, String lunchdays) {
+                                     String hobbies, String phoneNumber, LunchdayList lunchdays) {
         updatedColleague.setFirstName(firstName);
         updatedColleague.setLastName(lastName);
         updatedColleague.setJob(job);

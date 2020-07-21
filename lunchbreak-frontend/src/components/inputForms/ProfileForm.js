@@ -24,6 +24,7 @@ export default function ProfileForm() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [job, setJob] = useState('');
+    const [subsidiary, setSubsidiary] = useState('');
     const [favoriteFood, setFavoriteFood] = useState('');
     const [hobbies, setHobbies] = useState('');
     const [username, setUsername] = useState('');
@@ -44,6 +45,7 @@ export default function ProfileForm() {
                 setLastName(data.lastName);
                 setUsername(data.username);
                 setJob(data.job);
+                setSubsidiary(data.subsidiary);
                 setFavoriteFood(data.favoriteFood);
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
@@ -52,7 +54,7 @@ export default function ProfileForm() {
     }, [])
 
     function handleSave() {
-        const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber, lunchdays}
+        const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
         saveProfileDataFetch(profileInput)
             .then(data => console.log(data));
     }
@@ -74,7 +76,7 @@ export default function ProfileForm() {
                 <InputTextField fieldName="job" label="Tätigkeit bei CONET" value={job} setValue={setJob}/>
             </Grid>
             <Grid item>
-                <DropdownField/>
+                <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="favoriteFood" label="Lieblingsessen bzw. -essensrichtung"

@@ -1,4 +1,14 @@
 package de.lunchbreakapp.lunchbreakbackend.model;
 
-public class LunchdayList {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Lunchday {
+
+    private Boolean dayChecked;
+
 }
