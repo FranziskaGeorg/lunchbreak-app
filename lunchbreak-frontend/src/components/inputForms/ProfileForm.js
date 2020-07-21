@@ -8,6 +8,7 @@ import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils
 import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import {useHistory} from "react-router";
+import CheckboxForm from "../inputFields/CheckboxForm";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -28,6 +29,14 @@ export default function ProfileForm() {
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
 
+    const [lunchdays, setLunchdays] = useState({
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false
+    })
+
     useEffect(() => {
         initProfileDataFetch()
             .then(data => {
@@ -38,11 +47,12 @@ export default function ProfileForm() {
                 setFavoriteFood(data.favoriteFood);
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
+                setLunchdays(data.lunchdays)
             })
     }, [])
 
     function handleSave() {
-        const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber}
+        const profileInput = {firstName, lastName, job, favoriteFood, hobbies, username, phoneNumber, lunchdays}
         saveProfileDataFetch(profileInput)
             .then(data => console.log(data));
     }
@@ -80,7 +90,8 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item>
-                <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username} setValue={setUsername}/>
+                <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
+                                        setValue={setUsername}/>
             </Grid>
             <Grid item>
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
@@ -91,6 +102,9 @@ export default function ProfileForm() {
                     Deine Lunchdays
                 </Typography>
             </Grid>
+            <Grid item>
+                <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
+            </Grid>
             <Grid item className={classes.nextTopic}>
                 <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
                                  buttonText="Verwerfen"/>
@@ -100,9 +114,3 @@ export default function ProfileForm() {
         </>
     )
 }
-
-/*
-<Grid item>
-    <CheckboxForm/>
-</Grid>
-*/

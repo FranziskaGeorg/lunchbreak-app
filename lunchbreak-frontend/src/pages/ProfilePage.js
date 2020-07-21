@@ -2,13 +2,13 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import ProfileForm from "../components/inputForms/ProfileForm";
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(1)
+        paddingBottom: theme.spacing(2),
+        marginLeft: theme.spacing(4)
     },
     card: {
         marginBottom: theme.spacing(10)
@@ -27,9 +27,7 @@ export default function ProfilePage() {
                   justify="center"
                   spacing={1}
             >
-                <CardContent>
-                    <ProfileForm/>
-                </CardContent>
+                <ProfileForm/>
             </Grid>
         </Card>
     )
