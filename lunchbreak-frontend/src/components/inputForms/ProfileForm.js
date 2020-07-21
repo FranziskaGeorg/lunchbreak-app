@@ -8,38 +8,19 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
 import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
+import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
-    inputField: {
-        backgroundColor: "#eef5f6",
-        '@media (max-width: 599px)': {
-            width: "75vw"
-        },
-        '@media (min-width:600px)': {
-            width: "50vw"
-        },
-        '@media (min-width:960px)': {
-            width: "25vw"
-        }
-    },
-    notchedOutline: {
-        borderColor: "#eef5f6 !important",
-    },
     nextTopic: {
         paddingTop: theme.spacing(2)
-    },
-    button: {
-        backgroundColor: "#dfa528",
-        color: "#ffffff",
-        fontFamily: "Arimo",
-        fontWeight: "bold",
-        textTransform: "none",
-        marginRight: theme.spacing(2)
     }
 }));
 
 export default function ProfileForm() {
     const classes = useStyles();
+
+    const history = useHistory();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -113,21 +94,10 @@ export default function ProfileForm() {
                 </Typography>
             </Grid>
             <Grid item className={classes.nextTopic}>
-                <Button
-                    className={classes.button}
-                    variant="contained"
-                    size="large"
-                >
-                    Verwerfen
-                </Button>
-                <Button
-                    className={classes.button}
-                    onClick={handleSave}
-                    variant="contained"
-                    size="large"
-                >
-                    Speichern
-                </Button>
+                <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
+                                 buttonText="Verwerfen"/>
+                <ButtonYellowBig handleClick={handleSave}
+                                 buttonText="Speichern"/>
             </Grid>
         </>
     )
