@@ -42,10 +42,6 @@ export default function RegistrationForm() {
             });
     }
 
-    function cancel() {
-        history.push = "/login";
-    }
-
     return (
         <>
             <Grid item>
@@ -116,7 +112,7 @@ export default function RegistrationForm() {
                                                      buttonText="Account erstellen"/>
                                 </Grid>
                                 <Grid item className={classes.nextTopic}>
-                                    <ButtonYellowBig handleClick={cancel} buttonText="Abbrechen"/>
+                                    <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
                                 </Grid>
                             </Grid>
                         </Form>
