@@ -30,24 +30,14 @@ public class ColleagueController {
         return colleagueService.getRandomColleague();
     }
 
-    /*@GetMapping("profile/{id}")
-    public Optional<Colleague> getColleagueById(@PathVariable String id) {
-        Optional <Colleague> optionalColleague = colleagueService.getColleagueById(id);
-        if (optionalColleague.isPresent()) {
-            System.out.println(optionalColleague.get());
-            return optionalColleague;
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with id " + id + " does not exist.");
-    }*/
-
     @GetMapping("profile")
-    public Optional<Colleague> getColleagueByUsername(HttpServletRequest httpServletRequest) {
+    public Colleague getColleagueByUsername(HttpServletRequest httpServletRequest) {
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
         String token = authorizationHeader.replace("Bearer", "").trim();
         String usernameFromToken = jwtUtils.extractUserName(token);
         Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(usernameFromToken);
         if (optionalColleague.isPresent()) {
-            return optionalColleague;
+            return optionalColleague.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + usernameFromToken + " does not exist.");
     }
