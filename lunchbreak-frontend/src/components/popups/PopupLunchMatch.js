@@ -6,13 +6,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 
-export default function PopupLunchMatch({showPopup}, {setShowPopup}) {
+export default function PopupLunchMatch({showPopup, setShowPopup, matchData}) {
 
-    console.log(showPopup);
+    console.log({showPopup});
+    console.log({setShowPopup});
 
     function handleClosePopup() {
         setShowPopup(false);
-        return showPopup;
     }
 
     return (
@@ -25,12 +25,10 @@ export default function PopupLunchMatch({showPopup}, {setShowPopup}) {
             <DialogTitle id="alert-dialog-title">Neues Lunch-Match!</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Kontaktiere , um einen Termin zum Lunchen zu vereinbaren.
-                    <br/>
-                    E-Mail-Adresse:
-                    <br/>
-                    Handynummer:
-                    <br/>
+                    Kontaktiere {matchData.firstName}, um einen Termin zum Lunchen zu vereinbaren.
+                    <br/><br/>E-Mail-Adresse: {matchData.username}
+                    <br/><br/>Handynummer: {matchData.phoneNumber}
+                    <br/><br/>
                     Du kannst die Kontaktdaten deines Matches auch jederzeit zu einem späteren Zeitpunkt in deiner Nachrichtenbox anschauen.
                 </DialogContentText>
             </DialogContent>

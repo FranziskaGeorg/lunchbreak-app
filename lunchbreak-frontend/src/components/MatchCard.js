@@ -44,7 +44,7 @@ export default function MatchCard() {
         setShowPopup(true);
     }
 
-    console.log(dailyMatch);
+    console.log("Hallo" + setShowPopup);
 
     return (
         <Card>
@@ -96,10 +96,10 @@ export default function MatchCard() {
                      justifyContent="space-around"
                 >
                     <ButtonYellowBigPacifico handleClick={handleShuffleClick} buttonText="Mischen"/>
-                    <ButtonYellowBigPacifico handleClick={handleShuffleClick} buttonText="Mischen"/>
+                    <ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>
                 </Box>
             </Box>
-            <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup}/>
+            <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
         </Card>
     )
 }
