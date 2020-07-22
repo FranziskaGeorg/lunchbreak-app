@@ -2,13 +2,12 @@ package de.lunchbreakapp.lunchbreakbackend.service;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
+import de.lunchbreakapp.lunchbreakbackend.utils.LunchdayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -17,11 +16,13 @@ public class ColleagueService {
 
     private final MongoTemplate mongoTemplate;
     private final ColleagueMongoDb colleagueMongoDb;
+    private final LunchdayUtils lunchdayUtils;
 
     @Autowired
-    public ColleagueService(MongoTemplate mongoTemplate, ColleagueMongoDb colleagueMongoDb) {
+    public ColleagueService(MongoTemplate mongoTemplate, ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils) {
         this.mongoTemplate = mongoTemplate;
         this.colleagueMongoDb = colleagueMongoDb;
+        this.lunchdayUtils = lunchdayUtils;
     }
 
     public Optional<Colleague> getMatchingColleague(String loggedUsername, Map<String, Boolean> lunchdays) {
@@ -64,8 +65,6 @@ public class ColleagueService {
         return colleagueMongoDb.findByUsername(username);
     }
 
-    private final List<String> validWeekdays = List.of("monday", "tuesday", "wednesday", "thursday", "friday");
-
     public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
                                      String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
         updatedColleague.setFirstName(firstName);
@@ -75,11 +74,7 @@ public class ColleagueService {
         updatedColleague.setFavoriteFood(favoriteFood);
         updatedColleague.setHobbies(hobbies);
         updatedColleague.setPhoneNumber(phoneNumber);
-        for (String weekday : lunchdays.keySet()) {
-            if (!validWeekdays.contains(weekday)) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "weekday "+ weekday + " is not valid");
-            }
-        }
+        lunchdayUtils.validateLunchdays(lunchdays);
         updatedColleague.setLunchdays(lunchdays);
         return colleagueMongoDb.save(updatedColleague);
     }
