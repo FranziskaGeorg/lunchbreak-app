@@ -1,17 +1,16 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ColleagueService {
@@ -25,25 +24,14 @@ public class ColleagueService {
         this.colleagueMongoDb = colleagueMongoDb;
     }
 
-    public Optional<Colleague> getMatchingColleague(String loggedUsername, LunchdayList lunchdays) {
-
+    public Optional<Colleague> getMatchingColleague(String loggedUsername, Map<String, Boolean> lunchdays) {
         List<Criteria> checkedLunchdays = new ArrayList<>();
 
-        if (lunchdays.getMonday()) {
-            checkedLunchdays.add(Criteria.where("lunchdays.monday").is(true));
-        }
-        if (lunchdays.getTuesday()) {
-            checkedLunchdays.add(Criteria.where("lunchdays.tuesday").is(true));
-        }
-        if (lunchdays.getWednesday()) {
-            checkedLunchdays.add(Criteria.where("lunchdays.wednesday").is(true));
-        }
-        if (lunchdays.getThursday()) {
-            checkedLunchdays.add(Criteria.where("lunchdays.thursday").is(true));
-        }
-        if (lunchdays.getFriday()) {
-            checkedLunchdays.add(Criteria.where("lunchdays.friday").is(true));
-        }
+        lunchdays.forEach((key, value) -> {
+            if (value) {
+                checkedLunchdays.add(Criteria.where("lunchdays." + key).is(true));
+            }
+        });
 
         Query lunchdayQuery = new Query();
         lunchdayQuery.addCriteria(
@@ -68,7 +56,7 @@ public class ColleagueService {
         newColleague.setFavoriteFood("");
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
-        newColleague.setLunchdays(new LunchdayList(false, false, false, false, false));
+        newColleague.setLunchdays(new HashMap<>());
         return colleagueMongoDb.save(newColleague);
     }
 
@@ -76,8 +64,10 @@ public class ColleagueService {
         return colleagueMongoDb.findByUsername(username);
     }
 
+    private final List<String> validWeekdays = List.of("monday", "tuesday", "wednesday", "thursday", "friday");
+
     public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
-                                     String hobbies, String phoneNumber, LunchdayList lunchdays) {
+                                     String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
         updatedColleague.setFirstName(firstName);
         updatedColleague.setLastName(lastName);
         updatedColleague.setJob(job);
@@ -85,6 +75,11 @@ public class ColleagueService {
         updatedColleague.setFavoriteFood(favoriteFood);
         updatedColleague.setHobbies(hobbies);
         updatedColleague.setPhoneNumber(phoneNumber);
+        for (String weekday : lunchdays.keySet()) {
+            if (!validWeekdays.contains(weekday)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "weekday "+ weekday + " is not valid");
+            }
+        }
         updatedColleague.setLunchdays(lunchdays);
         return colleagueMongoDb.save(updatedColleague);
     }

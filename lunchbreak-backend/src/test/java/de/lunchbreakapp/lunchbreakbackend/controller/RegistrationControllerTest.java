@@ -3,7 +3,6 @@ package de.lunchbreakapp.lunchbreakbackend.controller;
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.RegistrationData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,7 +40,7 @@ class RegistrationControllerTest {
     @Test
     public void registerNewUserWithValidData() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "test@test.de", "Theo", "Tester", "", "", "", "", "", new LunchdayList());
+        Colleague testColleague = new Colleague("123", "test@test.de", "Theo", "Tester", "", "", "", "", "", new HashMap<>());
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/register";

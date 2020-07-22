@@ -1,7 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.security.JWTUtils;
 import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +27,7 @@ public class ColleagueController {
     public Colleague getMatchingColleague(HttpServletRequest httpServletRequest) {
         Colleague loggedColleague = getColleagueByUsername(httpServletRequest);
         String loggedUsername = loggedColleague.getUsername();
-        LunchdayList lunchdays = loggedColleague.getLunchdays();
+        Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
         Optional<Colleague> optionalColleague = colleagueService.getMatchingColleague(loggedUsername, lunchdays);
         if (optionalColleague.isPresent()) {
             return optionalColleague.get();
