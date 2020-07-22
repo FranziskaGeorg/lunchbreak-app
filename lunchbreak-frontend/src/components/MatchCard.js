@@ -44,8 +44,6 @@ export default function MatchCard() {
         setShowPopup(true);
     }
 
-    console.log("Hallo" + setShowPopup);
-
     return (
         <Card>
             <Box className={classes.bigBox}
