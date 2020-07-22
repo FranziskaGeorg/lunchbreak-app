@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getRandomColleagueFetch} from "../utils/FetchUtils";
+import {getMatchingColleagueFetch} from "../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import ButtonYellowBigPacifico from "./buttons/ButtonYellowBigPacifico";
@@ -31,12 +31,12 @@ export default function MatchCard() {
     const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
-        getRandomColleagueFetch()
+        getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }, [])
 
     function handleShuffleClick() {
-        getRandomColleagueFetch()
+        getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }
 
