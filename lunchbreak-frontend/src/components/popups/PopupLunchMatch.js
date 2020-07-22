@@ -19,7 +19,10 @@ export default function PopupLunchMatch({showPopup, setShowPopup, matchData}) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">Neues Lunch-Match! 🎉</DialogTitle>
+            <DialogTitle id="alert-dialog-title">
+                Neues Lunch-Match!
+                <span role="img" aria-labelledby="party-emoji">🎉</span>
+            </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                     Kontaktiere {matchData.firstName}, um einen Termin zum Lunchen zu vereinbaren.
