@@ -5,13 +5,11 @@ import de.lunchbreakapp.lunchbreakbackend.model.LunchdayList;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.SampleOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,24 +25,37 @@ public class ColleagueService {
         this.colleagueMongoDb = colleagueMongoDb;
     }
 
-    public Colleague getMatchingColleague(LunchdayList lunchdays) {
+    public Optional<Colleague> getMatchingColleague(String loggedUsername, LunchdayList lunchdays) {
+
+        List<Criteria> checkedLunchdays = new ArrayList<>();
+
+        if (lunchdays.getMonday()) {
+            checkedLunchdays.add(Criteria.where("lunchdays.monday").is(true));
+        }
+        if (lunchdays.getTuesday()) {
+            checkedLunchdays.add(Criteria.where("lunchdays.tuesday").is(true));
+        }
+        if (lunchdays.getWednesday()) {
+            checkedLunchdays.add(Criteria.where("lunchdays.wednesday").is(true));
+        }
+        if (lunchdays.getThursday()) {
+            checkedLunchdays.add(Criteria.where("lunchdays.thursday").is(true));
+        }
+        if (lunchdays.getFriday()) {
+            checkedLunchdays.add(Criteria.where("lunchdays.friday").is(true));
+        }
+
         Query lunchdayQuery = new Query();
         lunchdayQuery.addCriteria(
                 new Criteria().andOperator(
-                        Criteria.where("lunchdays.monday").ne(lunchdays.getMonday()),
-                        Criteria.where("lunchdays.tuesday").ne(lunchdays.getTuesday()),
-                        Criteria.where("lunchdays.wednesday").ne(lunchdays.getWednesday()),
-                        Criteria.where("lunchdays.thursday").ne(lunchdays.getThursday()),
-                        Criteria.where("lunchdays.friday").ne(lunchdays.getFriday()))
+                        Criteria.where("username").ne(loggedUsername),
+                        new Criteria().orOperator(checkedLunchdays.toArray(Criteria[]::new))
+                )
         );
-        List<Colleague> notMatchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
-        mongoTemplate.remove(notMatchingColleagues);
-        System.out.println(mongoTemplate);
 
-        SampleOperation matchStage = Aggregation.sample(1);
-        Aggregation aggregation = Aggregation.newAggregation(matchStage);
-        AggregationResults<Colleague> output = mongoTemplate.aggregate(aggregation, "colleagues", Colleague.class);
-        return output.getMappedResults().get(0);
+        List<Colleague> matchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
+        int randomIndex = (int) (Math.random() * (matchingColleagues.size() + 1));
+        return Optional.of(matchingColleagues.get(randomIndex));
     }
 
     public Colleague saveNewColleagueToDb(String username, String firstName, String lastName) {
