@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         position: "fixed",
         top: 'auto',
-        bottom: "0"
+        bottom: "0",
+        boxShadow: "none"
     }
 }));
 
