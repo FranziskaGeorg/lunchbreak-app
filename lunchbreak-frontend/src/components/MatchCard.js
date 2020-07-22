@@ -4,14 +4,17 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
+import ButtonYellowBigPacifico from "./buttons/ButtonYellowBigPacifico";
+import PopupLunchMatch from "./popups/PopupLunchMatch";
 
 export default function MatchCard() {
     const [dailyMatch, setDailyMatch] = useState({});
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         getRandomColleagueFetch()
             .then(data => setDailyMatch(data));
+        console.log(dailyMatch);
     }, [])
 
     function handleShuffleClick() {
@@ -19,10 +22,14 @@ export default function MatchCard() {
             .then(data => setDailyMatch(data));
     }
 
+    function handleLunchClick() {
+        setShowPopup(true);
+    }
+
     return (
         <Card>
             <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h3" component="h2">
                     {dailyMatch.firstName}
                 </Typography>
                 <Typography variant="body2" component="p">
@@ -30,9 +37,10 @@ export default function MatchCard() {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button variant="contained" size="small" color="secondary" onClick={handleShuffleClick}>Neu mischen</Button>
-                <Button variant="contained" size="small" color="secondary">Lunchen gehen</Button>
+                <ButtonYellowBigPacifico handleClick={handleShuffleClick} buttonText="Mischen"/>
+                <ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>
             </CardActions>
+            <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup}/>
         </Card>
     )
 }

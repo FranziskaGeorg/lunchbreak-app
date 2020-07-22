@@ -26,6 +26,10 @@ const LunchBreakTheme = createMuiTheme({
     },
 
     typography: {
+        h3: {
+            fontFamily: "Arimo",
+            color: "#575757"
+        },
         h4: {
             fontFamily: 'Pacifico'
         },
