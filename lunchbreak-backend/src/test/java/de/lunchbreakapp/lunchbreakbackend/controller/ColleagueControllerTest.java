@@ -48,7 +48,7 @@ class ColleagueControllerTest {
         LunchBreakUser testUser = new LunchBreakUser("hanni@nanni.de", passwordEncoder.encode("testpw"), "user");
         when(userDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testUser));
 
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", "");
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", null);
         when(colleagueDb.findByUsername("hanni@nanni.de")).thenReturn(Optional.of(testColleague));
 
         String url = "http://localhost:" + port + "/auth/login";
@@ -60,7 +60,7 @@ class ColleagueControllerTest {
     // getColleagueByUsername
     public void shouldReturnColleagueMatchingUsernameFromToken() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", "");
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", null);
         String userToken = loginToken();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setBearerAuth(userToken);

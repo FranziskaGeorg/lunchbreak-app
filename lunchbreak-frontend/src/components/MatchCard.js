@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getRandomColleagueFetch} from "../utils/FetchUtils";
+import {getMatchingColleagueFetch} from "../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -10,12 +10,12 @@ export default function MatchCard() {
     const [dailyMatch, setDailyMatch] = useState({});
 
     useEffect(() => {
-        getRandomColleagueFetch()
+        getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }, [])
 
     function handleShuffleClick() {
-        getRandomColleagueFetch()
+        getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }
 

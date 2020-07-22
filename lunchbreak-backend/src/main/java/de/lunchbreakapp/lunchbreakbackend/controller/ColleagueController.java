@@ -2,13 +2,13 @@ package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.security.JWTUtils;
-import de.lunchbreakapp.lunchbreakbackend.security.JwtAuthFilter;
 import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,17 +17,22 @@ public class ColleagueController {
 
     private final ColleagueService colleagueService;
     private final JWTUtils jwtUtils;
-    private final JwtAuthFilter jwtAuthFilter;
 
-    public ColleagueController(ColleagueService colleagueService, JWTUtils jwtUtils, JwtAuthFilter jwtAuthFilter) {
+    public ColleagueController(ColleagueService colleagueService, JWTUtils jwtUtils) {
         this.colleagueService = colleagueService;
         this.jwtUtils = jwtUtils;
-        this.jwtAuthFilter = jwtAuthFilter;
     }
 
     @GetMapping("dailymatch")
-    public Colleague getRandomColleague() {
-        return colleagueService.getRandomColleague();
+    public Colleague getMatchingColleague(HttpServletRequest httpServletRequest) {
+        Colleague loggedColleague = getColleagueByUsername(httpServletRequest);
+        String loggedUsername = loggedColleague.getUsername();
+        Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
+        Optional<Colleague> optionalColleague = colleagueService.getMatchingColleague(loggedUsername, lunchdays);
+        if (optionalColleague.isPresent()) {
+            return optionalColleague.get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No matching colleague for " + loggedUsername + " found.");
     }
 
     @GetMapping("profile")

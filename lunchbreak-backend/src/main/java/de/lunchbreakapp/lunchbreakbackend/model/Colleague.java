@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +24,6 @@ public class Colleague {
     private String favoriteFood;
     private String hobbies;
     private String phoneNumber;
-    private LunchdayList lunchdays;
+    private Map<String, Boolean> lunchdays;
 
 }

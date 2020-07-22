@@ -1,6 +1,6 @@
 import {getJWTToken} from "./JWTUtils";
 
-export async function getRandomColleagueFetch() {
+export async function getMatchingColleagueFetch() {
     const token = getJWTToken();
     const response = await fetch("/api/dailymatch", {
         method: 'GET',
