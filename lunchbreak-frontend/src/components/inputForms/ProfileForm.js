@@ -29,7 +29,6 @@ export default function ProfileForm() {
     const [hobbies, setHobbies] = useState('');
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-
     const [lunchdays, setLunchdays] = useState({
         monday: false,
         tuesday: false,
@@ -49,9 +48,9 @@ export default function ProfileForm() {
                 setFavoriteFood(data.favoriteFood);
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
-                setLunchdays(data.lunchdays)
+                setLunchdays(data.lunchdays);
             })
-    }, [])
+    }, []);
 
     function handleSave() {
         const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
