@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public class ColleagueController {
     }
 
     @GetMapping("dailymatch")
-    public Colleague getMatchingColleague(HttpServletRequest httpServletRequest) {
-        Colleague loggedColleague = getColleagueByUsername(httpServletRequest);
+    public Colleague getMatchingColleague(Principal principal) {
+        Colleague loggedColleague = getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
         Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
         Optional<Colleague> optionalColleague = colleagueService.getMatchingColleague(loggedUsername, lunchdays);
@@ -36,15 +36,13 @@ public class ColleagueController {
     }
 
     @GetMapping("profile")
-    public Colleague getColleagueByUsername(HttpServletRequest httpServletRequest) {
-        String authorizationHeader = httpServletRequest.getHeader("Authorization");
-        String token = authorizationHeader.replace("Bearer", "").trim();
-        String usernameFromToken = jwtUtils.extractUserName(token);
-        Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(usernameFromToken);
+    public Colleague getColleagueByUsername(Principal principal) {
+        String loggedUsername = principal.getName();
+        Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(loggedUsername);
         if (optionalColleague.isPresent()) {
             return optionalColleague.get();
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + usernameFromToken + " does not exist.");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + loggedUsername + " does not exist.");
     }
 
     @PostMapping("profile")

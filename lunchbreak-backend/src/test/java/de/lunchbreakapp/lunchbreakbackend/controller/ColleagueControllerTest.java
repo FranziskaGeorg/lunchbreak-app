@@ -15,6 +15,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,7 +49,7 @@ class ColleagueControllerTest {
         LunchBreakUser testUser = new LunchBreakUser("hanni@nanni.de", passwordEncoder.encode("testpw"), "user");
         when(userDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testUser));
 
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", null);
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>());
         when(colleagueDb.findByUsername("hanni@nanni.de")).thenReturn(Optional.of(testColleague));
 
         String url = "http://localhost:" + port + "/auth/login";
@@ -60,7 +61,7 @@ class ColleagueControllerTest {
     // getColleagueByUsername
     public void shouldReturnColleagueMatchingUsernameFromToken() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", null);
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>());
         String userToken = loginToken();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setBearerAuth(userToken);
