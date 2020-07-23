@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getMatchingColleagueFetch} from "../../utils/FetchUtils";
+import {getMatchingColleagueFetch, getProfileStatusFetch} from "../../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import ButtonYellowBigPacifico from "../buttons/ButtonYellowBigPacifico";
@@ -29,11 +29,16 @@ export default function DailyMatchCard() {
 
     const [dailyMatch, setDailyMatch] = useState({});
     const [showPopup, setShowPopup] = useState(false);
+    const [profileFilled, setProfileFilled] = useState(false);
 
     useEffect(() => {
+        getProfileStatusFetch()
+            .then(data => setProfileFilled(data));
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }, [])
+
+    console.log(profileFilled);
 
     function handleShuffleClick() {
         getMatchingColleagueFetch()
@@ -77,15 +82,15 @@ export default function DailyMatchCard() {
                         </Typography>
                     </Box>
                     <Box className={classes.nextTopicSmall}
-                        display="flex"
+                         display="flex"
                          flexDirection="row"
                          alignItems="center">
                         <SvgIcon className={classes.icon} color="primary">
                             <FaThumbsUp/>
                         </SvgIcon>
-                    <Typography variant="body1">
-                        {dailyMatch.hobbies}
-                    </Typography>
+                        <Typography variant="body1">
+                            {dailyMatch.hobbies}
+                        </Typography>
                     </Box>
                 </Box>
                 <Box className={classes.nextTopicLarge}
@@ -101,5 +106,3 @@ export default function DailyMatchCard() {
         </Card>
     )
 }
-
-/*<ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>*/
