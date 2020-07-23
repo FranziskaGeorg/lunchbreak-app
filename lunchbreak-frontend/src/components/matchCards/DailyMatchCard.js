@@ -8,6 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
+import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 
 const useStyles = makeStyles((theme) => ({
     bigBox: {
@@ -30,15 +31,20 @@ export default function DailyMatchCard() {
     const [dailyMatch, setDailyMatch] = useState({});
     const [showPopup, setShowPopup] = useState(false);
     const [profileFilled, setProfileFilled] = useState(false);
+    const [showSnackbar, setShowSnackbar] = useState(false);
 
     useEffect(() => {
         getProfileStatusFetch()
             .then(data => setProfileFilled(data));
+        if (!profileFilled) {
+            setShowSnackbar(true);
+        }
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
     }, [])
 
     console.log(profileFilled);
+    console.log("Snackbar" + showSnackbar);
 
     function handleShuffleClick() {
         getMatchingColleagueFetch()
@@ -98,11 +104,14 @@ export default function DailyMatchCard() {
                      flexDirection="row"
                      justifyContent="space-around"
                 >
-                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleShuffleClick} buttonText="Mischen"/>
-                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleLunchClick} buttonText="Lunchen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
+                                             buttonText="Mischen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleLunchClick}
+                                             buttonText="Lunchen"/>
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
+            <SnackbarFillProfile showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
         </Card>
     )
 }
