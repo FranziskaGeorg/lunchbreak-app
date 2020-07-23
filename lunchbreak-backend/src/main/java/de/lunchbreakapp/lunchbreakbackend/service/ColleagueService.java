@@ -25,7 +25,7 @@ public class ColleagueService {
         this.lunchdayUtils = lunchdayUtils;
     }
 
-    public Optional<Colleague> getMatchingColleague(String loggedUsername, Map<String, Boolean> lunchdays) {
+    public Optional<Colleague> getMatchingColleague(String loggedUsername, Boolean profileFilled, Map<String, Boolean> lunchdays) {
         List<Criteria> checkedLunchdays = new ArrayList<>();
 
         lunchdays.forEach((key, value) -> {
@@ -38,6 +38,7 @@ public class ColleagueService {
         lunchdayQuery.addCriteria(
                 new Criteria().andOperator(
                         Criteria.where("username").ne(loggedUsername),
+                        Criteria.where("profileFilled").is(true),
                         new Criteria().orOperator(checkedLunchdays.toArray(Criteria[]::new))
                 )
         );
