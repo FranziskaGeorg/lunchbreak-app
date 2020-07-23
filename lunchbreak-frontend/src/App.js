@@ -15,19 +15,32 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import BottomNavBar from "./components/navigation/BottomNavBar";
 import RegistrationPage from "./pages/RegistrationPage";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+    overallContainer: {
+        background: "linear-gradient(0deg, rgba(238,245,246,1) 0%, rgba(149,208,197,1) 90%, rgba(0,159,149,1) 100%)",
+        height: "100vh",
+        paddingTop: "20%"
+    }
+}));
 
 function Navigation() {
+    const classes = useStyles();
+
     const dispatch = useContext(UserDispatchContext);
 
     useEffect(() => {
         if (isJWTTokenValid()) {
             dispatch({type: LOGIN_SUCCESS, payload: getDecodedJWTToken()});
-        } else {dispatch({type: LOGIN_FAILED})}
+        } else {
+            dispatch({type: LOGIN_FAILED})
+        }
     }, [dispatch]);
 
     return <BrowserRouter>
         <Header/>
-        <Container maxWidth={'md'} component="main">
+        <Container className={classes.overallContainer} maxWidth={'md'} component="main">
             <Switch>
                 <Route path="/login" component={LoginPage} exact/>
                 <Route path="/register" component={RegistrationPage} exact/>
@@ -40,11 +53,9 @@ function Navigation() {
 }
 
 export default function App() {
-
     return (
         <ThemeProvider theme={LunchBreakTheme}>
             <UserContextProvider>
-                <CssBaseline />
                 <Navigation/>
             </UserContextProvider>
         </ThemeProvider>

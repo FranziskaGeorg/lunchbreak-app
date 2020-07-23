@@ -9,9 +9,10 @@ import logo from '../../images/happytoast.png';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
+        position: "fixed",
         flexGrow: 1,
-        marginBottom: theme.spacing(2),
-        boxShadow: "none"
+        boxShadow: "none",
+        opacity: "100%"
     },
     logo: {
         marginRight: theme.spacing(0.5),

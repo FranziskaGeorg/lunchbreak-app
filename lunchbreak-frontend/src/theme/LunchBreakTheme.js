@@ -17,11 +17,6 @@ const LunchBreakTheme = createMuiTheme({
         info:
             {
                 main: '#ffffff' // white
-            },
-        background:
-            {
-                // default: '#f8f8f8' // light grey
-                default: "#eef5f6" // light turquoise
             }
     },
 
