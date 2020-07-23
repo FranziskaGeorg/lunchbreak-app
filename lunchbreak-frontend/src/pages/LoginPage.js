@@ -1,25 +1,15 @@
-import Grid from "@material-ui/core/Grid";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Card from "@material-ui/core/Card";
 import LoginForm from "../components/inputForms/LoginForm";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
-    gridBigContainer: {
-        height: "60vh",
-        paddingTop: "40%",
+    overallBox: {
+        display: "flex"
     },
-    gridContainer: {
+    bigBox: {
         padding: theme.spacing(4)
-    },
-    buttonNonContained: {
-        color: "primary",
-        fontFamily: "Arimo",
-        textTransform: "none",
-        textAlign: "center"
-    },
-    nextTopic: {
-        paddingTop: theme.spacing(3)
     }
 }));
 
@@ -27,24 +17,13 @@ export default function LoginPage() {
     const classes = useStyles();
 
     return (
-        <Grid container
-              className={classes.gridBigContainer}
-              direction="row"
-              justify="center"
-        >
+        <Box className={classes.overallBox}>
             <Card>
-                <Grid item>
-                    <Grid container
-                          className={classes.gridContainer}
-                          direction="column"
-                          alignContent="center"
-                          justify="center"
-                    >
-                        <LoginForm/>
-                    </Grid>
-                </Grid>
+                <Box className={classes.bigBox}>
+                    <LoginForm/>
+                </Box>
             </Card>
-        </Grid>
+        </Box>
     );
 }
 

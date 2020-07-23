@@ -12,18 +12,19 @@ import {performLogin} from "../../utils/AuthUtils";
 import {getDecodedJWTToken, setJWTToken} from "../../utils/JWTUtils";
 import {Redirect} from "react-router-dom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     buttonNonContained: {
         color: "primary",
         fontFamily: "Arimo",
-        textTransform: "none",
-        textAlign: "center"
+        textTransform: "none"
     },
     nextTopic: {
         paddingTop: theme.spacing(3)
     },
-    centerButton: {
+    nextTopicAndCenterItem: {
+        paddingTop: theme.spacing(3),
         textAlign: "center"
     }
 }));
@@ -56,12 +57,12 @@ export default function LoginForm() {
     }
 
     return (
-        <>
-            <Grid item>
+        <Box>
+            <Box>
                 <Typography variant="h4" color="primary" align="center">
                     Welcome to LunchBreak
                 </Typography>
-            </Grid>
+            </Box>
             <Formik initialValues={
                 {
                     username: '',
@@ -80,30 +81,28 @@ export default function LoginForm() {
                 {props => {
                     return (
                         <Form>
-                            <Grid item className={classes.nextTopic}>
+                            <Box className={classes.nextTopicAndCenterItem}>
                                 <InputTextFieldValidated fieldType="text" fieldName="username"
                                                          label="E-Mail-Adresse" formikProps={props}/>
-                            </Grid>
-                            <Grid item>
                                 <InputTextFieldValidated fieldType="password" fieldName="password"
                                                          label="Passwort" formikProps={props}/>
-                            </Grid>
-                                <Grid item className={classes.nextTopic}>
-                                    <ButtonYellowBig handleClick={props.handleSubmit}
-                                                     buttonText="Login"/>
-                                </Grid>
-                                <Grid item className={classes.nextTopic}>
-                                    <Button
-                                        className={classes.buttonNonContained}
-                                        color="primary"
-                                        onClick={goToRegistration}>
-                                        Noch keinen Account? Hier geht's zur Registrierung.
-                                    </Button>
-                                </Grid>
+                            </Box>
+                            <Box className={classes.nextTopicAndCenterItem}>
+                                <ButtonYellowBig handleClick={props.handleSubmit}
+                                                 buttonText="Login"/>
+                            </Box>
+                            <Box className={classes.nextTopicAndCenterItem}>
+                                <Button
+                                    className={classes.buttonNonContained}
+                                    color="primary"
+                                    onClick={goToRegistration}>
+                                    Noch keinen Account? Hier geht's zur Registrierung.
+                                </Button>
+                            </Box>
                         </Form>
                     )
                 }}
             </Formik>
-        </>
+        </Box>
     )
 }
