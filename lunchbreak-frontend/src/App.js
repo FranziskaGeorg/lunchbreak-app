@@ -12,7 +12,6 @@ import Header from "./components/navigation/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import BottomNavBar from "./components/navigation/BottomNavBar";
 import RegistrationPage from "./pages/RegistrationPage";
 import makeStyles from "@material-ui/core/styles/makeStyles";
