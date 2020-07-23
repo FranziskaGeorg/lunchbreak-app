@@ -11,16 +11,24 @@ import ProfilePage from "./pages/ProfilePage";
 import Header from "./components/navigation/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
-import Container from "@material-ui/core/Container";
 import BottomNavBar from "./components/navigation/BottomNavBar";
 import RegistrationPage from "./pages/RegistrationPage";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     overallContainer: {
         background: "linear-gradient(0deg, rgba(238,245,246,1) 0%, rgba(149,208,197,1) 90%, rgba(0,159,149,1) 100%)",
         height: "100vh",
-        paddingTop: "20%"
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        padding: theme.spacing(2),
+        overflowY: "scroll",
+        top: "0",
+        bottom: "0",
+        right: "0",
+        left: "0"
     }
 }));
 
@@ -39,14 +47,14 @@ function Navigation() {
 
     return <BrowserRouter>
         <Header/>
-        <Container className={classes.overallContainer} maxWidth={'md'} component="main">
+        <Box className={classes.overallContainer}>
             <Switch>
                 <Route path="/login" component={LoginPage} exact/>
                 <Route path="/register" component={RegistrationPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>
             </Switch>
-        </Container>
+        </Box>
         <BottomNavBar/>
     </BrowserRouter>
 }
