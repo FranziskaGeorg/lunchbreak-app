@@ -31,17 +31,13 @@ export default function DailyMatchCard() {
     const [dailyMatch, setDailyMatch] = useState({});
     const [showPopup, setShowPopup] = useState(false);
     const [profileFilled, setProfileFilled] = useState(false);
-    const [showSnackbar, setShowSnackbar] = useState(false);
 
     useEffect(() => {
         getProfileStatusFetch()
             .then(data => setProfileFilled(data));
-        if (!profileFilled) {
-            setShowSnackbar(true);
-        }
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
-    }, [profileFilled])
+    }, [])
 
     function handleShuffleClick() {
         getMatchingColleagueFetch()
@@ -108,7 +104,7 @@ export default function DailyMatchCard() {
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
-            <SnackbarFillProfile showSnackbar={showSnackbar}/>
+            <SnackbarFillProfile showSnackbar={!profileFilled}/>
         </Card>
     )
 }
