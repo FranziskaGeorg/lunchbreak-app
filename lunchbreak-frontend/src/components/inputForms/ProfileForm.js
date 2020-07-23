@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
 import DropdownField from "../inputFields/DropdownField";
@@ -9,6 +8,7 @@ import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
 import ButtonYellowBig from "../buttons/ButtonYellowBig";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -59,59 +59,59 @@ export default function ProfileForm() {
     }
 
     return (
-        <>
-            <Grid item>
+        <Box>
+            <Box>
                 <Typography variant="h5">
                     Über Dich
                 </Typography>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="lastName" label="Nachname" value={lastName} setValue={setLastName}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="job" label="Tätigkeit bei CONET" value={job} setValue={setJob}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="favoriteFood" label="Lieblingsessen bzw. -essensrichtung"
                                 value={favoriteFood} setValue={setFavoriteFood}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="hobbies" label="Hobbies oder Interessen" value={hobbies}
                                 setValue={setHobbies}/>
-            </Grid>
-            <Grid item className={classes.nextTopic}>
+            </Box>
+            <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Kontaktdaten
                 </Typography>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
                                         setValue={setUsername}/>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
                                 setValue={setPhoneNumber}/>
-            </Grid>
-            <Grid item className={classes.nextTopic}>
+            </Box>
+            <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Deine Lunchdays
                 </Typography>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
-            </Grid>
-            <Grid item className={classes.nextTopic}>
+            </Box>
+            <Box className={classes.nextTopic}>
                 <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
                                  buttonText="Verwerfen"/>
                 <ButtonYellowBig handleClick={handleSave}
                                  buttonText="Speichern"/>
-            </Grid>
-        </>
+            </Box>
+        </Box>
     )
 }
