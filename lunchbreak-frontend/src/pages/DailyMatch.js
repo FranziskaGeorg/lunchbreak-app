@@ -1,5 +1,5 @@
 import React from "react";
-import MatchCard from "../components/MatchCard";
+import DailyMatchCard from "../components/matchCards/DailyMatchCard";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -16,7 +16,7 @@ export default function DailyMatch() {
     return (
         <Grid container>
             <Grid item className={classes.root}>
-                <MatchCard/>
+                <DailyMatchCard/>
             </Grid>
         </Grid>
     )
