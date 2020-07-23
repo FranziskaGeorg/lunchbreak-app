@@ -98,8 +98,8 @@ export default function DailyMatchCard() {
                      flexDirection="row"
                      justifyContent="space-around"
                 >
-                    <ButtonYellowBigPacifico handleClick={handleShuffleClick} buttonText="Mischen"/>
-                    <ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleShuffleClick} buttonText="Mischen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleLunchClick} buttonText="Lunchen"/>
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
