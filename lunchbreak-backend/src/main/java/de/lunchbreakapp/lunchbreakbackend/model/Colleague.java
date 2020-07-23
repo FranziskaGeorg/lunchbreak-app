@@ -25,5 +25,6 @@ public class Colleague {
     private String hobbies;
     private String phoneNumber;
     private Map<String, Boolean> lunchdays;
+    private Boolean profileFilled;
 
 }

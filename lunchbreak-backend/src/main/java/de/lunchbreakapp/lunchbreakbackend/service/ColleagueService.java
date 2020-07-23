@@ -58,6 +58,7 @@ public class ColleagueService {
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays(new HashMap<>());
+        newColleague.setProfileFilled(false);
         return colleagueMongoDb.save(newColleague);
     }
 
@@ -76,6 +77,10 @@ public class ColleagueService {
         updatedColleague.setPhoneNumber(phoneNumber);
         lunchdayUtils.validateLunchdays(lunchdays);
         updatedColleague.setLunchdays(lunchdays);
+        if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank()
+        && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() &&!lunchdays.isEmpty()) {
+            updatedColleague.setProfileFilled(true);
+        }
         return colleagueMongoDb.save(updatedColleague);
     }
 

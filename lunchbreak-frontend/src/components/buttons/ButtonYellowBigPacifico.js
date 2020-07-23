@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ButtonYellowBigPacifico({handleClick, buttonText}) {
+export default function ButtonYellowBigPacifico({handleClick, buttonText, disabled}) {
     const classes = useStyles();
 
     return (
@@ -20,6 +20,7 @@ export default function ButtonYellowBigPacifico({handleClick, buttonText}) {
             className={classes.buttonContained}
             variant="contained"
             size="large"
+            disabled={disabled}
             onClick={(event) => handleClick()}
         >
             {buttonText}

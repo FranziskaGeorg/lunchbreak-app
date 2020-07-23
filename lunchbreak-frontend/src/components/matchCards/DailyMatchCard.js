@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {getMatchingColleagueFetch} from "../utils/FetchUtils";
+import {getMatchingColleagueFetch, getProfileStatusFetch} from "../../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import ButtonYellowBigPacifico from "./buttons/ButtonYellowBigPacifico";
-import PopupLunchMatch from "./popups/PopupLunchMatch";
+import ButtonYellowBigPacifico from "../buttons/ButtonYellowBigPacifico";
+import PopupLunchMatch from "../popups/PopupLunchMatch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
+import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 
 const useStyles = makeStyles((theme) => ({
     bigBox: {
@@ -24,16 +25,23 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function MatchCard() {
+export default function DailyMatchCard() {
     const classes = useStyles();
 
     const [dailyMatch, setDailyMatch] = useState({});
     const [showPopup, setShowPopup] = useState(false);
+    const [profileFilled, setProfileFilled] = useState(false);
+    const [showSnackbar, setShowSnackbar] = useState(false);
 
     useEffect(() => {
+        getProfileStatusFetch()
+            .then(data => setProfileFilled(data));
+        if (!profileFilled) {
+            setShowSnackbar(true);
+        }
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
-    }, [])
+    }, [profileFilled])
 
     function handleShuffleClick() {
         getMatchingColleagueFetch()
@@ -77,15 +85,15 @@ export default function MatchCard() {
                         </Typography>
                     </Box>
                     <Box className={classes.nextTopicSmall}
-                        display="flex"
+                         display="flex"
                          flexDirection="row"
                          alignItems="center">
                         <SvgIcon className={classes.icon} color="primary">
                             <FaThumbsUp/>
                         </SvgIcon>
-                    <Typography variant="body1">
-                        {dailyMatch.hobbies}
-                    </Typography>
+                        <Typography variant="body1">
+                            {dailyMatch.hobbies}
+                        </Typography>
                     </Box>
                 </Box>
                 <Box className={classes.nextTopicLarge}
@@ -93,13 +101,14 @@ export default function MatchCard() {
                      flexDirection="row"
                      justifyContent="space-around"
                 >
-                    <ButtonYellowBigPacifico handleClick={handleShuffleClick} buttonText="Mischen"/>
-                    <ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
+                                             buttonText="Mischen"/>
+                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleLunchClick}
+                                             buttonText="Lunchen"/>
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
+            <SnackbarFillProfile showSnackbar={showSnackbar}/>
         </Card>
     )
 }
-
-/*<ButtonYellowBigPacifico handleClick={handleLunchClick} buttonText="Lunchen"/>*/
