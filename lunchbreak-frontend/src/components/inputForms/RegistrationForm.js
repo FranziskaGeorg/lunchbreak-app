@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
 import {performRegistration} from "../../utils/AuthUtils";
@@ -15,10 +14,16 @@ import {
 } from "../../context/user/UserContextProvider";
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
         paddingTop: theme.spacing(3)
+    },
+    buttonBox: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
     }
 }));
 
@@ -43,12 +48,12 @@ export default function RegistrationForm() {
     }
 
     return (
-        <>
-            <Grid item>
+        <Box>
+            <Box>
                 <Typography variant="h4" color="primary" align="center">
                     Registrierung
                 </Typography>
-            </Grid>
+            </Box>
             <Formik initialValues={
                 {
                     firstName: '',
@@ -84,42 +89,40 @@ export default function RegistrationForm() {
                 {props => {
                     return (
                         <Form>
-                            <Grid item className={classes.nextTopic}>
+                            <Box className={classes.nextTopic}>
                                 <InputTextFieldValidated fieldType="text" fieldName="firstName"
                                                          label="Vorname" formikProps={props}/>
-                            </Grid>
-                            <Grid item>
+                            </Box>
+                            <Box>
                                 <InputTextFieldValidated fieldType="text" fieldName="lastName"
                                                          label="Nachname" formikProps={props}/>
-                            </Grid>
-                            <Grid item>
+                            </Box>
+                            <Box>
                                 <InputTextFieldValidated fieldType="text" fieldName="username"
                                                          label="E-Mail-Adresse" formikProps={props}/>
-                            </Grid>
-                            <Grid item>
+                            </Box>
+                            <Box>
                                 <InputTextFieldValidated fieldType="password" fieldName="password"
                                                          label="Passwort" formikProps={props}/>
-                            </Grid>
-                            <Grid item>
+                            </Box>
+                            <Box>
                                 <InputTextFieldValidated fieldType="password" fieldName="matchingPassword"
                                                          label="Passwort wiederholen" formikProps={props}/>
-                            </Grid>
-                            <Grid container
-                                  direction="row"
-                                  justify="space-between">
-                                <Grid item className={classes.nextTopic}>
+                            </Box>
+                            <Box className={classes.buttonBox}>
+                                <Box className={classes.nextTopic}>
                                     <ButtonYellowBig handleClick={props.handleSubmit}
                                                      buttonText="Account erstellen"/>
-                                </Grid>
-                                <Grid item className={classes.nextTopic}>
+                                </Box>
+                                <Box className={classes.nextTopic}>
                                     <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         </Form>
                     )
                 }}
             </Formik>
             <PopupRegistrationSuccess openStatus={registrationStatus === 'SUCCESS'}/>
-        </>
+        </Box>
     )
 }
