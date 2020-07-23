@@ -41,7 +41,7 @@ export default function DailyMatchCard() {
         }
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
-    }, [])
+    }, [profileFilled])
 
     function handleShuffleClick() {
         getMatchingColleagueFetch()
