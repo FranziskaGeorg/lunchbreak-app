@@ -56,5 +56,5 @@ export async function getProfileStatusFetch() {
     if (response.status !== 200) {
         throw new Error("Fetch of profile status failed")
     }
-    return await response.json();
+    return await response.text();
 }

@@ -43,9 +43,6 @@ export default function DailyMatchCard() {
             .then(data => setDailyMatch(data));
     }, [])
 
-    console.log(profileFilled);
-    console.log("Snackbar" + showSnackbar);
-
     function handleShuffleClick() {
         getMatchingColleagueFetch()
             .then(data => setDailyMatch(data));
@@ -111,7 +108,7 @@ export default function DailyMatchCard() {
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>
-            <SnackbarFillProfile showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
+            <SnackbarFillProfile showSnackbar={showSnackbar}/>
         </Card>
     )
 }
