@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         width: "100vw",
-        minHeight: "80%"
+        minHeight: "95%"
     },
     bigBox: {
         flexGrow: 1,

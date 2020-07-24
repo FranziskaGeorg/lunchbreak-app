@@ -13,6 +13,12 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
         paddingTop: theme.spacing(2)
+    },
+    buttonBox: {
+        display: "flex",
+        flexDirection: "row",
+        paddingTop: theme.spacing(2),
+        justifyContent: "space-around"
     }
 }));
 
@@ -106,7 +112,7 @@ export default function ProfileForm() {
             <Box>
                 <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
             </Box>
-            <Box className={classes.nextTopic}>
+            <Box className={classes.buttonBox}>
                 <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
                                  buttonText="Verwerfen"/>
                 <ButtonYellowBig handleClick={handleSave}

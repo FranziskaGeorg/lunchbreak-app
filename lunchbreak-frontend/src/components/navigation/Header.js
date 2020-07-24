@@ -9,7 +9,7 @@ import logo from '../../images/happytoast.png';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        position: "fixed",
+        position: "sticky",
         flexGrow: 1,
         boxShadow: "none",
         opacity: "100%"
