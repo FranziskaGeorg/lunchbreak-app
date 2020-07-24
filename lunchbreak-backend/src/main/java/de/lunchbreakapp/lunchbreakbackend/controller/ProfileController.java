@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
+import de.lunchbreakapp.lunchbreakbackend.service.ProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,16 +13,16 @@ import java.util.Optional;
 @RequestMapping("api/profile")
 public class ProfileController {
 
-    private final ColleagueService colleagueService;
+    private final ProfileService profileService;
 
-    public ProfileController(ColleagueService colleagueService) {
-        this.colleagueService = colleagueService;
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
     @GetMapping
     public Colleague getColleagueByUsername(Principal principal) {
         String loggedUsername = principal.getName();
-        Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(loggedUsername);
+        Optional<Colleague> optionalColleague = profileService.getColleagueByUsername(loggedUsername);
         if (optionalColleague.isPresent()) {
             return optionalColleague.get();
         }
@@ -31,9 +31,9 @@ public class ProfileController {
 
     @PostMapping
     public void saveProfileChanges(@RequestBody Colleague profileData) {
-        Optional<Colleague> optionalColleague = colleagueService.getColleagueByUsername(profileData.getUsername());
+        Optional<Colleague> optionalColleague = profileService.getColleagueByUsername(profileData.getUsername());
         if (optionalColleague.isPresent()) {
-            colleagueService.updateColleague(optionalColleague.get(), profileData.getFirstName(), profileData.getLastName(), profileData.getJob(),
+            profileService.updateColleague(optionalColleague.get(), profileData.getFirstName(), profileData.getLastName(), profileData.getJob(),
                     profileData.getSubsidiary(), profileData.getFavoriteFood(), profileData.getHobbies(), profileData.getPhoneNumber(),
                     profileData.getLunchdays());
         } else {

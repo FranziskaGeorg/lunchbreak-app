@@ -1,4 +1,4 @@
-package de.lunchbreakapp.lunchbreakbackend.model;
+package de.lunchbreakapp.lunchbreakbackend.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lunchday {
+public class HistoryData {
 
-    private Boolean dayChecked;
+    private String matchedUsername;
 
 }
