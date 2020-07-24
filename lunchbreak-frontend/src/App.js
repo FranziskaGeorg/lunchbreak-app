@@ -15,6 +15,7 @@ import BottomNavBar from "./components/navigation/BottomNavBar";
 import RegistrationPage from "./pages/RegistrationPage";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
+import LunchHistory from "./pages/LunchHistory";
 
 const useStyles = makeStyles((theme) => ({
     overallContainer: {
@@ -53,6 +54,7 @@ function Navigation() {
                 <Route path="/register" component={RegistrationPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>
+                <PrivateRoute path="/history"component={LunchHistory} exact/>
             </Switch>
         </Box>
         <BottomNavBar/>
