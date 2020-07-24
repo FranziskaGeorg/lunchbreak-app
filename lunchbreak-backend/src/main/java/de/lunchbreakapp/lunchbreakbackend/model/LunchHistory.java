@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lunchday {
+public class LunchHistory {
 
-    private Boolean dayChecked;
+    String loggedUserId;
+    String matchedUserId;
+    LocalDate matchDate;
 
 }
