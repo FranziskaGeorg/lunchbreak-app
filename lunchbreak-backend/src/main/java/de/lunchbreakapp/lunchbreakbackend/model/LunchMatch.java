@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Document(collection = "matches")
 public class LunchMatch {
 
-    String loggedUserId;
-    String matchedUserId;
+    String loggedUsername;
+    String matchedUsername;
     LocalDate matchDate;
 
 }

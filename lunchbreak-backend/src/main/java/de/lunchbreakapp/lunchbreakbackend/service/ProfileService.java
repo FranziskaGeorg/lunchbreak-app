@@ -4,48 +4,20 @@ import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.utils.LunchdayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class ColleagueService {
+public class ProfileService {
 
-    private final MongoTemplate mongoTemplate;
     private final ColleagueMongoDb colleagueMongoDb;
     private final LunchdayUtils lunchdayUtils;
 
     @Autowired
-    public ColleagueService(MongoTemplate mongoTemplate, ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils) {
-        this.mongoTemplate = mongoTemplate;
+    public ProfileService(ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils) {
         this.colleagueMongoDb = colleagueMongoDb;
         this.lunchdayUtils = lunchdayUtils;
-    }
-
-    public Optional<Colleague> getMatchingColleague(String loggedUsername, Boolean profileFilled, Map<String, Boolean> lunchdays) {
-        List<Criteria> checkedLunchdays = new ArrayList<>();
-
-        lunchdays.forEach((key, value) -> {
-            if (value) {
-                checkedLunchdays.add(Criteria.where("lunchdays." + key).is(true));
-            }
-        });
-
-        Query lunchdayQuery = new Query();
-        lunchdayQuery.addCriteria(
-                new Criteria().andOperator(
-                        Criteria.where("username").ne(loggedUsername),
-                        Criteria.where("profileFilled").is(true),
-                        new Criteria().orOperator(checkedLunchdays.toArray(Criteria[]::new))
-                )
-        );
-
-        List<Colleague> matchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
-        int randomIndex = (int) (Math.random() * (matchingColleagues.size() + 1));
-        return Optional.of(matchingColleagues.get(randomIndex));
     }
 
     public Colleague saveNewColleagueToDb(String username, String firstName, String lastName) {

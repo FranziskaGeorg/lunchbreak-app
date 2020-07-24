@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.service.ColleagueService;
+import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,11 +14,11 @@ import java.util.Optional;
 @RequestMapping("api/dailymatch")
 public class MatchController {
 
-    private final ColleagueService colleagueService;
+    private final MatchService matchService;
     private final ProfileController profileController;
 
-    public MatchController(ColleagueService colleagueService, ProfileController profileController) {
-        this.colleagueService = colleagueService;
+    public MatchController(MatchService matchService, ProfileController profileController) {
+        this.matchService = matchService;
         this.profileController = profileController;
     }
 
@@ -26,9 +26,8 @@ public class MatchController {
     public Colleague getMatchingColleague(Principal principal) {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
-        Boolean profileFilled = loggedColleague.getProfileFilled();
         Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
-        Optional<Colleague> optionalColleague = colleagueService.getMatchingColleague(loggedUsername, profileFilled, lunchdays);
+        Optional<Colleague> optionalColleague = matchService.getMatchingColleague(loggedUsername, lunchdays);
         if (optionalColleague.isPresent()) {
             return optionalColleague.get();
         }
