@@ -48,7 +48,7 @@ public class MatchService {
         );
 
         List<Colleague> matchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
-        int randomIndex = (int) (Math.random() * (matchingColleagues.size() + 1));
+        int randomIndex = (int) (Math.random() * matchingColleagues.size());
         return Optional.of(matchingColleagues.get(randomIndex));
     }
 
