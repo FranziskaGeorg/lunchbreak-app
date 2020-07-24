@@ -71,7 +71,8 @@ export async function getProfileStatusFetch() {
     if (response.status !== 200) {
         throw new Error("Fetch of profile status failed")
     }
-    return await response.text();
+    const result = await response.text();
+    return (result === 'true');
 }
 
 export async function getLunchMatchesFetch() {
