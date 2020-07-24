@@ -7,12 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HistoryData {
+public class MatchData {
 
     private String matchedUsername;
-    private String matchDate;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
 
 }

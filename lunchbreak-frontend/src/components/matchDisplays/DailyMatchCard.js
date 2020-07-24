@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getMatchingColleagueFetch, getProfileStatusFetch} from "../../utils/FetchUtils";
+import {getMatchingColleagueFetch, getProfileStatusFetch, saveLunchMatchFetch} from "../../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import ButtonYellowBigPacifico from "../buttons/ButtonYellowBigPacifico";
@@ -46,6 +46,8 @@ export default function DailyMatchCard() {
 
     function handleLunchClick() {
         setShowPopup(true);
+        saveLunchMatchFetch(dailyMatch.username)
+            .then(data => console.log(data));
     }
 
     return (
