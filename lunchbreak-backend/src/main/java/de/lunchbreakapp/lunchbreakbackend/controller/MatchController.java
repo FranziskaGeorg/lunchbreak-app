@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.dto.HistoryData;
+import de.lunchbreakapp.lunchbreakbackend.model.dto.MatchData;
 import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class MatchController {
     }
 
     @PostMapping
-    public void saveProfileChanges(Principal principal, @RequestBody HistoryData data) {
+    public void saveLunchMatch(Principal principal, @RequestBody MatchData data) {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
         String matchedUsername = data.getMatchedUsername();
