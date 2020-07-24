@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {getLunchMatchesFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HistoryAccordion() {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+
+    const [lunchMatches, setLunchMatches] = useState([]);
+
+    const [expanded, setExpanded] = useState(false);
+
+    useEffect(() => {
+        getLunchMatchesFetch()
+            .then(data => setLunchMatches(data));
+    })
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -31,14 +40,16 @@ export default function HistoryAccordion() {
 
     return (
         <div className={classes.root}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            {lunchMatches.map(lunchMatch =>
+                <Accordion expanded={expanded === 'panel1'}
+                           onChange={handleChange('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                 >
-                    <Typography className={classes.heading}>05.08.2020</Typography>
-                    <Typography className={classes.secondaryHeading}>Draco</Typography>
+                    <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
+                    <Typography className={classes.secondaryHeading}>{lunchMatch.matchedUsername}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -47,7 +58,7 @@ export default function HistoryAccordion() {
                         Handynummer:
                     </Typography>
                 </AccordionDetails>
-            </Accordion>
+            </Accordion>)}
         </div>
-);
+    );
 }
