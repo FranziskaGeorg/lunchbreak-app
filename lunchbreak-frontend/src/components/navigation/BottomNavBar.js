@@ -12,7 +12,7 @@ import LogoutButton from "./LogoutButton";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        position: "fixed",
+        position: "sticky",
         top: 'auto',
         bottom: "0",
         boxShadow: "none"

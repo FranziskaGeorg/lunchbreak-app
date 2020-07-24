@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
     buttonBox: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between"
+        paddingTop: theme.spacing(2),
+        justifyContent: "space-around"
     }
 }));
 
@@ -110,13 +111,9 @@ export default function RegistrationForm() {
                                                          label="Passwort wiederholen" formikProps={props}/>
                             </Box>
                             <Box className={classes.buttonBox}>
-                                <Box className={classes.nextTopic}>
-                                    <ButtonYellowBig handleClick={props.handleSubmit}
-                                                     buttonText="Account erstellen"/>
-                                </Box>
-                                <Box className={classes.nextTopic}>
-                                    <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
-                                </Box>
+                                <ButtonYellowBig handleClick={props.handleSubmit}
+                                                 buttonText="Account erstellen"/>
+                                <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
                             </Box>
                         </Form>
                     )

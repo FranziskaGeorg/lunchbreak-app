@@ -23,13 +23,9 @@ const useStyles = makeStyles((theme) => ({
         height: "100vh",
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "flex-start",
         padding: theme.spacing(2),
-        overflowY: "scroll",
-        top: "0",
-        bottom: "0",
-        right: "0",
-        left: "0"
+        overflowY: "scroll"
     }
 }));
 
