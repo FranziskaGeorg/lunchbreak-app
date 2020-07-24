@@ -1,6 +1,9 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
+import de.lunchbreakapp.lunchbreakbackend.db.MatchMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
+import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
+import de.lunchbreakapp.lunchbreakbackend.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,10 +19,14 @@ import java.util.Optional;
 public class MatchService {
 
     private final MongoTemplate mongoTemplate;
+    private final MatchMongoDb matchMongoDb;
+    private final DateUtils dateUtils;
 
     @Autowired
-    public MatchService(MongoTemplate mongoTemplate) {
+    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, DateUtils dateUtils) {
         this.mongoTemplate = mongoTemplate;
+        this.matchMongoDb = matchMongoDb;
+        this.dateUtils = dateUtils;
     }
 
     public Optional<Colleague> getMatchingColleague(String loggedUsername, Map<String, Boolean> lunchdays) {
@@ -43,6 +50,14 @@ public class MatchService {
         List<Colleague> matchingColleagues = mongoTemplate.find(lunchdayQuery, Colleague.class);
         int randomIndex = (int) (Math.random() * (matchingColleagues.size() + 1));
         return Optional.of(matchingColleagues.get(randomIndex));
+    }
+
+    public LunchMatch saveNewLunchMatchToDb(String loggedUsername, String matchedUsername) {
+        LunchMatch newLunchMatch = new LunchMatch();
+        newLunchMatch.setLoggedUsername(loggedUsername);
+        newLunchMatch.setMatchedUsername(matchedUsername);
+        newLunchMatch.setMatchDate(dateUtils.formatCurrentDate());
+        return matchMongoDb.save(newLunchMatch);
     }
 
 }

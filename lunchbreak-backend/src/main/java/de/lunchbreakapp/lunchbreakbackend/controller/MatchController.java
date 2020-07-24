@@ -1,6 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
+import de.lunchbreakapp.lunchbreakbackend.model.dto.HistoryData;
 import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,14 @@ public class MatchController {
             return optionalColleague.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No matching colleague for " + loggedUsername + " found.");
+    }
+
+    @PostMapping
+    public void saveProfileChanges(Principal principal, @RequestBody HistoryData data) {
+        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
+        String loggedUsername = loggedColleague.getUsername();
+        String matchedUsername = data.getMatchedUsername();
+        matchService.saveNewLunchMatchToDb(loggedUsername, matchedUsername);
     }
 
 }

@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +13,6 @@ public class LunchMatch {
 
     String loggedUsername;
     String matchedUsername;
-    LocalDate matchDate;
+    String matchDate;
 
 }
