@@ -53,6 +53,8 @@ public class ProfileService {
         if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank()
         && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() &&!lunchdays.isEmpty()) {
             updatedColleague.setProfileFilled(true);
+        } else {
+            updatedColleague.setProfileFilled(false);
         }
         return colleagueMongoDb.save(updatedColleague);
     }
