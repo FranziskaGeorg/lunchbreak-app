@@ -12,8 +12,10 @@ const useStyles = makeStyles((theme) => ({
     },
     bigBox: {
         flexGrow: 1,
+        maxWidth: "1000px",
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "#ffffff",
         borderRadius: "10px",
         padding: theme.spacing(4)

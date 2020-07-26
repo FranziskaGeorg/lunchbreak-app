@@ -20,11 +20,29 @@ const useStyles = makeStyles((theme) => ({
     nextTopic: {
         paddingTop: theme.spacing(3)
     },
+    centerItem: {
+        textAlign: "center"
+    },
+    nextTopicAndCenterItem: {
+        paddingTop: theme.spacing(3),
+        textAlign: "center"
+    },
     buttonBox: {
         display: "flex",
         flexDirection: "row",
         paddingTop: theme.spacing(2),
-        justifyContent: "space-between"
+        justifyContent: "space-around"
+    },
+    registrationBox: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        '@media (min-width: 412px, max-width: 599px)': {
+            minWidth: "400px"
+        },
+        '@media (min-width:600px)': {
+            maxWidth: "500px"
+        }
     }
 }));
 
@@ -49,7 +67,7 @@ export default function RegistrationForm() {
     }
 
     return (
-        <Box>
+        <Box className={classes.registrationBox}>
             <Box>
                 <Typography variant="h4" color="primary" align="center">
                     Registrierung
@@ -90,23 +108,23 @@ export default function RegistrationForm() {
                 {props => {
                     return (
                         <Form>
-                            <Box className={classes.nextTopic}>
+                            <Box className={classes.nextTopicAndCenterItem}>
                                 <InputTextFieldValidated fieldType="text" fieldName="firstName"
                                                          label="Vorname" formikProps={props}/>
                             </Box>
-                            <Box>
+                            <Box className={classes.centerItem}>
                                 <InputTextFieldValidated fieldType="text" fieldName="lastName"
                                                          label="Nachname" formikProps={props}/>
                             </Box>
-                            <Box>
+                            <Box className={classes.centerItem}>
                                 <InputTextFieldValidated fieldType="text" fieldName="username"
                                                          label="E-Mail-Adresse" formikProps={props}/>
                             </Box>
-                            <Box>
+                            <Box className={classes.centerItem}>
                                 <InputTextFieldValidated fieldType="password" fieldName="password"
                                                          label="Passwort" formikProps={props}/>
                             </Box>
-                            <Box>
+                            <Box className={classes.centerItem}>
                                 <InputTextFieldValidated fieldType="password" fieldName="matchingPassword"
                                                          label="Passwort wiederholen" formikProps={props}/>
                             </Box>
