@@ -15,6 +15,7 @@ import {
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 import Box from "@material-ui/core/Box";
+import ButtonYellowMediumPacifico from "../buttons/ButtonYellowMediumPacifico";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "row",
         paddingTop: theme.spacing(2),
-        justifyContent: "space-around"
+        justifyContent: "space-between"
     }
 }));
 
@@ -111,9 +112,14 @@ export default function RegistrationForm() {
                                                          label="Passwort wiederholen" formikProps={props}/>
                             </Box>
                             <Box className={classes.buttonBox}>
+                                <ButtonYellowBig handleClick={() => history.push("/login")}
+                                                 buttonSize="medium"
+                                                 buttonText="Abbrechen"
+                                />
                                 <ButtonYellowBig handleClick={props.handleSubmit}
-                                                 buttonText="Account erstellen"/>
-                                <ButtonYellowBig handleClick={() => history.push("/login")} buttonText="Abbrechen"/>
+                                                 buttonSize="medium"
+                                                 buttonText="Account erstellen"
+                                />
                             </Box>
                         </Form>
                     )
