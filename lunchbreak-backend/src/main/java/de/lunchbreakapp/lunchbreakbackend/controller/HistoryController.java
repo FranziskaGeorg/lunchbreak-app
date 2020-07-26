@@ -1,13 +1,11 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
+import de.lunchbreakapp.lunchbreakbackend.model.dto.HistoryData;
 import de.lunchbreakapp.lunchbreakbackend.service.HistoryService;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,15 +23,10 @@ public class HistoryController {
     }
 
     @GetMapping
-    public List<LunchMatch> getLunchMatchesByUsername(Principal principal) {
+    public List<HistoryData> getLunchMatchDetails(Principal principal) {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
-        List<LunchMatch> lunchMatches = historyService.getLunchMatchesByUsername(loggedUsername);
-        if (!lunchMatches.isEmpty()) {
-            return lunchMatches;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No lunch matches for " + loggedUsername + "found");
-        }
+        return historyService.getDetailsForLunchMatches(loggedUsername);
     }
 
 }
