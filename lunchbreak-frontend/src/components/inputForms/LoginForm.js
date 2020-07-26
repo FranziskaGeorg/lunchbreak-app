@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
             minWidth: "400px"
         },
         '@media (min-width:600px)': {
-            maxWidth: "600px"
+            maxWidth: "500px"
         }
     }
 }));
