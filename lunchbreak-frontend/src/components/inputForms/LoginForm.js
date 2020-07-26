@@ -12,6 +12,7 @@ import {getDecodedJWTToken, setJWTToken} from "../../utils/JWTUtils";
 import {Redirect} from "react-router-dom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
+import startLogo from '../../images/happytoast_startlogo.png';
 
 const useStyles = makeStyles((theme) => ({
     buttonNonContained: {
@@ -36,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
         '@media (min-width:600px)': {
             maxWidth: "500px"
         }
+    },
+    logo: {
+        width: '60%',
+        height: '60%'
+    },
+    logoPlacement: {
+        paddingTop: theme.spacing(3),
+        textAlign: "center"
     }
 }));
 
@@ -72,6 +81,9 @@ export default function LoginForm() {
                 <Typography variant="h4" color="primary" align="center">
                     Welcome to LunchBreak
                 </Typography>
+            </Box>
+            <Box className={classes.logoPlacement}>
+                <img src={startLogo} alt="Lunchbreak logo for login" className={classes.logo}/>
             </Box>
             <Formik initialValues={
                 {
