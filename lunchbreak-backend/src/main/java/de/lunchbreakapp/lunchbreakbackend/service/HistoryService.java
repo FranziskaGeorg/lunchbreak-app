@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,7 +27,9 @@ public class HistoryService {
     }
 
     public List<LunchMatch> getLunchMatchesByUsername(String loggedUsername) {
-        return matchMongoDb.findAllByLoggedUsername(loggedUsername);
+        List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(loggedUsername);
+        lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
+        return lunchMatches;
     }
 
     public List<HistoryData> getLunchMatchDetails(List<LunchMatch> lunchMatches) {
