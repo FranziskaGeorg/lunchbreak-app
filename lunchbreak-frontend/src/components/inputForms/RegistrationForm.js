@@ -15,7 +15,6 @@ import {
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 import Box from "@material-ui/core/Box";
-import ButtonYellowMediumPacifico from "../buttons/ButtonYellowMediumPacifico";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
