@@ -8,11 +8,11 @@ const LunchBreakTheme = createMuiTheme({
             },
         secondary:
             {
-                main: '#b3d5d4' // light turquoise
+                main: '#dfa528' // sandy yellow
             },
         error:
             {
-                main: '#dfa528' // sandy yellow
+                main: '#b3d5d4' // light turquoise
             },
         info:
             {
@@ -34,7 +34,7 @@ const LunchBreakTheme = createMuiTheme({
             color: "#575757"
         },
         caption: {
-            fontFamily: 'Arimo',
+            fontFamily: "Arimo",
             color: '#dfa528'
         }
     }

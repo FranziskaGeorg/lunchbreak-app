@@ -88,6 +88,7 @@ export default function LoginForm() {
                             </Box>
                             <Box className={classes.nextTopicAndCenterItem}>
                                 <ButtonYellowBig handleClick={props.handleSubmit}
+                                                 buttonSize="large"
                                                  buttonText="Login"/>
                             </Box>
                             <Box className={classes.nextTopicAndCenterItem}>

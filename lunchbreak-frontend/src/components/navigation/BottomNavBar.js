@@ -28,7 +28,7 @@ export default function BottomNavBar() {
         return (
             <Link to={currentPath}>
                 {location.pathname === currentPath ?
-                    <SvgIcon color="error">
+                    <SvgIcon color="secondary">
                         {icon}
                     </SvgIcon> :
                     <SvgIcon color="primary">

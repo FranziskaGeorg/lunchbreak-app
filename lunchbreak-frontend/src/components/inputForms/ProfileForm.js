@@ -114,8 +114,10 @@ export default function ProfileForm() {
             </Box>
             <Box className={classes.buttonBox}>
                 <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
+                                 buttonSize="large"
                                  buttonText="Verwerfen"/>
                 <ButtonYellowBig handleClick={handleSave}
+                                 buttonSize="large"
                                  buttonText="Speichern"/>
             </Box>
         </Box>
