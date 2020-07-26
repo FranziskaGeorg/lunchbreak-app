@@ -49,13 +49,13 @@ export default function HistoryAccordion() {
                     id="panel1bh-header"
                 >
                     <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
-                    <Typography className={classes.secondaryHeading}>{lunchMatch.matchedUsername}</Typography>
+                    <Typography className={classes.secondaryHeading}>{lunchMatch.firstName} {lunchMatch.lastName}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        E-Mail-Adresse:
+                        E-Mail-Adresse: {lunchMatch.matchedUsername}
                         <br/><br/>
-                        Handynummer:
+                        Handynummer: {lunchMatch.phoneNumber}
                     </Typography>
                 </AccordionDetails>
             </Accordion>)}
