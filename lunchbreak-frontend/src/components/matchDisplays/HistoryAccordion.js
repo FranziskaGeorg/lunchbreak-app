@@ -9,17 +9,24 @@ import {getLunchMatchesFetch} from "../../utils/FetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        width: "100%",
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
-        flexBasis: '33.33%',
+        flexBasis: "33.33%",
         flexShrink: 0,
     },
     secondaryHeading: {
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
     },
+    link: {
+        color: "#009899",
+        textDecoration: "none",
+        '&:hover': {
+            color: "#dfa528"
+        }
+    }
 }));
 
 export default function HistoryAccordion() {
@@ -43,22 +50,27 @@ export default function HistoryAccordion() {
             {lunchMatches.map(lunchMatch =>
                 <Accordion expanded={expanded === 'panel1'}
                            onChange={handleChange('panel1')}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel1bh-content"
-                    id="panel1bh-header"
-                >
-                    <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
-                    <Typography className={classes.secondaryHeading}>{lunchMatch.firstName} {lunchMatch.lastName}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        E-Mail-Adresse: {lunchMatch.matchedUsername}
-                        <br/><br/>
-                        Handynummer: {lunchMatch.phoneNumber}
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>)}
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon/>}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
+                        <Typography
+                            className={classes.secondaryHeading}>{lunchMatch.firstName} {lunchMatch.lastName}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            E-Mail-Adresse: <a className={classes.link} href={`mailto:${lunchMatch.matchedUsername}`}>
+                            {lunchMatch.matchedUsername}
+                        </a>
+                            <br/><br/>
+                            Handynummer: <a className={classes.link} href={`tel:${lunchMatch.phoneNumber}`}>
+                            {lunchMatch.phoneNumber}
+                        </a>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>)}
         </div>
     );
 }
