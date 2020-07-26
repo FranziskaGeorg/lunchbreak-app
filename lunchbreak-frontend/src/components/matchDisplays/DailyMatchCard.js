@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {getMatchingColleagueFetch, getProfileStatusFetch, saveLunchMatchFetch} from "../../utils/FetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import ButtonYellowBigPacifico from "../buttons/ButtonYellowBigPacifico";
 import PopupLunchMatch from "../popups/PopupLunchMatch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
+import ButtonYellowMediumPacifico from "../buttons/ButtonYellowMediumPacifico";
 
 const useStyles = makeStyles((theme) => ({
     bigBox: {
@@ -97,12 +97,16 @@ export default function DailyMatchCard() {
                 <Box className={classes.nextTopicLarge}
                      display="flex"
                      flexDirection="row"
-                     justifyContent="space-around"
+                     justifyContent="space-between"
                 >
-                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
+                    <Box>
+                    <ButtonYellowMediumPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
                                              buttonText="Mischen"/>
-                    <ButtonYellowBigPacifico disabled={!profileFilled} handleClick={handleLunchClick}
+                    </Box>
+                    <Box>
+                    <ButtonYellowMediumPacifico disabled={!profileFilled} handleClick={handleLunchClick}
                                              buttonText="Lunchen"/>
+                    </Box>
                 </Box>
             </Box>
             <PopupLunchMatch showPopup={showPopup} setShowPopup={setShowPopup} matchData={dailyMatch}/>

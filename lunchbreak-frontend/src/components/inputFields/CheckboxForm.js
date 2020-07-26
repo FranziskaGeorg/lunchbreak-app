@@ -24,6 +24,7 @@ export default function CheckboxForm({lunchdays, setLunchdays}) {
         return (
             <FormControlLabel
                 control={<Checkbox checked={checked}
+                                   color="primary"
                                    onChange={handleLunchdayChange}
                                    name={fieldName}/>}
                 label={label}

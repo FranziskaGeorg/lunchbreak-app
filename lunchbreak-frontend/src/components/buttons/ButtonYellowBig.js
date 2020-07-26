@@ -4,7 +4,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
     buttonContained: {
-        backgroundColor: "#dfa528",
         color: "#ffffff",
         fontFamily: "Arimo",
         fontWeight: "bold",
@@ -17,6 +16,7 @@ export default function ButtonYellowBig({handleClick, buttonText}) {
 
     return (
         <Button
+            color="secondary"
             className={classes.buttonContained}
             variant="contained"
             size="large"
