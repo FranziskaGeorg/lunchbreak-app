@@ -25,6 +25,17 @@ const useStyles = makeStyles((theme) => ({
     nextTopicAndCenterItem: {
         paddingTop: theme.spacing(3),
         textAlign: "center"
+    },
+    loginBox: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        '@media (min-width: 412px, max-width: 599px)': {
+            minWidth: "400px"
+        },
+        '@media (min-width:600px)': {
+            maxWidth: "600px"
+        }
     }
 }));
 
@@ -56,7 +67,7 @@ export default function LoginForm() {
     }
 
     return (
-        <Box>
+        <Box className={classes.loginBox}>
             <Box>
                 <Typography variant="h4" color="primary" align="center">
                     Welcome to LunchBreak

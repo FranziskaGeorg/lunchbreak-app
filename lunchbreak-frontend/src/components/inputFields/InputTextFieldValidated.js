@@ -10,10 +10,8 @@ const useStyles = makeStyles((theme) => ({
             width: "75vw"
         },
         '@media (min-width:600px)': {
-            width: "50vw"
-        },
-        '@media (min-width:960px)': {
-            width: "25vw"
+            width: "50vw",
+            maxWidth: "100%"
         }
     },
     notchedOutline: {
