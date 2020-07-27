@@ -33,7 +33,6 @@ export default function InputTextFieldDisabled({fieldName, label, value, setValu
                     notchedOutline: classes.notchedOutline
                 }
             }}
-            id="outlined-required"
             variant="outlined"
             name={fieldName}
             label={label}

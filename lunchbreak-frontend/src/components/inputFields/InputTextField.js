@@ -33,7 +33,6 @@ export default function InputTextField({fieldName, label, value, setValue}) {
                     notchedOutline: classes.notchedOutline
                 }
             }}
-            id="outlined-required"
             variant="outlined"
             name={fieldName}
             label={label}

@@ -35,7 +35,6 @@ export default function InputTextFieldValidated({fieldType, fieldName, label, fo
                     notchedOutline: classes.notchedOutline
                 }
             }}
-            id="outlined-required"
             variant="outlined"
             name={fieldName}
             label={label}

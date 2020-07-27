@@ -29,9 +29,11 @@ export default function UploadPhotoButtons({setProfilePicture}) {
     async function handleUploadClick() {
         const base64String = await convertImageToBase64(selectedFile);
         uploadProfilePictureFetch(base64String)
-            .then(data => console.log(data));
-        getProfilePictureFetch()
-            .then(data => setProfilePicture(data));
+            .then(data => console.log(data))
+            .then(
+                () => getProfilePictureFetch()
+                    .then(data => setProfilePicture(data))
+            );
     }
 
     return (

@@ -10,6 +10,7 @@ import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
 import UploadPhotoButtons from "../buttons/UploadPhotoButtons";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -20,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
         paddingTop: theme.spacing(2),
         justifyContent: "space-around"
+    },
+    divider: {
+        marginTop: theme.spacing(2),
+        backgroundColor: "#eef5f6",
+        border: "none",
+        height: "1px"
     }
 }));
 
@@ -59,7 +66,7 @@ export default function ProfileForm() {
                 setLunchdays(data.lunchdays);
                 setProfilePicture(data.profilePicUrl);
             })
-    }, [setProfilePicture]);
+    }, [profilePicture]);
 
     function handleSave() {
         const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
@@ -80,6 +87,7 @@ export default function ProfileForm() {
             <Box className={classes.nextTopic}>
                 <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
             </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Über Dich
@@ -105,6 +113,7 @@ export default function ProfileForm() {
                 <InputTextField fieldName="hobbies" label="Hobbies oder Interessen" value={hobbies}
                                 setValue={setHobbies}/>
             </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Kontaktdaten
@@ -118,6 +127,7 @@ export default function ProfileForm() {
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
                                 setValue={setPhoneNumber}/>
             </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Deine Lunchdays
