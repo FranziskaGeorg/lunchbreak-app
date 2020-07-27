@@ -9,7 +9,7 @@ import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
-import UploadPhotoButton from "../buttons/UploadPhotoButton";
+import UploadPhotoButtons from "../buttons/UploadPhotoButtons";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -59,7 +59,7 @@ export default function ProfileForm() {
                 setLunchdays(data.lunchdays);
                 setProfilePicture(data.profilePicUrl);
             })
-    }, [profilePicture]);
+    }, [setProfilePicture]);
 
     function handleSave() {
         const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
@@ -71,14 +71,19 @@ export default function ProfileForm() {
         <Box>
             <Box>
                 <Typography variant="h5">
-                    Über Dich
+                    Dein Profilbild
                 </Typography>
             </Box>
             <Box className={classes.nextTopic}>
                 <img src={profilePicture}/>
             </Box>
             <Box className={classes.nextTopic}>
-                <UploadPhotoButton setProfilePicture={setProfilePicture}/>
+                <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
+            </Box>
+            <Box className={classes.nextTopic}>
+                <Typography variant="h5">
+                    Über Dich
+                </Typography>
             </Box>
             <Box className={classes.nextTopic}>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
@@ -105,7 +110,7 @@ export default function ProfileForm() {
                     Kontaktdaten
                 </Typography>
             </Box>
-            <Box>
+            <Box className={classes.nextTopic}>
                 <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
                                         setValue={setUsername}/>
             </Box>

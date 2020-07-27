@@ -4,23 +4,22 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
     buttonContained: {
-        color: "#ffffff",
         fontFamily: "Arimo",
         fontWeight: "bold",
         textTransform: "none"
     }
 }));
 
-export default function ButtonTurquoiseNoAction({handleClick, buttonText, buttonSize}) {
+export default function ButtonTurquoiseNoAction({handleClick, buttonText, buttonSize, icon}) {
     const classes = useStyles();
 
     return (
         <Button
             color="primary"
             className={classes.buttonContained}
-            variant="contained"
             size={buttonSize}
             onClick={(event) => handleClick()}
+            startIcon={icon}
         >
             {buttonText}
         </Button>
