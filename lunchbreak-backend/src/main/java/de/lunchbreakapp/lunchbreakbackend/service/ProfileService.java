@@ -1,6 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
@@ -54,7 +55,7 @@ public class ProfileService {
         lunchdayUtils.validateLunchdays(lunchdays);
         updatedColleague.setLunchdays(lunchdays);
         if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank()
-        && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() &&!lunchdays.isEmpty()) {
+                && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() && !lunchdays.isEmpty()) {
             updatedColleague.setProfileFilled(true);
         } else {
             updatedColleague.setProfileFilled(false);
@@ -64,7 +65,11 @@ public class ProfileService {
 
     public Map uploadProfilePicToCloud(String imageUrl) throws IOException {
         Cloudinary cloudinary = new Cloudinary("cloudinary://126578721149466:ZJjIUAwv79dor7Rc6ac63jvGdQA@hql1hvgt9");
-        return cloudinary.uploader().upload(imageUrl, ObjectUtils.emptyMap());
+        return cloudinary.uploader().upload(
+                imageUrl,
+                ObjectUtils.asMap("transformation", new Transformation().width(250).height(250).radius(20).crop("fill")
+                )
+        );
     }
 
     public Colleague saveProfilePicToDb(Colleague loggedColleage, String cloudinaryUrl) {
