@@ -82,7 +82,7 @@ export default function ProfileForm() {
                 </Typography>
             </Box>
             <Box className={classes.nextTopic}>
-                <img src={profilePicture} alt="profile picture"/>
+                <img src={profilePicture} alt="custom user avatar"/>
             </Box>
             <Box className={classes.nextTopic}>
                 <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
