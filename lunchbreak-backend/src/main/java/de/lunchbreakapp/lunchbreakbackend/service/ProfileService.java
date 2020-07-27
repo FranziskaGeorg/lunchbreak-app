@@ -67,4 +67,9 @@ public class ProfileService {
         return cloudinary.uploader().upload(imageUrl, ObjectUtils.emptyMap());
     }
 
+    public Colleague saveProfilePicToDb(Colleague loggedColleage, String cloudinaryUrl) {
+        loggedColleage.setProfilePicUrl(cloudinaryUrl);
+        return colleagueMongoDb.save(loggedColleage);
+    }
+
 }

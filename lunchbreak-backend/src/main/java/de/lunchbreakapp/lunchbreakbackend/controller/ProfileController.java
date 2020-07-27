@@ -51,8 +51,11 @@ public class ProfileController {
     }
 
     @PostMapping("picture")
-    public Map uploadProfilePicToCloud(@RequestBody String imageUrl) throws IOException {
-        return profileService.uploadProfilePicToCloud(imageUrl);
+    public void saveProfilePicture(Principal principal, @RequestBody String imageUrl) throws IOException {
+        Map imageMap = profileService.uploadProfilePicToCloud(imageUrl);
+        String cloudinaryUrl = (String) imageMap.get("url");
+        Colleague loggedColleague = getColleagueByUsername(principal);
+        profileService.saveProfilePicToDb(loggedColleague, cloudinaryUrl);
     }
 
 }
