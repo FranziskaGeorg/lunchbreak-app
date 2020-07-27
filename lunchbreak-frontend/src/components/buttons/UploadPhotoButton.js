@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import ButtonTurquoiseNoAction from "./ButtonTurquoiseNoAction";
-import {uploadProfilePictureFetch} from "../../utils/ProfileFetchUtils";
+import {getProfilePictureFetch, uploadProfilePictureFetch} from "../../utils/ProfileFetchUtils";
 import convertImageToBase64 from "../../utils/ImageConversionUtils";
 import TextField from "@material-ui/core/TextField";
 import ButtonTurquoise from "./ButtonTurquoise";
 
-export default function UploadPhotoButton() {
+export default function UploadPhotoButton({setProfilePicture}) {
     const [selectedFile, setSelectedFile] = useState();
 
     function handleFileSelection(event) {
@@ -16,6 +16,8 @@ export default function UploadPhotoButton() {
         const base64String = await convertImageToBase64(selectedFile);
         uploadProfilePictureFetch(base64String)
             .then(data => console.log(data));
+        getProfilePictureFetch()
+            .then(data => setProfilePicture(data));
     }
 
     return (

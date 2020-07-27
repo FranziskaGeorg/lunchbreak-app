@@ -58,4 +58,11 @@ public class ProfileController {
         profileService.saveProfilePicToDb(loggedColleague, cloudinaryUrl);
     }
 
+    @GetMapping("picture")
+    public String getProfilePictureUrl(Principal principal) {
+        Colleague loggedColleague = getColleagueByUsername(principal);
+        String profilePicUrl = loggedColleague.getProfilePicUrl();
+        return profilePicUrl;
+    }
+
 }

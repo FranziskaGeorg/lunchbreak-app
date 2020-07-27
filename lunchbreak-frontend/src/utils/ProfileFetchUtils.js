@@ -60,3 +60,17 @@ export async function uploadProfilePictureFetch(imageUrl) {
     }
     return await response.text();
 }
+
+export async function getProfilePictureFetch() {
+    const token = getJWTToken();
+    const response = await fetch("/api/profile/picture", {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    if (response.status !== 200) {
+        throw new Error("Fetch of profile picture failed")
+    }
+    return await response.text();
+}

@@ -43,6 +43,7 @@ export default function ProfileForm() {
         thursday: false,
         friday: false
     })
+    const [profilePicture, setProfilePicture] = useState();
 
     useEffect(() => {
         initProfileDataFetch()
@@ -56,8 +57,9 @@ export default function ProfileForm() {
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
                 setLunchdays(data.lunchdays);
+                setProfilePicture(data.profilePicUrl);
             })
-    }, []);
+    }, [profilePicture]);
 
     function handleSave() {
         const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
@@ -72,12 +74,11 @@ export default function ProfileForm() {
                     Über Dich
                 </Typography>
             </Box>
-            <Box>
-                <img src="http://res.cloudinary.com/hql1hvgt9/image/upload/w_150,h_100,c_fill,r_20/sample.png"
-                     alt="cloudinary sample"/>
+            <Box className={classes.nextTopic}>
+                <img src={profilePicture}/>
             </Box>
             <Box className={classes.nextTopic}>
-                <UploadPhotoButton/>
+                <UploadPhotoButton setProfilePicture={setProfilePicture}/>
             </Box>
             <Box className={classes.nextTopic}>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
