@@ -3,15 +3,13 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
 import DropdownField from "../inputFields/DropdownField";
 import Typography from "@material-ui/core/Typography";
-import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
+import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/ProfileFetchUtils";
 import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
 import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
-import UploadPhotoField from "../inputFields/UploadPhotoField";
+import UploadPhotoButton from "../buttons/UploadPhotoButton";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -79,7 +77,7 @@ export default function ProfileForm() {
                      alt="cloudinary sample"/>
             </Box>
             <Box className={classes.nextTopic}>
-                <UploadPhotoField/>
+                <UploadPhotoButton/>
             </Box>
             <Box className={classes.nextTopic}>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>

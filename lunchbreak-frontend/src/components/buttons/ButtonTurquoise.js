@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ButtonYellow({buttonText, buttonSize}) {
+export default function ButtonYellow({handleClick, buttonText, buttonSize}) {
     const classes = useStyles();
 
     return (
@@ -21,6 +21,7 @@ export default function ButtonYellow({buttonText, buttonSize}) {
             variant="contained"
             size={buttonSize}
             component="span"
+            onClick={(event) => handleClick()}
         >
             {buttonText}
         </Button>
