@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ButtonYellowBig({handleClick, buttonText, buttonSize}) {
+export default function ButtonYellow({handleClick, buttonText, buttonSize}) {
     const classes = useStyles();
 
     return (

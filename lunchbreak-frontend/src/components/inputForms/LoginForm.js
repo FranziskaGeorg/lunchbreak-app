@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
-import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import ButtonYellow from "../buttons/ButtonYellow";
 import Button from "@material-ui/core/Button";
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from "../../context/user/UserContextProvider";
@@ -110,9 +110,9 @@ export default function LoginForm() {
                                                          label="Passwort" formikProps={props}/>
                             </Box>
                             <Box className={classes.nextTopicAndCenterItem}>
-                                <ButtonYellowBig handleClick={props.handleSubmit}
-                                                 buttonSize="large"
-                                                 buttonText="Login"/>
+                                <ButtonYellow handleClick={props.handleSubmit}
+                                              buttonSize="large"
+                                              buttonText="Login"/>
                             </Box>
                             <Box className={classes.nextTopicAndCenterItem}>
                                 <Button

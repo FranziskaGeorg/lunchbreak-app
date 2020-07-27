@@ -4,7 +4,7 @@ import {Form, Formik} from "formik";
 import {performRegistration} from "../../utils/AuthUtils";
 import * as Yup from "yup";
 import InputTextFieldValidated from "../inputFields/InputTextFieldValidated";
-import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import ButtonYellow from "../buttons/ButtonYellow";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useHistory} from "react-router";
 import {
@@ -129,13 +129,13 @@ export default function RegistrationForm() {
                                                          label="Passwort wiederholen" formikProps={props}/>
                             </Box>
                             <Box className={classes.buttonBox}>
-                                <ButtonYellowBig handleClick={() => history.push("/login")}
-                                                 buttonSize="medium"
-                                                 buttonText="Abbrechen"
+                                <ButtonYellow handleClick={() => history.push("/login")}
+                                              buttonSize="medium"
+                                              buttonText="Abbrechen"
                                 />
-                                <ButtonYellowBig handleClick={props.handleSubmit}
-                                                 buttonSize="medium"
-                                                 buttonText="Account erstellen"
+                                <ButtonYellow handleClick={props.handleSubmit}
+                                              buttonSize="medium"
+                                              buttonText="Account erstellen"
                                 />
                             </Box>
                         </Form>

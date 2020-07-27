@@ -5,10 +5,13 @@ import DropdownField from "../inputFields/DropdownField";
 import Typography from "@material-ui/core/Typography";
 import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
 import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
-import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
+import UploadPhotoField from "../inputFields/UploadPhotoField";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -72,6 +75,13 @@ export default function ProfileForm() {
                 </Typography>
             </Box>
             <Box>
+                <img src="http://res.cloudinary.com/hql1hvgt9/image/upload/w_150,h_100,c_fill,r_20/sample.png"
+                     alt="cloudinary sample"/>
+            </Box>
+            <Box className={classes.nextTopic}>
+                <UploadPhotoField/>
+            </Box>
+            <Box className={classes.nextTopic}>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
             </Box>
             <Box>
@@ -113,12 +123,12 @@ export default function ProfileForm() {
                 <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
             </Box>
             <Box className={classes.buttonBox}>
-                <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
-                                 buttonSize="large"
-                                 buttonText="Verwerfen"/>
-                <ButtonYellowBig handleClick={handleSave}
-                                 buttonSize="large"
-                                 buttonText="Speichern"/>
+                <ButtonYellow handleClick={() => history.push("/dailymatch")}
+                              buttonSize="large"
+                              buttonText="Verwerfen"/>
+                <ButtonYellow handleClick={handleSave}
+                              buttonSize="large"
+                              buttonText="Speichern"/>
             </Box>
         </Box>
     )
