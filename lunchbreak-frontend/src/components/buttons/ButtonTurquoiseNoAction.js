@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ButtonTurquoiseNoAction({handleClick, buttonText, buttonSize}) {
+export default function ButtonTurquoiseNoAction({buttonText, buttonSize}) {
     const classes = useStyles();
 
     return (
@@ -20,7 +20,7 @@ export default function ButtonTurquoiseNoAction({handleClick, buttonText, button
             className={classes.buttonContained}
             variant="contained"
             size={buttonSize}
-            onClick={(event) => handleClick()}
+            component="span"
         >
             {buttonText}
         </Button>

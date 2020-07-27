@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -46,6 +48,11 @@ public class ProfileController {
         Colleague loggedColleague = getColleagueByUsername(principal);
         Boolean profileFilled = loggedColleague.getProfileFilled();
         return profileFilled;
+    }
+
+    @PostMapping("picture")
+    public Map uploadProfilePicToCloud(@RequestBody String imageUrl) throws IOException {
+        return profileService.uploadProfilePicToCloud(imageUrl);
     }
 
 }

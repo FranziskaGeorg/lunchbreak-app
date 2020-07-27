@@ -45,7 +45,7 @@ export async function getProfileStatusFetch() {
     return (result === 'true');
 }
 
-export async function saveProfilePictureFetch(pictureUrl) {
+export async function uploadProfilePictureFetch(imageUrl) {
     const token = getJWTToken();
     const response = await fetch("/api/profile/picture", {
         method: 'POST',
@@ -53,10 +53,10 @@ export async function saveProfilePictureFetch(pictureUrl) {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(pictureUrl)
+        body: imageUrl
     });
     if (response.status !== 200) {
-        throw new Error("Saving profile picture failed");
+        throw new Error("Uploading profile picture failed");
     }
     return await response.text();
 }

@@ -1,11 +1,14 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.utils.LunchdayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -57,6 +60,11 @@ public class ProfileService {
             updatedColleague.setProfileFilled(false);
         }
         return colleagueMongoDb.save(updatedColleague);
+    }
+
+    public Map uploadProfilePicToCloud(String imageUrl) throws IOException {
+        Cloudinary cloudinary = new Cloudinary("cloudinary://126578721149466:ZJjIUAwv79dor7Rc6ac63jvGdQA@hql1hvgt9");
+        return cloudinary.uploader().upload(imageUrl, ObjectUtils.emptyMap());
     }
 
 }

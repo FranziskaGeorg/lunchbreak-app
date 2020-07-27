@@ -1,6 +1,9 @@
 import React, {useState} from "react";
+import ButtonTurquoiseNoAction from "./ButtonTurquoiseNoAction";
+import {uploadProfilePictureFetch} from "../../utils/ProfileFetchUtils";
+import convertImageToBase64 from "../../utils/ImageConversionUtils";
+import TextField from "@material-ui/core/TextField";
 import ButtonTurquoise from "./ButtonTurquoise";
-import {saveProfilePictureFetch} from "../../utils/ProfileFetchUtils";
 
 export default function UploadPhotoButton() {
     const [selectedFile, setSelectedFile] = useState();
@@ -9,8 +12,9 @@ export default function UploadPhotoButton() {
         setSelectedFile(event.target.files[0]);
     }
 
-    function handleUploadClick() {
-        saveProfilePictureFetch(selectedFile)
+    async function handleUploadClick() {
+        const base64String = await convertImageToBase64(selectedFile);
+        uploadProfilePictureFetch(base64String)
             .then(data => console.log(data));
     }
 
@@ -23,7 +27,18 @@ export default function UploadPhotoButton() {
                 type="file"
                 onChange={handleFileSelection}
             />
-            <ButtonTurquoise handleClick={handleUploadClick()}
+            <ButtonTurquoiseNoAction buttonSize="medium"
+                                     buttonText="Profilbild auswählen"/>
+            {selectedFile ?
+                <TextField variant="outlined"
+                           value={selectedFile.name}
+                           disabled="true"/>
+                :
+                <TextField variant="outlined"
+                           value="Noch kein Bild ausgewählt"
+                           disabled="true"/>
+            }
+            <ButtonTurquoise handleClick={handleUploadClick}
                              buttonSize="medium"
                              buttonText="Profilbild hochladen"/>
         </label>
