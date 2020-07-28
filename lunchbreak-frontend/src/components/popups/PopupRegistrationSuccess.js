@@ -13,11 +13,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         padding: theme.spacing(4)
     },
-    buttonBox: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center"
-    },
     nextTopic: {
         paddingTop: theme.spacing(2)
     },
@@ -58,14 +53,12 @@ export default function PopupRegistrationSuccess({openStatus}) {
                         🥳
                     </span>
                 </Box>
-                <Box className={classes.buttonBox}>
-                    <Box className={classes.nextTopic}>
-                        <Button className={classes.loginButton}
-                                onClick={goToLogin}
-                                color="primary">
-                            Weiter zum Login
-                        </Button>
-                    </Box>
+                <Box className={classes.nextTopic}>
+                    <Button className={classes.loginButton}
+                            onClick={goToLogin}
+                            color="primary">
+                        Weiter zum Login
+                    </Button>
                 </Box>
             </Box>
         </Dialog>
