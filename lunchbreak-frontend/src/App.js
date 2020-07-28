@@ -19,7 +19,7 @@ import LunchHistory from "./pages/LunchHistory";
 
 const useStyles = makeStyles((theme) => ({
     overallContainer: {
-        background: "linear-gradient(180deg, rgba(238,245,246,1) 0%, rgba(220,234,231,1) 100%)",
+        background: "linear-gradient(180deg, rgba(241,246,247,1) 0%, rgba(238,245,246,1) 20%, rgba(192,227,220,0.6) 100%)",
             // "linear-gradient(0deg, rgba(238,245,246,1) 0%, rgba(149,208,197,1) 90%, rgba(0,159,149,1) 100%)",
         height: "100vh",
         display: "flex",
