@@ -1,5 +1,4 @@
 import React, {useContext, useEffect} from 'react';
-import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import UserContextProvider, {LOGIN_FAILED, LOGIN_SUCCESS} from "./context/user/UserContextProvider";
