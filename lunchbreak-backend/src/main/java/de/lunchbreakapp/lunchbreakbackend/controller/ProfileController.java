@@ -65,4 +65,10 @@ public class ProfileController {
         return profilePicUrl;
     }
 
+    @DeleteMapping("picture")
+    public void deleteProfilePic(Principal principal) {
+        Colleague loggedColleague = getColleagueByUsername(principal);
+        profileService.deleteProfilePic(loggedColleague);
+    }
+
 }
