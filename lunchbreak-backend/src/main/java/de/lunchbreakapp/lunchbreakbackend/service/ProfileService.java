@@ -39,6 +39,7 @@ public class ProfileService {
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays(new HashMap<>());
         newColleague.setProfileFilled(false);
+        newColleague.setProfilePicUrl("");
         return colleagueMongoDb.save(newColleague);
     }
 
