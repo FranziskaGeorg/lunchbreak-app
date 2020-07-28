@@ -71,7 +71,7 @@ public class ProfileService {
         Cloudinary cloudinary = new Cloudinary(cloudinaryUrl);
         return cloudinary.uploader().upload(
                 imageUrl,
-                ObjectUtils.asMap("transformation", new Transformation().width(250).height(250).radius(10).crop("fill")
+                ObjectUtils.asMap("transformation", new Transformation().width(400).height(400).gravity("face").crop("fill")
                 )
         );
     }

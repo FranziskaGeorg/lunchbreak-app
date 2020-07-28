@@ -5,14 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import {useLocation} from "react-router";
 import {UserStateContext} from "../../context/user/UserContext";
-import logo from '../../images/happytoast.png';
+import logo from '../../images/happytoast_white.png';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         position: "sticky",
         flexGrow: 1,
         boxShadow: "none",
-        opacity: "100%"
+        opacity: "100%",
+        backgroundColor: "#009899"
     },
     logo: {
         marginRight: theme.spacing(0.5),
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        color: "#ffffff"
     },
 }));
 
@@ -32,7 +34,7 @@ export default function Header() {
     function HeaderTitle({currentPath, titleText}) {
         if (location.pathname === currentPath) {
             return (
-                <Typography variant="h4" color="primary" className={classes.title}>
+                <Typography variant="h4" className={classes.title}>
                     {titleText}
                 </Typography>
             );
