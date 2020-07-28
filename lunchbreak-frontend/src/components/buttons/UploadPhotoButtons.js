@@ -1,11 +1,15 @@
 import React, {useState} from "react";
 import ButtonTurquoiseNoAction from "./ButtonTurquoiseNoAction";
-import {getProfilePictureFetch, uploadProfilePictureFetch} from "../../utils/ProfileFetchUtils";
+import {
+    deleteProfilePictureFetch,
+    getProfilePictureFetch,
+    uploadProfilePictureFetch
+} from "../../utils/ProfileFetchUtils";
 import convertImageToBase64 from "../../utils/ImageConversionUtils";
 import ButtonTurquoise from "./ButtonTurquoise";
 import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {FaFolder, FaFileUpload} from "react-icons/all";
+import {FaFolder, FaFileUpload, FaTrash} from "react-icons/all";
 import InputTextFieldOutlined from "../inputFields/InputTextFieldOutlined";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +40,12 @@ export default function UploadPhotoButtons({setProfilePicture}) {
             );
     }
 
+    function handleFileDeletion(event) {
+        deleteProfilePictureFetch()
+            .then(data => console.log(data));
+        setProfilePicture("");
+    }
+
     return (
         <Box className={classes.uploadBox}>
             <label htmlFor="upload-photo">
@@ -63,6 +73,12 @@ export default function UploadPhotoButtons({setProfilePicture}) {
                                      buttonSize="medium"
                                      buttonText="Profilbild hochladen"
                                      icon={<FaFileUpload/>}/>
+                </Box>
+                <Box className={classes.nextTopic}>
+                    <ButtonTurquoise handleClick={handleFileDeletion}
+                                     buttonSize="medium"
+                                     buttonText="Profilbild löschen"
+                                     icon={<FaTrash/>}/>
                 </Box>
             </label>
         </Box>
