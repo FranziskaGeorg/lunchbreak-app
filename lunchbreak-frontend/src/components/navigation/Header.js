@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#009899"
     },
     logo: {
-        marginRight: theme.spacing(0.5),
+        margin: theme.spacing(0.5),
         width: '12%',
-        height: '12%'
+        maxWidth: "60px"
     },
     title: {
         flexGrow: 1,
