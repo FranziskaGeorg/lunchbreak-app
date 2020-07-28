@@ -15,6 +15,7 @@ import {
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 import Box from "@material-ui/core/Box";
+import nerdLogo from '../../images/happytoast_nerd.png';
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -43,6 +44,14 @@ const useStyles = makeStyles((theme) => ({
         '@media (min-width:600px)': {
             maxWidth: "500px"
         }
+    },
+    logo: {
+        width: '60%',
+        height: '60%'
+    },
+    logoPlacement: {
+        paddingTop: theme.spacing(3),
+        textAlign: "center"
     }
 }));
 
@@ -72,6 +81,9 @@ export default function RegistrationForm() {
                 <Typography variant="h4" color="primary" align="center">
                     Registrierung
                 </Typography>
+            </Box>
+            <Box className={classes.logoPlacement}>
+                <img src={nerdLogo} alt="Lunchbreak logo for registration" className={classes.logo}/>
             </Box>
             <Formik initialValues={
                 {
