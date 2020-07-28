@@ -39,7 +39,7 @@ public class ProfileService {
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays(new HashMap<>());
         newColleague.setProfileFilled(false);
-        newColleague.setProfilePicUrl("https://res.cloudinary.com/hql1hvgt9/image/upload/v1595924252/happytoast_profilepic_yt9b3r.png");
+        newColleague.setProfilePicUrl("");
         return colleagueMongoDb.save(newColleague);
     }
 
@@ -79,6 +79,11 @@ public class ProfileService {
     public Colleague saveProfilePicToDb(Colleague loggedColleage, String cloudinaryUrl) {
         loggedColleage.setProfilePicUrl(cloudinaryUrl);
         return colleagueMongoDb.save(loggedColleage);
+    }
+
+    public Colleague deleteProfilePic(Colleague loggedColleague) {
+        loggedColleague.setProfilePicUrl("");
+        return colleagueMongoDb.save(loggedColleague);
     }
 
 }

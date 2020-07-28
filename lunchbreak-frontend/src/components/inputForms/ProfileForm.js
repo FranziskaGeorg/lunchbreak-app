@@ -68,7 +68,11 @@ export default function ProfileForm() {
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
                 setLunchdays(data.lunchdays);
-                setProfilePicture(data.profilePicUrl);
+                if (!data.profilePicUrl) {
+                    setProfilePicture("https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png");
+                } else {
+                    setProfilePicture(data.profilePicUrl);
+                }
             })
     }, [profilePicture]);
 

@@ -71,10 +71,15 @@ export default function DailyMatchCard() {
     return (
         <Card className={classes.card}>
             <Box className={classes.pictureBox}>
-                <img className={classes.profilePicture}
-                    // src="https://vignette.wikia.nocookie.net/hogwarts-life/images/7/75/AlbusDumbledore-003.jpg/revision/latest/top-crop/width/360/height/450?cb=20170109115706"
-                     src={dailyMatch.profilePicUrl}
-                     alt="custom user avatar"/>
+                {dailyMatch.profilePicUrl ?
+                    <img className={classes.profilePicture}
+                         src={dailyMatch.profilePicUrl}
+                         alt="custom user avatar"/>
+                    :
+                    <img className={classes.profilePicture}
+                         src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
+                         alt="custom user avatar"/>
+                }
             </Box>
             <Box className={classes.bigBox}
                  display="flex"

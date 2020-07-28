@@ -74,3 +74,16 @@ export async function getProfilePictureFetch() {
     }
     return await response.text();
 }
+
+export async function deleteProfilePictureFetch() {
+    const token = getJWTToken();
+    const response = await fetch("/api/profile/picture", {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    if (response.status !== 200) {
+        throw new Error("Deletion of profile picture failed")
+    }
+}
