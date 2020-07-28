@@ -21,7 +21,7 @@ public class ProfileService {
     private final String cloudinaryUrl;
 
     @Autowired
-    public ProfileService(ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils, @Value("${CLOUDINARY_URL}") String cloudinaryUrl) {
+    public ProfileService(ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils, @Value("${cloudinary.url}") String cloudinaryUrl) {
         this.colleagueMongoDb = colleagueMongoDb;
         this.lunchdayUtils = lunchdayUtils;
         this.cloudinaryUrl = cloudinaryUrl;
