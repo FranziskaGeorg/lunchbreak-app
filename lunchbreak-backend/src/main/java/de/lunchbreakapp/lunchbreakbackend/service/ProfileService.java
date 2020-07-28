@@ -39,7 +39,7 @@ public class ProfileService {
         newColleague.setPhoneNumber("");
         newColleague.setLunchdays(new HashMap<>());
         newColleague.setProfileFilled(false);
-        newColleague.setProfilePicUrl("");
+        newColleague.setProfilePicUrl("https://res.cloudinary.com/hql1hvgt9/image/upload/v1595924252/happytoast_profilepic_yt9b3r.png");
         return colleagueMongoDb.save(newColleague);
     }
 
