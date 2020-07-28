@@ -44,6 +44,7 @@ public class HistoryService {
             lunchMatchDetails.setLastName(matchedColleague.getLastName());
             lunchMatchDetails.setMatchDate(matchDate);
             lunchMatchDetails.setPhoneNumber(matchedColleague.getPhoneNumber());
+            lunchMatchDetails.setProfilePicUrl(matchedColleague.getProfilePicUrl());
             allLunchMatchDetails.add(lunchMatchDetails);
         }
         return allLunchMatchDetails;

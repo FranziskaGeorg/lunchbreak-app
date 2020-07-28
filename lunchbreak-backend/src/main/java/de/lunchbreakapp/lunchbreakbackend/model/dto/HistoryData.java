@@ -14,5 +14,6 @@ public class HistoryData {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String profilePicUrl;
 
 }
