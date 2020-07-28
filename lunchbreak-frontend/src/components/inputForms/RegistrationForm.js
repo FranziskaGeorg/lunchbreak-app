@@ -16,6 +16,7 @@ import {UserDispatchContext, UserStateContext} from "../../context/user/UserCont
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 import Box from "@material-ui/core/Box";
 import nerdLogo from '../../images/happytoast_nerd.png';
+import PopupRegistrationFailed from "../popups/PopupRegistrationFailed";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -155,6 +156,7 @@ export default function RegistrationForm() {
                 }}
             </Formik>
             <PopupRegistrationSuccess openStatus={registrationStatus === 'SUCCESS'}/>
+            <PopupRegistrationFailed openStatus={registrationStatus === 'FAILED'}/>
         </Box>
     )
 }

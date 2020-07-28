@@ -31,7 +31,7 @@ public class LoginController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword()));
             return jwtUtils.createToken(new HashMap<>(), data.getUsername());
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
         }
     }
     

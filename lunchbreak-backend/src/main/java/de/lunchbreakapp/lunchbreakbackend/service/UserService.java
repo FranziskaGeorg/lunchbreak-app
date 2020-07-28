@@ -1,10 +1,13 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
 import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
+import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,10 +23,14 @@ public class UserService {
     }
 
     public void saveNewUserToDb(LunchBreakUser newUser) {
-        newUser.setUsername(newUser.getUsername());
-        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        newUser.setRole(newUser.getRole());
-        userMongoDb.save(newUser);
+            newUser.setUsername(newUser.getUsername());
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            newUser.setRole(newUser.getRole());
+            userMongoDb.save(newUser);
+    }
+
+    public Optional<LunchBreakUser> getUserByUsername(String username) {
+        return userMongoDb.findByUsername(username);
     }
 
 }
