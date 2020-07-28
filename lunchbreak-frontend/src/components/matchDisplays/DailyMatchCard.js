@@ -31,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: "300px",
         objectFit: "cover"
     },
+    profilePictureLight: {
+        minWidth: "100%",
+        maxHeight: "300px",
+        objectFit: "cover",
+        opacity: "0.2",
+        filter: "grayscale(100%)"
+    },
     nextTopicLarge: {
         paddingTop: theme.spacing(3)
     },
@@ -71,15 +78,22 @@ export default function DailyMatchCard() {
     return (
         <Card className={classes.card}>
             <Box className={classes.pictureBox}>
-                {dailyMatch.profilePicUrl ?
-                    <img className={classes.profilePicture}
-                         src={dailyMatch.profilePicUrl}
-                         alt="custom user avatar"/>
-                    :
-                    <img className={classes.profilePicture}
-                         src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
-                         alt="custom user avatar"/>
-                }
+                {dailyMatch.profilePicUrl && profileFilled &&
+                <img className={classes.profilePicture}
+                     src={dailyMatch.profilePicUrl}
+                     alt="custom user avatar"/>}
+                {dailyMatch.profilePicUrl && !profileFilled &&
+                <img className={classes.profilePictureLight}
+                     src={dailyMatch.profilePicUrl}
+                     alt="custom user avatar"/>}
+                {!dailyMatch.profilePicUrl && profileFilled &&
+                <img className={classes.profilePicture}
+                     src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
+                     alt="custom user avatar"/>}
+                {!dailyMatch.profilePicUrl && !profileFilled &&
+                < img className={classes.profilePictureLight}
+                      src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
+                      alt="custom user avatar"/>}
             </Box>
             <Box className={classes.bigBox}
                  display="flex"
