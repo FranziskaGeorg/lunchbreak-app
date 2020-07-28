@@ -9,11 +9,9 @@ const useStyles = makeStyles((theme) => ({
         '@media (max-width: 599px)': {
             width: "75vw"
         },
-        '@media (min-width:600px)': {
-            width: "50vw"
-        },
-        '@media (min-width:960px)': {
-            width: "25vw"
+        '@media (min-width: 600px)': {
+            maxWidth: "400px",
+            minWidth: "400px"
         }
     },
     notchedOutline: {
@@ -57,7 +55,6 @@ export default function DropdownField({subsidiary, setSubsidiary}) {
 
     return (
         <TextField
-            required
             select
             margin="dense"
             className={classes.inputField}

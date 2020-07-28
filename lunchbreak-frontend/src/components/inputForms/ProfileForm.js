@@ -22,6 +22,18 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(2),
         justifyContent: "space-around"
     },
+    profileBox: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        '@media (max-width: 599px)': {
+            maxWidth: "100%"
+        },
+        '@media (min-width:600px)': {
+            width: "75vw",
+            maxWidth: "1000px"
+        }
+    },
     divider: {
         marginTop: theme.spacing(2),
         backgroundColor: "#eef5f6",
@@ -29,8 +41,9 @@ const useStyles = makeStyles((theme) => ({
         height: "1px"
     },
     profilePicture: {
+        borderRadius: "5px",
         width: "100%",
-        borderRadius: "5px"
+        maxWidth: "400px"
     }
 }));
 
@@ -77,13 +90,23 @@ export default function ProfileForm() {
     }, [profilePicture]);
 
     function handleSave() {
-        const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
+        const profileInput = {
+            firstName,
+            lastName,
+            job,
+            subsidiary,
+            favoriteFood,
+            hobbies,
+            username,
+            phoneNumber,
+            lunchdays
+        }
         saveProfileDataFetch(profileInput)
             .then(data => console.log(data));
     }
 
     return (
-        <Box>
+        <Box className={classes.profileBox}>
             <Box>
                 <Typography variant="h5">
                     Dein Profilbild
@@ -114,7 +137,7 @@ export default function ProfileForm() {
                 <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
             </Box>
             <Box>
-                <InputTextField fieldName="favoriteFood" label="Lieblingsessen bzw. -essensrichtung"
+                <InputTextField fieldName="favoriteFood" label="Lieblingsessen(srichtung)"
                                 value={favoriteFood} setValue={setFavoriteFood}/>
             </Box>
             <Box>
