@@ -19,7 +19,7 @@ export default function ButtonYellowMediumPacifico({handleClick, buttonText, dis
             color="secondary"
             className={classes.buttonContained}
             variant="contained"
-            size="medium"
+            size="small"
             disabled={disabled}
             onClick={(event) => handleClick()}
         >

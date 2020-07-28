@@ -12,7 +12,7 @@ const LunchBreakTheme = createMuiTheme({
             },
         error:
             {
-                main: '#b3d5d4' // light turquoise
+                main: '#eef5f6' // light turquoise
             },
         info:
             {
@@ -23,7 +23,8 @@ const LunchBreakTheme = createMuiTheme({
     typography: {
         h3: {
             fontFamily: "Arimo",
-            color: "#575757"
+            color: "#575757",
+            textShadow: "none"
         },
         h4: {
             fontFamily: 'Pacifico'
@@ -31,7 +32,8 @@ const LunchBreakTheme = createMuiTheme({
         h5: {
             fontFamily: "Arimo",
             fontWeight: "bold",
-            color: "#575757"
+            color: "#575757",
+            textShadow: "none"
         },
         caption: {
             fontFamily: "Arimo",

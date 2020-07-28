@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#eef5f6",
         border: "none",
         height: "1px"
+    },
+    profilePicture: {
+        width: "100%",
+        borderRadius: "5px"
     }
 }));
 
@@ -82,7 +86,7 @@ export default function ProfileForm() {
                 </Typography>
             </Box>
             <Box className={classes.nextTopic}>
-                <img src={profilePicture} alt="custom user avatar"/>
+                <img className={classes.profilePicture} src={profilePicture} alt="custom user avatar"/>
             </Box>
             <Box className={classes.nextTopic}>
                 <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
