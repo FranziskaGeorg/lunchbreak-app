@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getMatchingColleagueFetch, getProfileStatusFetch, saveLunchMatchFetch} from "../../utils/FetchUtils";
+import {getMatchingColleagueFetch, saveLunchMatchFetch} from "../../utils/MatchFetchUtils";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import PopupLunchMatch from "../popups/PopupLunchMatch";
@@ -9,6 +9,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 import ButtonYellowMediumPacifico from "../buttons/ButtonYellowMediumPacifico";
+import {getProfileStatusFetch} from "../../utils/ProfileFetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     bigBox: {

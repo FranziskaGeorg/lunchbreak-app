@@ -49,7 +49,7 @@ class ProfileControllerTest {
         LunchBreakUser testUser = new LunchBreakUser("hanni@nanni.de", passwordEncoder.encode("testpw"), "user");
         when(userDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testUser));
 
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>(), false);
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>(), false, "");
         when(colleagueDb.findByUsername("hanni@nanni.de")).thenReturn(Optional.of(testColleague));
 
         String url = "http://localhost:" + port + "/auth/login";
@@ -61,7 +61,7 @@ class ProfileControllerTest {
     // getColleagueByUsername
     public void shouldReturnColleagueMatchingUsernameFromToken() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>(), false);
+        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", new HashMap<>(), false, "");
         String userToken = loginToken();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setBearerAuth(userToken);

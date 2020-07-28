@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -46,6 +48,21 @@ public class ProfileController {
         Colleague loggedColleague = getColleagueByUsername(principal);
         Boolean profileFilled = loggedColleague.getProfileFilled();
         return profileFilled;
+    }
+
+    @PostMapping("picture")
+    public void saveProfilePicture(Principal principal, @RequestBody String imageUrl) throws IOException {
+        Map imageMap = profileService.uploadProfilePicToCloud(imageUrl);
+        String cloudinaryUrl = (String) imageMap.get("url");
+        Colleague loggedColleague = getColleagueByUsername(principal);
+        profileService.saveProfilePicToDb(loggedColleague, cloudinaryUrl);
+    }
+
+    @GetMapping("picture")
+    public String getProfilePictureUrl(Principal principal) {
+        Colleague loggedColleague = getColleagueByUsername(principal);
+        String profilePicUrl = loggedColleague.getProfilePicUrl();
+        return profilePicUrl;
     }
 
 }

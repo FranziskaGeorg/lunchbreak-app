@@ -4,7 +4,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
     inputField: {
-        backgroundColor: "#eef5f6",
         '@media (max-width: 599px)': {
             width: "75vw"
         },
@@ -20,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function InputTextField({fieldName, label, value, setValue}) {
+export default function InputTextFieldOutlined({value}) {
     const classes = useStyles();
 
     return (
         <TextField
-            required
+            disabled
             margin="dense"
             className={classes.inputField}
             InputProps={{
@@ -34,10 +33,7 @@ export default function InputTextField({fieldName, label, value, setValue}) {
                 }
             }}
             variant="outlined"
-            name={fieldName}
-            label={label}
             value={value}
-            onChange={(event) => setValue(event.target.value)}
         />
     )
 }

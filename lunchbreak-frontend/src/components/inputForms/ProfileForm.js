@@ -3,12 +3,14 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import InputTextField from "../inputFields/InputTextField";
 import DropdownField from "../inputFields/DropdownField";
 import Typography from "@material-ui/core/Typography";
-import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/FetchUtils";
+import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/ProfileFetchUtils";
 import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
-import ButtonYellowBig from "../buttons/ButtonYellowBig";
+import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
+import UploadPhotoButtons from "../buttons/UploadPhotoButtons";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -19,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
         paddingTop: theme.spacing(2),
         justifyContent: "space-around"
+    },
+    divider: {
+        marginTop: theme.spacing(2),
+        backgroundColor: "#eef5f6",
+        border: "none",
+        height: "1px"
     }
 }));
 
@@ -42,6 +50,7 @@ export default function ProfileForm() {
         thursday: false,
         friday: false
     })
+    const [profilePicture, setProfilePicture] = useState();
 
     useEffect(() => {
         initProfileDataFetch()
@@ -55,8 +64,9 @@ export default function ProfileForm() {
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
                 setLunchdays(data.lunchdays);
+                setProfilePicture(data.profilePicUrl);
             })
-    }, []);
+    }, [profilePicture]);
 
     function handleSave() {
         const profileInput = {firstName, lastName, job, subsidiary, favoriteFood, hobbies, username, phoneNumber, lunchdays}
@@ -68,10 +78,22 @@ export default function ProfileForm() {
         <Box>
             <Box>
                 <Typography variant="h5">
+                    Dein Profilbild
+                </Typography>
+            </Box>
+            <Box className={classes.nextTopic}>
+                <img src={profilePicture} alt="custom user avatar"/>
+            </Box>
+            <Box className={classes.nextTopic}>
+                <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
+            </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
+            <Box className={classes.nextTopic}>
+                <Typography variant="h5">
                     Über Dich
                 </Typography>
             </Box>
-            <Box>
+            <Box className={classes.nextTopic}>
                 <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
             </Box>
             <Box>
@@ -91,12 +113,13 @@ export default function ProfileForm() {
                 <InputTextField fieldName="hobbies" label="Hobbies oder Interessen" value={hobbies}
                                 setValue={setHobbies}/>
             </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Kontaktdaten
                 </Typography>
             </Box>
-            <Box>
+            <Box className={classes.nextTopic}>
                 <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
                                         setValue={setUsername}/>
             </Box>
@@ -104,6 +127,7 @@ export default function ProfileForm() {
                 <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
                                 setValue={setPhoneNumber}/>
             </Box>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Deine Lunchdays
@@ -113,12 +137,12 @@ export default function ProfileForm() {
                 <CheckboxForm lunchdays={lunchdays} setLunchdays={setLunchdays}/>
             </Box>
             <Box className={classes.buttonBox}>
-                <ButtonYellowBig handleClick={() => history.push("/dailymatch")}
-                                 buttonSize="large"
-                                 buttonText="Verwerfen"/>
-                <ButtonYellowBig handleClick={handleSave}
-                                 buttonSize="large"
-                                 buttonText="Speichern"/>
+                <ButtonYellow handleClick={() => history.push("/dailymatch")}
+                              buttonSize="large"
+                              buttonText="Verwerfen"/>
+                <ButtonYellow handleClick={handleSave}
+                              buttonSize="large"
+                              buttonText="Speichern"/>
             </Box>
         </Box>
     )
