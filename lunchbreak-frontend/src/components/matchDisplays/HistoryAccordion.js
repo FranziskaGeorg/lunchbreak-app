@@ -9,7 +9,10 @@ import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: "100%",
+        width: "100%"
+    },
+    accordion: {
+        boxShadow: "none"
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
@@ -26,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             color: "#dfa528"
         }
+    },
+    miniPicture: {
+        width: "50px",
+        height: "50px",
+        borderRadius: "5px",
+        marginRight: theme.spacing(2)
     }
 }));
 
@@ -48,7 +57,8 @@ export default function HistoryAccordion() {
     return (
         <div className={classes.root}>
             {lunchMatches.map(lunchMatch =>
-                <Accordion expanded={expanded === 'panel1'}
+                <Accordion className={classes.accordion}
+                           expanded={expanded === 'panel1'}
                            onChange={handleChange('panel1')}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
@@ -56,8 +66,10 @@ export default function HistoryAccordion() {
                         id="panel1bh-header"
                     >
                         <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
+                        <img className={classes.miniPicture} src={lunchMatch.profilePicUrl} alt="custom user avatar"/>
                         <Typography
-                            className={classes.secondaryHeading}>{lunchMatch.firstName} {lunchMatch.lastName}</Typography>
+                            className={classes.secondaryHeading}>{lunchMatch.firstName}<br/>{lunchMatch.lastName}
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
