@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
     },
     icon: {
         marginRight: theme.spacing(1),
-        fontSize: "20px"
+        fontSize: "20px",
+        position: "relative",
+        top: "5px"
     }
 }));
 

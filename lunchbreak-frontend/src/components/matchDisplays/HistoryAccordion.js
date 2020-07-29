@@ -6,6 +6,9 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
+import {FaEnvelope, FaPhone} from "react-icons/all";
+import SvgIcon from "@material-ui/core/SvgIcon";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
         height: "50px",
         borderRadius: "5px",
         marginRight: theme.spacing(2)
+    },
+    icon: {
+        marginRight: theme.spacing(1),
+        fontSize: "20px",
+        position: "relative",
+        top: "5px"
     }
 }));
 
@@ -66,20 +75,31 @@ export default function HistoryAccordion() {
                         id="panel1bh-header"
                     >
                         <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
-                        <img className={classes.miniPicture} src={lunchMatch.profilePicUrl} alt="custom user avatar"/>
+                        {lunchMatch.profilePicUrl ?
+                            <img className={classes.miniPicture}
+                                 src={lunchMatch.profilePicUrl}
+                                 alt="custom user avatar"/>
+                            :
+                            <img className={classes.miniPicture}
+                                 src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
+                                 alt="custom user avatar"/>}
                         <Typography
                             className={classes.secondaryHeading}>{lunchMatch.firstName}<br/>{lunchMatch.lastName}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            E-Mail-Adresse: <a className={classes.link} href={`mailto:${lunchMatch.matchedUsername}`}>
-                            {lunchMatch.matchedUsername}
-                        </a>
+                            <SvgIcon className={classes.icon} color="primary">
+                                <FaEnvelope/>
+                            </SvgIcon>
+                            <a className={classes.link} href={`mailto:${lunchMatch.matchedUsername}`}>
+                                {lunchMatch.matchedUsername}</a>
                             <br/><br/>
-                            Handynummer: <a className={classes.link} href={`tel:${lunchMatch.phoneNumber}`}>
-                            {lunchMatch.phoneNumber}
-                        </a>
+                            <SvgIcon className={classes.icon} color="primary">
+                                <FaPhone/>
+                            </SvgIcon>
+                            <a className={classes.link} href={`tel:${lunchMatch.phoneNumber}`}>
+                                {lunchMatch.phoneNumber}</a>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>)}
