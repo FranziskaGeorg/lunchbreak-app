@@ -56,10 +56,7 @@ export default function HistoryAccordion() {
     const [lunchMatches, setLunchMatches] = useState([]);
     const [expanded, setExpanded] = useState(false);
 
-    useEffect(() => {
-        getMutualMatches()
-            .then(data => console.log(data));
-    }, [getMutualMatches])
+    useEffect(getMutualMatches,[])
 
     async function getMutualMatches() {
         const data = await getLunchMatchesFetch();
@@ -75,7 +72,7 @@ export default function HistoryAccordion() {
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
-    };
+    }
 
     function translateLunchday(englishLunchday) {
         switch (englishLunchday) {
