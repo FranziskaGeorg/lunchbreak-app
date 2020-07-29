@@ -85,11 +85,9 @@ export default function DailyMatchCard() {
 
     async function handleLunchClick() {
         await saveLunchMatchFetch(dailyMatch.username);
-        const isMatchMutual = await checkIfMatchIsMutualFetch();
+        const isMatchMutual = await checkIfMatchIsMutualFetch(dailyMatch.username);
         if (isMatchMutual) {
             setShowPopup(true);
-        } else {
-            handleShuffleClick();
         }
     }
 

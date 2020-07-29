@@ -1,7 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.MatchData;
 import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
 import org.springframework.http.HttpStatus;
@@ -44,19 +43,11 @@ public class MatchController {
         matchService.saveNewLunchMatchToDb(loggedUsername, matchedUsername);
     }
 
-    @GetMapping("mutual")
-    public Boolean checkIfMatchIsMutual(Principal principal) {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
-        LunchMatch mostRecentLunchMatchOfLoggedUser = matchService.getMostRecentLunchMatchOfLoggedUser(loggedUsername).get();
-        return matchService.isMatchMutual(mostRecentLunchMatchOfLoggedUser);
-    }
-
-    /*@GetMapping("{matchedUsername}")
+    @GetMapping("{matchedUsername}")
     public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
         return matchService.isMatchMutual(loggedUsername, matchedUsername);
-    }*/
+    }
 
 }

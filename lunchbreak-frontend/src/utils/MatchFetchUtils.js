@@ -30,9 +30,9 @@ export async function saveLunchMatchFetch(matchedUsername) {
     return await response.text();
 }
 
-export async function checkIfMatchIsMutualFetch() {
+export async function checkIfMatchIsMutualFetch(matchedUsername) {
     const token = getJWTToken();
-    const response = await fetch("/api/dailymatch/mutual", {
+    const response = await fetch(`/api/dailymatch/${matchedUsername}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -45,17 +45,4 @@ export async function checkIfMatchIsMutualFetch() {
     return (result === 'true');
 }
 
-/*export async function checkIfMatchIsMutualFetch(matchedUsername) {
-    const token = getJWTToken();
-    const response = await fetch("/api/dailymatch/{matchedUsername}", {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    if (response.status !== 200) {
-        throw new Error("Fetch of daily match status failed")
-    }
-    const result = await response.text();
-    return (result === 'true');
-}*/
+

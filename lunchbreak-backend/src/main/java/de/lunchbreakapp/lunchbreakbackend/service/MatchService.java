@@ -5,7 +5,6 @@ import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
 import de.lunchbreakapp.lunchbreakbackend.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -69,17 +68,7 @@ public class MatchService {
         return matchMongoDb.save(newLunchMatch);
     }
 
-    public Optional<LunchMatch> getMostRecentLunchMatchOfLoggedUser(String loggedUsername) {
-        Query lunchMatchQuery = new Query();
-        lunchMatchQuery.addCriteria(new Criteria().where("loggedUsername").is(loggedUsername));
-        lunchMatchQuery.with(Sort.by(Sort.Direction.DESC, "_id"));
-        LunchMatch mostRecentLunchMatch = mongoTemplate.findOne(lunchMatchQuery, LunchMatch.class);
-        return Optional.of(mostRecentLunchMatch);
-    }
-
-    public Boolean isMatchMutual(LunchMatch lunchMatch) {
-        String loggedUsername = lunchMatch.getLoggedUsername();
-        String matchedUsername = lunchMatch.getMatchedUsername();
+    public Boolean isMatchMutual(String loggedUsername, String matchedUsername) {
         List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByUsername(matchedUsername);
         for (LunchMatch match : lunchMatchesOfMatchedUser) {
             if (match.getMatchedUsername().equals(loggedUsername)) {
@@ -88,15 +77,5 @@ public class MatchService {
         }
         return false;
     }
-
-    /*public Boolean isMatchMutual(String loggedUsername, String matchedUsername) {
-        List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByUsername(matchedUsername);
-        for (LunchMatch match : lunchMatchesOfMatchedUser) {
-            if (match.getMatchedUsername().equals(loggedUsername)) {
-                return true;
-            }
-        }
-        return false;
-    }*/
 
 }
