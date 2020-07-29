@@ -49,7 +49,6 @@ public class MatchController {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
         LunchMatch mostRecentLunchMatchOfLoggedUser = matchService.getMostRecentLunchMatchOfLoggedUser(loggedUsername).get();
-        System.out.println(matchService.isMatchMutual(mostRecentLunchMatchOfLoggedUser));
         return matchService.isMatchMutual(mostRecentLunchMatchOfLoggedUser);
     }
 
