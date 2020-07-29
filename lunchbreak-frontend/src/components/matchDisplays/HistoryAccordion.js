@@ -71,6 +71,7 @@ export default function HistoryAccordion() {
             case "wednesday": return "Mittwoch"
             case "thursday": return "Donnerstag"
             case "friday": return "Freitag"
+            default: throw new Error("Unexpected week day")
         }
     }
 
