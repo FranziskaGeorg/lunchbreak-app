@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
 import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import {checkIfMatchIsMutualFetch} from "../../utils/MatchFetchUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,9 +57,21 @@ export default function HistoryAccordion() {
     const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
-        getLunchMatchesFetch()
-            .then(data => setLunchMatches(data))
+        getMutualMatches()
+            .then(data => console.log(data));
     }, [])
+
+    async function getMutualMatches() {
+        const data = await getLunchMatchesFetch();
+        const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchIsMutualFetch(lunchMatch.matchedUsername))
+        console.log(mutualMatches);
+        setLunchMatches(mutualMatches);
+    }
+
+    async function filter(arr, callback) {
+        const fail = Symbol()
+        return (await Promise.all(arr.map(async item => (await callback(item)) ? item : fail))).filter(i=>i!==fail)
+    }
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -66,16 +79,22 @@ export default function HistoryAccordion() {
 
     function translateLunchday(englishLunchday) {
         switch (englishLunchday) {
-            case "monday": return "Montag"
-            case "tuesday": return "Dienstag"
-            case "wednesday": return "Mittwoch"
-            case "thursday": return "Donnerstag"
-            case "friday": return "Freitag"
-            default: throw new Error("Unexpected week day")
+            case "monday":
+                return "Montag"
+            case "tuesday":
+                return "Dienstag"
+            case "wednesday":
+                return "Mittwoch"
+            case "thursday":
+                return "Donnerstag"
+            case "friday":
+                return "Freitag"
+            default:
+                throw new Error("Unexpected week day")
         }
     }
 
-    function sortLunchdays(a, b){
+    function sortLunchdays(a, b) {
         const daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday"];
         return daysOfWeek.indexOf(a) - daysOfWeek.indexOf(b);
     }
@@ -123,9 +142,9 @@ export default function HistoryAccordion() {
                             </SvgIcon>
                             Gemeinsame Lunchdays:
                             <ul>
-                            {lunchMatch.commonLunchdays.sort(sortLunchdays).map(commonLunchday =>
-                                <li className={classes.lunchdayText}>{translateLunchday(commonLunchday)}</li>
-                            )}
+                                {lunchMatch.commonLunchdays.sort(sortLunchdays).map(commonLunchday =>
+                                    <li className={classes.lunchdayText}>{translateLunchday(commonLunchday)}</li>
+                                )}
                             </ul>
                         </Typography>
                     </AccordionDetails>
