@@ -89,4 +89,14 @@ public class MatchService {
         return false;
     }
 
+    /*public Boolean isMatchMutual(String loggedUsername, String matchedUsername) {
+        List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByUsername(matchedUsername);
+        for (LunchMatch match : lunchMatchesOfMatchedUser) {
+            if (match.getMatchedUsername().equals(loggedUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }*/
+
 }

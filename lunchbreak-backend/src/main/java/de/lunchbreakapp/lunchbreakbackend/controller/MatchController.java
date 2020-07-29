@@ -53,4 +53,11 @@ public class MatchController {
         return matchService.isMatchMutual(mostRecentLunchMatchOfLoggedUser);
     }
 
+    /*@GetMapping("{matchedUsername}")
+    public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) {
+        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
+        String loggedUsername = loggedColleague.getUsername();
+        return matchService.isMatchMutual(loggedUsername, matchedUsername);
+    }*/
+
 }

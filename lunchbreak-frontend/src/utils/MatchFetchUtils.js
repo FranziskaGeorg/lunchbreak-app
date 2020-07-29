@@ -44,3 +44,18 @@ export async function checkIfMatchIsMutualFetch() {
     const result = await response.text();
     return (result === 'true');
 }
+
+/*export async function checkIfMatchIsMutualFetch(matchedUsername) {
+    const token = getJWTToken();
+    const response = await fetch("/api/dailymatch/{matchedUsername}", {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    if (response.status !== 200) {
+        throw new Error("Fetch of daily match status failed")
+    }
+    const result = await response.text();
+    return (result === 'true');
+}*/
