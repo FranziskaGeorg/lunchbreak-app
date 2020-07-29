@@ -74,6 +74,11 @@ export default function HistoryAccordion() {
         }
     }
 
+    function sortLunchdays(a, b){
+        const daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+        return daysOfWeek.indexOf(a) - daysOfWeek.indexOf(b);
+    }
+
     return (
         <div className={classes.root}>
             {lunchMatches.map(lunchMatch =>
@@ -117,7 +122,7 @@ export default function HistoryAccordion() {
                             </SvgIcon>
                             Gemeinsame Lunchdays:
                             <ul>
-                            {lunchMatch.commonLunchdays.map(commonLunchday =>
+                            {lunchMatch.commonLunchdays.sort(sortLunchdays).map(commonLunchday =>
                                 <li className={classes.lunchdayText}>{translateLunchday(commonLunchday)}</li>
                             )}
                             </ul>
