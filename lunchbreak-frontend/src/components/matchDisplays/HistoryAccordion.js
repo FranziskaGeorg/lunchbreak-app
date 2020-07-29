@@ -59,7 +59,7 @@ export default function HistoryAccordion() {
     useEffect(() => {
         getMutualMatches()
             .then(data => console.log(data));
-    }, [])
+    }, [getMutualMatches()])
 
     async function getMutualMatches() {
         const data = await getLunchMatchesFetch();
