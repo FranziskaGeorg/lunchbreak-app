@@ -28,8 +28,12 @@ public class HistoryService {
 
     public List<LunchMatch> getLunchMatchesByUsername(String loggedUsername) {
         List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(loggedUsername);
-        lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
-        return lunchMatches;
+        if (!lunchMatches.isEmpty()) {
+            lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
+            return lunchMatches;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No lunch matches for " + loggedUsername + " found");
+        }
     }
 
     public List<HistoryData> getLunchMatchDetails(List<LunchMatch> lunchMatches, Colleague loggedColleague) {
@@ -54,11 +58,7 @@ public class HistoryService {
     public List<HistoryData> getDetailsForLunchMatches(String loggedUsername) {
         List<LunchMatch> lunchMatches = getLunchMatchesByUsername(loggedUsername);
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
-        if (!lunchMatches.isEmpty()) {
-            return getLunchMatchDetails(lunchMatches, loggedColleague);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No lunch matches for " + loggedUsername + " found");
-        }
+        return getLunchMatchDetails(lunchMatches, loggedColleague);
     }
 
     public List<String> getCommonLunchdays(Map<String, Boolean> loggedUserLunchdays, Map<String, Boolean> matchedUserLunchdays) {
@@ -75,9 +75,9 @@ public class HistoryService {
             }
         });
         List<String> commonLunchdays = new ArrayList<>();
-        for (int i = 0; i < matchedUserCheckedLunchdays.size(); i++) {
-            if (loggedUserCheckedLunchdays.contains(matchedUserCheckedLunchdays.get(i))) {
-                commonLunchdays.add(matchedUserCheckedLunchdays.get(i));
+        for (String matchedUserCheckedLunchday : matchedUserCheckedLunchdays) {
+            if (loggedUserCheckedLunchdays.contains(matchedUserCheckedLunchday)) {
+                commonLunchdays.add(matchedUserCheckedLunchday);
             }
         }
         if (!commonLunchdays.isEmpty()) {
