@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         top: "5px"
     },
     lunchdayText: {
-        marginLeft: theme.spacing(2)
+        marginLeft: theme.spacing(0.5)
     }
 }));
 
