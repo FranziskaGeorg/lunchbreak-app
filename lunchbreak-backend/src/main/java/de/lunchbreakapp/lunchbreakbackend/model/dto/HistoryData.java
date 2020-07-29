@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,6 @@ public class HistoryData {
     private String lastName;
     private String phoneNumber;
     private String profilePicUrl;
+    private List<String> commonLunchdays;
 
 }
