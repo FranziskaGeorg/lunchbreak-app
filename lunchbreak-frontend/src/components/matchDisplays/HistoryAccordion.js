@@ -6,9 +6,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
-import {FaEnvelope, FaPhone} from "react-icons/all";
+import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "20px",
         position: "relative",
         top: "5px"
+    },
+    lunchdayText: {
+        marginLeft: theme.spacing(2)
     }
 }));
 
@@ -51,17 +53,26 @@ export default function HistoryAccordion() {
     const classes = useStyles();
 
     const [lunchMatches, setLunchMatches] = useState([]);
-
     const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         getLunchMatchesFetch()
-            .then(data => setLunchMatches(data));
-    })
+            .then(data => setLunchMatches(data))
+    }, [])
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
+
+    function translateLunchday(englishLunchday) {
+        switch (englishLunchday) {
+            case "monday": return "Montag"
+            case "tuesday": return "Dienstag"
+            case "wednesday": return "Mittwoch"
+            case "thursday": return "Donnerstag"
+            case "friday": return "Freitag"
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -100,6 +111,16 @@ export default function HistoryAccordion() {
                             </SvgIcon>
                             <a className={classes.link} href={`tel:${lunchMatch.phoneNumber}`}>
                                 {lunchMatch.phoneNumber}</a>
+                            <br/><br/>
+                            <SvgIcon className={classes.icon} color="primary">
+                                <FaCalendarCheck/>
+                            </SvgIcon>
+                            Gemeinsame Lunchdays:
+                            <ul>
+                            {lunchMatch.commonLunchdays.map(commonLunchday =>
+                                <li className={classes.lunchdayText}>{translateLunchday(commonLunchday)}</li>
+                            )}
+                            </ul>
                         </Typography>
                     </AccordionDetails>
                 </Accordion>)}
