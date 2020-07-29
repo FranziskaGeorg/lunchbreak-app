@@ -9,7 +9,7 @@ import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
-import UploadPhotoButtons from "../buttons/UploadPhotoButtons";
+import PhotoUploadForm from "./PhotoUploadForm";
 import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
@@ -116,7 +116,7 @@ export default function ProfileForm() {
                 <img className={classes.profilePicture} src={profilePicture} alt="custom user avatar"/>
             </Box>
             <Box className={classes.nextTopic}>
-                <UploadPhotoButtons setProfilePicture={setProfilePicture}/>
+                <PhotoUploadForm setProfilePicture={setProfilePicture}/>
             </Box>
             <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
