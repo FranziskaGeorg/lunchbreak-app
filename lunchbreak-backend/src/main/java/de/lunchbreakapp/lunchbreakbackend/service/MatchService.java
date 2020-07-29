@@ -10,10 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -23,12 +20,14 @@ public class MatchService {
     private final MongoTemplate mongoTemplate;
     private final MatchMongoDb matchMongoDb;
     private final DateUtils dateUtils;
+    private final HistoryService historyService;
 
     @Autowired
-    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, DateUtils dateUtils) {
+    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, DateUtils dateUtils, HistoryService historyService) {
         this.mongoTemplate = mongoTemplate;
         this.matchMongoDb = matchMongoDb;
         this.dateUtils = dateUtils;
+        this.historyService = historyService;
     }
 
     public Optional<Colleague> getMatchingColleague(String loggedUsername, Map<String, Boolean> lunchdays) {
@@ -67,6 +66,16 @@ public class MatchService {
         newLunchMatch.setMatchedUsername(matchedUsername);
         newLunchMatch.setMatchDate(dateUtils.formatCurrentDate());
         return matchMongoDb.save(newLunchMatch);
+    }
+
+    public Boolean isMatchMutual(String loggedUsername, String matchedUsername) {
+        List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByUsername(matchedUsername);
+        for (LunchMatch match : lunchMatchesOfMatchedUser) {
+            if (match.getMatchedUsername().equals(loggedUsername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -1,7 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.service;
 
 import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
