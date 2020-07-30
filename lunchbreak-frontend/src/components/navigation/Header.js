@@ -57,7 +57,7 @@ export default function Header() {
                 <HeaderTitle currentPath="/dailymatch" titleText="Lunchen mit..."/>
                 <HeaderTitle currentPath="/profile" titleText="Dein Profil"/>
                 <HeaderTitle currentPath="/history" titleText="Deine Matches"/>
-                <HeaderTitle currentPath="/howto" titleText="Dein Leitfaden"/>
+                <HeaderTitle currentPath="/howto" titleText="Über LunchBreak"/>
                 <img src={logo} alt="Lunchbreak logo" className={classes.logo}/>
             </Toolbar>
         </AppBar>

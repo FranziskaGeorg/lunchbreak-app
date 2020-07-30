@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#ffffff",
         fontFamily: "Arimo",
         fontWeight: "bold",
-        textTransform: "none"
+        textTransform: "none",
+        borderRadius: "30px"
     }
 }));
 
