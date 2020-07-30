@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     miniPicture: {
         width: "50px",
         height: "50px",
-        borderRadius: "5px",
+        borderRadius: "50%",
         marginRight: theme.spacing(2)
     },
     icon: {

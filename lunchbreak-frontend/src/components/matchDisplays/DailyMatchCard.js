@@ -22,10 +22,14 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     pictureBox: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
         width: "100%",
         maxWidth: "400px",
         height: "100%",
-        borderRadius: "10px"
+        borderRadius: "10px",
+        paddingTop: theme.spacing(2)
     },
     bigBox: {
         paddingLeft: theme.spacing(3),
@@ -34,20 +38,16 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(1)
     },
     profilePicture: {
-        minWidth: "100%",
-        maxWidth: "300px",
-        maxHeight: "300px",
-        objectFit: "cover",
-        '@media (max-width: 505px)': {
-            borderRadius: "10px 10px 0px 0px"
-        },
-        '@media (min-width: 506px)': {
-            borderRadius: "10px 0px 0px 10px"
-        }
+        width: "250px",
+        height: "250px",
+        borderRadius: "50%",
+        objectFit: "cover"
     },
     profilePictureLight: {
         minWidth: "100%",
-        maxHeight: "300px",
+        maxWidth: "250px",
+        maxHeight: "250px",
+        borderRadius: "50%",
         objectFit: "cover",
         opacity: "0.2",
         filter: "grayscale(100%)"
