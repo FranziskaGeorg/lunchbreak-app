@@ -32,7 +32,7 @@ public class HistoryService {
             lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
             return lunchMatches;
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No lunch matches for " + loggedUsername + " found");
+            return Collections.emptyList();
         }
     }
 

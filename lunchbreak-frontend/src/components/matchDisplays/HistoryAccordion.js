@@ -56,14 +56,17 @@ export default function HistoryAccordion() {
     const [lunchMatches, setLunchMatches] = useState([]);
     const [expanded, setExpanded] = useState(false);
 
-    useEffect(getMutualMatches,[])
+    useEffect(() => {
+        async function getMutualMatches() {
+            const data = await getLunchMatchesFetch();
+            const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchIsMutualFetch(lunchMatch.matchedUsername))
+            console.log(mutualMatches);
+            setLunchMatches(mutualMatches);
+        };
+        getMutualMatches();
+    },[]);
 
-    async function getMutualMatches() {
-        const data = await getLunchMatchesFetch();
-        const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchIsMutualFetch(lunchMatch.matchedUsername))
-        console.log(mutualMatches);
-        setLunchMatches(mutualMatches);
-    }
+
 
     async function filter(arr, callback) {
         const fail = Symbol()
