@@ -28,15 +28,15 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2)
     },
     pictureBox: {
-        width: "300px",
-        height: "300px",
+        width: "250px",
+        height: "250px",
         margin: theme.spacing(2)
     },
     previewPic: {
-        borderRadius: "5px",
-        objectFit: "cover",
-        width: "100%",
-        height: "100%"
+        width: "250px",
+        height: "250px",
+        borderRadius: "50%",
+        objectFit: "cover"
     }
 }));
 

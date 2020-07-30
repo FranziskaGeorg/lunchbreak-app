@@ -41,9 +41,10 @@ const useStyles = makeStyles((theme) => ({
         height: "1px"
     },
     profilePicture: {
-        borderRadius: "5px",
         width: "100%",
-        maxWidth: "400px"
+        maxWidth: "300px",
+        borderRadius: "50%",
+        objectFit: "cover"
     }
 }));
 
@@ -108,17 +109,17 @@ export default function ProfileForm() {
     return (
         <Box className={classes.profileBox}>
             <Box>
+                <img className={classes.profilePicture} src={profilePicture} alt="custom user avatar"/>
+            </Box>
+            <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Dein Profilbild
                 </Typography>
             </Box>
             <Box className={classes.nextTopic}>
-                <img className={classes.profilePicture} src={profilePicture} alt="custom user avatar"/>
-            </Box>
-            <Box className={classes.nextTopic}>
                 <PhotoUploadForm setProfilePicture={setProfilePicture}/>
             </Box>
-            <Divider className={classes.divider} variant="fullWidth"/>
+            <Divider className={classes.divider} variant="fulLWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Über Dich
