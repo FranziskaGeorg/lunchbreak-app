@@ -15,7 +15,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import LunchHistory from "./pages/LunchHistory";
-import HowTo from "./pages/HowTo";
+import HowToPage from "./pages/HowToPage";
 
 const useStyles = makeStyles((theme) => ({
     overallContainer: {
@@ -52,7 +52,7 @@ function Navigation() {
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>
                 <PrivateRoute path="/history"component={LunchHistory} exact/>
-                <PrivateRoute path="/howto"component={HowTo} exact/>
+                <PrivateRoute path="/howto" component={HowToPage} exact/>
             </Switch>
         </Box>
         <BottomNavBar/>

@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
         width: "250px",
         height: "250px",
         borderRadius: "50%",
-        objectFit: "cover"
+        objectFit: "cover",
+        boxShadow: "0px 2px 5px 0px #575757"
     },
     profilePictureLight: {
         minWidth: "100%",
