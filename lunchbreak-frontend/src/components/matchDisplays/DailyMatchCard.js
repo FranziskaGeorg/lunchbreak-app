@@ -7,7 +7,7 @@ import Box from "@material-ui/core/Box";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
-import ButtonYellowMediumPacifico from "../buttons/ButtonYellowMediumPacifico";
+import ButtonYellowPacifico from "../buttons/ButtonYellowPacifico";
 import {getProfileStatusFetch} from "../../utils/ProfileFetchUtils";
 
 const useStyles = makeStyles((theme) => ({
@@ -159,12 +159,12 @@ export default function DailyMatchCard() {
                      justifyContent="space-around"
                 >
                     <Box>
-                        <ButtonYellowMediumPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
-                                                    buttonText="Mischen"/>
+                        <ButtonYellowPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
+                                              buttonText="Mischen"/>
                     </Box>
                     <Box>
-                        <ButtonYellowMediumPacifico disabled={!profileFilled} handleClick={handleLunchClick}
-                                                    buttonText="Lunchen"/>
+                        <ButtonYellowPacifico disabled={!profileFilled} handleClick={handleLunchClick}
+                                              buttonText="Lunchen"/>
                     </Box>
                 </Box>
             </Box>
