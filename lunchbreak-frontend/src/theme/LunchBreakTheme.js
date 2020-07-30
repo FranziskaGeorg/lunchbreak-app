@@ -22,7 +22,7 @@ const LunchBreakTheme = createMuiTheme({
 
     typography: {
         h3: {
-            fontFamily: "Arimo",
+            fontFamily: "Quicksand",
             color: "#575757",
             textShadow: "none"
         },
@@ -30,23 +30,22 @@ const LunchBreakTheme = createMuiTheme({
             fontFamily: 'Pacifico'
         },
         h5: {
-            fontFamily: "Arimo",
-            fontWeight: "bold",
+            fontFamily: "Quicksand",
             color: "#575757",
             textShadow: "none"
         },
         h6: {
-            fontFamily: "Arimo",
+            fontFamily: "Quicksand",
             fontWeight: "normal",
             color: "#575757",
             textShadow: "none"
         },
         caption: {
-            fontFamily: "Arimo",
+            fontFamily: "Quicksand",
             color: '#dfa528'
         },
         body1: {
-            fontFamily: "Arimo",
+            fontFamily: "Quicksand",
             color: "#575757"
         }
     }

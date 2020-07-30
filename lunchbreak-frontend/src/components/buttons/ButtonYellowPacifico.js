@@ -6,12 +6,13 @@ const useStyles = makeStyles((theme) => ({
     buttonContained: {
         color: "#ffffff",
         fontFamily: "Pacifico",
-        fontSize: "28px",
-        textTransform: "none"
+        fontSize: "24px",
+        textTransform: "none",
+        borderRadius: "30px"
     }
 }));
 
-export default function ButtonYellowMediumPacifico({handleClick, buttonText, disabled}) {
+export default function ButtonYellowPacifico({handleClick, buttonText, disabled}) {
     const classes = useStyles();
 
     return (
@@ -19,7 +20,7 @@ export default function ButtonYellowMediumPacifico({handleClick, buttonText, dis
             color="secondary"
             className={classes.buttonContained}
             variant="contained"
-            size="small"
+            size="medium"
             disabled={disabled}
             onClick={(event) => handleClick()}
         >
