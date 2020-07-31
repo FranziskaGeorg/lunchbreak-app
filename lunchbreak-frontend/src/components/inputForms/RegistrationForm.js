@@ -15,7 +15,7 @@ import {
 import {UserDispatchContext, UserStateContext} from "../../context/user/UserContext";
 import PopupRegistrationSuccess from "../popups/PopupRegistrationSuccess";
 import Box from "@material-ui/core/Box";
-import nerdLogo from '../../images/happytoast_nerd.png';
+import helloLogo from '../../images/happytoast_hello.png';
 import PopupRegistrationFailed from "../popups/PopupRegistrationFailed";
 
 const useStyles = makeStyles((theme) => ({
@@ -84,7 +84,7 @@ export default function RegistrationForm() {
                 </Typography>
             </Box>
             <Box className={classes.logoPlacement}>
-                <img src={nerdLogo} alt="Lunchbreak logo for registration" className={classes.logo}/>
+                <img src={helloLogo} alt="Lunchbreak logo for registration" className={classes.logo}/>
             </Box>
             <Formik initialValues={
                 {
