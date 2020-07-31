@@ -9,6 +9,7 @@ import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
 import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {checkIfMatchIsMutualFetch} from "../../utils/MatchFetchUtils";
+import {sortLunchdays, translateLunchday} from "../../utils/LunchDayUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,39 +76,13 @@ export default function HistoryAccordion() {
         setExpanded(isExpanded ? panel : false);
     }
 
-    function translateLunchday(englishLunchday) {
-        switch (englishLunchday) {
-            case "monday":
-                return "Montag"
-            case "tuesday":
-                return "Dienstag"
-            case "wednesday":
-                return "Mittwoch"
-            case "thursday":
-                return "Donnerstag"
-            case "friday":
-                return "Freitag"
-            default:
-                throw new Error("Unexpected week day")
-        }
-    }
-
-    function sortLunchdays(a, b) {
-        const daysOfWeek = ["monday", "tuesday", "wednesday", "thursday", "friday"];
-        return daysOfWeek.indexOf(a) - daysOfWeek.indexOf(b);
-    }
-
     return (
         <div className={classes.root}>
-            {lunchMatches.map(lunchMatch =>
+            {lunchMatches.map((lunchMatch, index) =>
                 <Accordion className={classes.accordion}
-                           expanded={expanded === 'panel1'}
-                           onChange={handleChange('panel1')}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
+                           expanded={expanded === 'panel' + index}
+                           onChange={handleChange('panel' + index)}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
                         {lunchMatch.profilePicUrl ?
                             <img className={classes.miniPicture}

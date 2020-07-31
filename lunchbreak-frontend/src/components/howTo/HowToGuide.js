@@ -57,10 +57,7 @@ export default function HowToGuide() {
                 <Accordion className={classes.accordion}
                            expanded={expanded === 'panel1'}
                            onChange={handleChange('panel1')}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header">
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography className={classes.accordionHeading}>Über LunchBreak</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -70,10 +67,7 @@ export default function HowToGuide() {
                 <Accordion className={classes.accordion}
                            expanded={expanded === 'panel2'}
                            onChange={handleChange('panel2')}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel2bh-content"
-                        id="panel2bh-header">
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography className={classes.accordionHeading}>Wie funktioniert die App?</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -83,10 +77,7 @@ export default function HowToGuide() {
                 <Accordion className={classes.accordion}
                            expanded={expanded === 'panel3'}
                            onChange={handleChange('panel3')}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel3bh-content"
-                        id="panel3bh-header">
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography className={classes.accordionHeading}>Impressum</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
