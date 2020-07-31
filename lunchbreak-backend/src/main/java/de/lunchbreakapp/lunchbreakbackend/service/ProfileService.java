@@ -34,6 +34,7 @@ public class ProfileService {
         newColleague.setLastName(lastName);
         newColleague.setJob("");
         newColleague.setSubsidiary("");
+        newColleague.setLocation("");
         newColleague.setFavoriteFood("");
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
@@ -47,18 +48,19 @@ public class ProfileService {
         return colleagueMongoDb.findByUsername(username);
     }
 
-    public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
-                                     String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
+    public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String location,
+                                     String favoriteFood, String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
         updatedColleague.setFirstName(firstName);
         updatedColleague.setLastName(lastName);
         updatedColleague.setJob(job);
         updatedColleague.setSubsidiary(subsidiary);
+        updatedColleague.setLocation(location);
         updatedColleague.setFavoriteFood(favoriteFood);
         updatedColleague.setHobbies(hobbies);
         updatedColleague.setPhoneNumber(phoneNumber);
         lunchdayUtils.validateLunchdays(lunchdays);
         updatedColleague.setLunchdays(lunchdays);
-        if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank()
+        if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank() && !location.isBlank()
                 && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() && !lunchdays.isEmpty()) {
             updatedColleague.setProfileFilled(true);
         } else {

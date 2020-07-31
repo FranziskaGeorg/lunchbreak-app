@@ -4,11 +4,11 @@ import Typography from "@material-ui/core/Typography";
 import PopupLunchMatch from "../popups/PopupLunchMatch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
+import {FaBriefcase, FaThumbsUp, FaUtensils, FaMapMarkerAlt} from "react-icons/all";
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 import ButtonYellowPacifico from "../buttons/ButtonYellowPacifico";
 import {getProfileStatusFetch} from "../../utils/ProfileFetchUtils";
+import MatchCardProfileInfo from "./MatchCardProfileInfo";
 
 const useStyles = makeStyles((theme) => ({
     cardBox: {
@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     bigBox: {
+        display: "flex",
+        flexDirection: "column",
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
         paddingBottom: theme.spacing(2),
@@ -58,10 +60,16 @@ const useStyles = makeStyles((theme) => ({
         opacity: "0.2",
         filter: "grayscale(100%)"
     },
-    nextTopicLarge: {
+    buttonBox: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
         paddingTop: theme.spacing(3)
     },
-    nextTopicSmall: {
+    infoBox: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
         paddingTop: theme.spacing(1)
     },
     icon: {
@@ -117,53 +125,25 @@ export default function DailyMatchCard() {
                       src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
                       alt="custom user avatar"/>}
             </Box>
-            <Box className={classes.bigBox}
-                 display="flex"
-                 flexDirection="column"
-            >
+            <Box className={classes.bigBox}>
                 <Box>
                     <Typography variant="h5">
                         {dailyMatch.firstName}
                     </Typography>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
-                        <SvgIcon className={classes.icon} color="primary">
-                            <FaBriefcase/>
-                        </SvgIcon>
-                        <Typography variant="body1">
-                            {dailyMatch.job} ({dailyMatch.subsidiary})
-                        </Typography>
+                    <Box className={classes.infoBox}>
+                        <MatchCardProfileInfo icon={<FaBriefcase/>} profileInput={dailyMatch.job + " (" + dailyMatch.subsidiary +")"}/>
                     </Box>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
-                        <SvgIcon className={classes.icon} color="primary">
-                            <FaUtensils/>
-                        </SvgIcon>
-                        <Typography variant="body1">
-                            {dailyMatch.favoriteFood}
-                        </Typography>
+                    <Box className={classes.infoBox}>
+                        <MatchCardProfileInfo icon={<FaMapMarkerAlt/>} profileInput={dailyMatch.location}/>
                     </Box>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
-                        <SvgIcon className={classes.icon} color="primary">
-                            <FaThumbsUp/>
-                        </SvgIcon>
-                        <Typography variant="body1">
-                            {dailyMatch.hobbies}
-                        </Typography>
+                    <Box className={classes.infoBox}>
+                        <MatchCardProfileInfo icon={<FaUtensils/>} profileInput={dailyMatch.favoriteFood}/>
+                    </Box>
+                    <Box className={classes.infoBox}>
+                        <MatchCardProfileInfo icon={<FaThumbsUp/>} profileInput={dailyMatch.hobbies}/>
                     </Box>
                 </Box>
-                <Box className={classes.nextTopicLarge}
-                     display="flex"
-                     flexDirection="row"
-                     justifyContent="space-around"
-                >
+                <Box className={classes.buttonBox}>
                     <Box>
                         <ButtonYellowPacifico disabled={!profileFilled} handleClick={handleShuffleClick}
                                               buttonText="Mischen"/>

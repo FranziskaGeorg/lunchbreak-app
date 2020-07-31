@@ -54,14 +54,15 @@ export default function ProfileForm() {
 
     const history = useHistory();
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [job, setJob] = useState('');
-    const [subsidiary, setSubsidiary] = useState('');
-    const [favoriteFood, setFavoriteFood] = useState('');
-    const [hobbies, setHobbies] = useState('');
-    const [username, setUsername] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [job, setJob] = useState("");
+    const [subsidiary, setSubsidiary] = useState("");
+    const [location, setLocation] = useState("");
+    const [favoriteFood, setFavoriteFood] = useState("");
+    const [hobbies, setHobbies] = useState("");
+    const [username, setUsername] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [lunchdays, setLunchdays] = useState({
         monday: false,
         tuesday: false,
@@ -79,6 +80,7 @@ export default function ProfileForm() {
                 setUsername(data.username);
                 setJob(data.job);
                 setSubsidiary(data.subsidiary);
+                setLocation(data.location);
                 setFavoriteFood(data.favoriteFood);
                 setHobbies(data.hobbies);
                 setPhoneNumber(data.phoneNumber);
@@ -97,6 +99,7 @@ export default function ProfileForm() {
             lastName,
             job,
             subsidiary,
+            location,
             favoriteFood,
             hobbies,
             username,
@@ -137,6 +140,9 @@ export default function ProfileForm() {
             </Box>
             <Box>
                 <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
+            </Box>
+            <Box>
+                <InputTextField fieldName="location" label="Standort (Hennef, Bonn, ...)" value={location} setValue={setLocation}/>
             </Box>
             <Box>
                 <InputTextField fieldName="favoriteFood" label="Lieblingsessen(srichtung)"

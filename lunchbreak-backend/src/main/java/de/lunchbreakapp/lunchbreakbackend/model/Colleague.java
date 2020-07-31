@@ -21,6 +21,7 @@ public class Colleague {
     private String lastName;
     private String job;
     private String subsidiary;
+    private String location;
     private String favoriteFood;
     private String hobbies;
     private String phoneNumber;
