@@ -1,13 +1,9 @@
-import React, {useState} from "react";
-import Typography from "@material-ui/core/Typography";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
 import nerdLogo from "../../images/happytoast_nerd.png";
 import Box from "@material-ui/core/Box";
 import {AboutText, HowToSteps} from "./HowToTextSnippets";
+import HowToAccordion from "./HowToAccordion";
 
 const useStyles = makeStyles((theme) => ({
     howToBox: {
@@ -42,50 +38,15 @@ const useStyles = makeStyles((theme) => ({
 export default function HowToGuide() {
     const classes = useStyles();
 
-    const [expanded, setExpanded] = useState(false);
-
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    }
-
     return (
         <Box className={classes.howToBox}>
             <Box className={classes.logoBox}>
                 <img src={nerdLogo} alt="Lunchbreak logo for how to section" className={classes.logo}/>
             </Box>
             <Box>
-                <Accordion className={classes.accordion}
-                           expanded={expanded === 'panel1'}
-                           onChange={handleChange('panel1')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                        <Typography className={classes.accordionHeading}>Über LunchBreak</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <AboutText/>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion className={classes.accordion}
-                           expanded={expanded === 'panel2'}
-                           onChange={handleChange('panel2')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                        <Typography className={classes.accordionHeading}>Wie funktioniert die App?</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <HowToSteps/>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion className={classes.accordion}
-                           expanded={expanded === 'panel3'}
-                           onChange={handleChange('panel3')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                        <Typography className={classes.accordionHeading}>Impressum</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Blabla
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
+                <HowToAccordion panelNumber="1" headingText="Über LunchBreak" howToContent={<AboutText/>}/>
+                <HowToAccordion panelNumber="2" headingText="Wie funktioniert die App?" howToContent={<HowToSteps/>}/>
+                <HowToAccordion panelNumber="3" headingText="Impressum" howToContent="Blabla"/>
             </Box>
         </Box>
     )
