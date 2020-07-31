@@ -47,12 +47,13 @@ public class ProfileService {
         return colleagueMongoDb.findByUsername(username);
     }
 
-    public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String favoriteFood,
-                                     String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
+    public Colleague updateColleague(Colleague updatedColleague, String firstName, String lastName, String job, String subsidiary, String location,
+                                     String favoriteFood, String hobbies, String phoneNumber, Map<String, Boolean> lunchdays) {
         updatedColleague.setFirstName(firstName);
         updatedColleague.setLastName(lastName);
         updatedColleague.setJob(job);
         updatedColleague.setSubsidiary(subsidiary);
+        updatedColleague.setLocation(location);
         updatedColleague.setFavoriteFood(favoriteFood);
         updatedColleague.setHobbies(hobbies);
         updatedColleague.setPhoneNumber(phoneNumber);

@@ -40,7 +40,7 @@ class RegistrationControllerTest {
     @Test
     public void registerNewUserWithValidData() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "test@test.de", "Theo", "Tester", "", "", "", "", "", new HashMap<>(), false, "");
+        Colleague testColleague = new Colleague("123", "test@test.de", "Theo", "Tester", "", "", "", "", "", "", new HashMap<>(), false, "");
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/register";

@@ -5,7 +5,7 @@ import PopupLunchMatch from "../popups/PopupLunchMatch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import {FaBriefcase, FaThumbsUp, FaUtensils} from "react-icons/all";
+import {FaBriefcase, FaThumbsUp, FaUtensils, FaMapMarkerAlt} from "react-icons/all";
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 import ButtonYellowPacifico from "../buttons/ButtonYellowPacifico";
 import {getProfileStatusFetch} from "../../utils/ProfileFetchUtils";
@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     bigBox: {
+        display: "flex",
+        flexDirection: "column",
         paddingLeft: theme.spacing(3),
         paddingRight: theme.spacing(3),
         paddingBottom: theme.spacing(2),
@@ -61,7 +63,10 @@ const useStyles = makeStyles((theme) => ({
     nextTopicLarge: {
         paddingTop: theme.spacing(3)
     },
-    nextTopicSmall: {
+    infoBox: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
         paddingTop: theme.spacing(1)
     },
     icon: {
@@ -117,18 +122,12 @@ export default function DailyMatchCard() {
                       src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
                       alt="custom user avatar"/>}
             </Box>
-            <Box className={classes.bigBox}
-                 display="flex"
-                 flexDirection="column"
-            >
+            <Box className={classes.bigBox}>
                 <Box>
                     <Typography variant="h5">
                         {dailyMatch.firstName}
                     </Typography>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
+                    <Box className={classes.infoBox}>
                         <SvgIcon className={classes.icon} color="primary">
                             <FaBriefcase/>
                         </SvgIcon>
@@ -136,10 +135,15 @@ export default function DailyMatchCard() {
                             {dailyMatch.job} ({dailyMatch.subsidiary})
                         </Typography>
                     </Box>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
+                    <Box className={classes.infoBox}>
+                        <SvgIcon className={classes.icon} color="primary">
+                            <FaMapMarkerAlt/>
+                        </SvgIcon>
+                        <Typography variant="body1">
+                            {dailyMatch.location}
+                        </Typography>
+                    </Box>
+                    <Box className={classes.infoBox}>
                         <SvgIcon className={classes.icon} color="primary">
                             <FaUtensils/>
                         </SvgIcon>
@@ -147,10 +151,7 @@ export default function DailyMatchCard() {
                             {dailyMatch.favoriteFood}
                         </Typography>
                     </Box>
-                    <Box className={classes.nextTopicSmall}
-                         display="flex"
-                         flexDirection="row"
-                         alignItems="center">
+                    <Box className={classes.infoBox}>
                         <SvgIcon className={classes.icon} color="primary">
                             <FaThumbsUp/>
                         </SvgIcon>

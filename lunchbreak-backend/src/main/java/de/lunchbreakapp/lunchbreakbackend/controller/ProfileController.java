@@ -36,7 +36,7 @@ public class ProfileController {
         Optional<Colleague> optionalColleague = profileService.getColleagueByUsername(profileData.getUsername());
         if (optionalColleague.isPresent()) {
             profileService.updateColleague(optionalColleague.get(), profileData.getFirstName(), profileData.getLastName(), profileData.getJob(),
-                    profileData.getSubsidiary(), profileData.getFavoriteFood(), profileData.getHobbies(), profileData.getPhoneNumber(),
+                    profileData.getSubsidiary(), profileData.getLocation(), profileData.getFavoriteFood(), profileData.getHobbies(), profileData.getPhoneNumber(),
                     profileData.getLunchdays());
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + profileData.getUsername() + " does not exist.");
