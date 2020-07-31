@@ -7,6 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import nerdLogo from "../../images/happytoast_nerd.png";
 import Box from "@material-ui/core/Box";
+import {AboutText, HowToSteps} from "./HowToTextSnippets";
 
 const useStyles = makeStyles((theme) => ({
     howToBox: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     },
     accordion: {
         boxShadow: "none"
+    },
+    accordionHeading: {
+        fontSize: "20px"
     }
 }));
 
@@ -57,12 +61,10 @@ export default function HowToGuide() {
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel1bh-content"
                         id="panel1bh-header">
-                        <Typography>Über LunchBreak</Typography>
+                        <Typography className={classes.accordionHeading}>Über LunchBreak</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
-                            Blabla
-                        </Typography>
+                        <AboutText/>
                     </AccordionDetails>
                 </Accordion>
                 <Accordion className={classes.accordion}
@@ -72,12 +74,10 @@ export default function HowToGuide() {
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel2bh-content"
                         id="panel2bh-header">
-                        <Typography className={classes.heading}>Wie funktioniert die App?</Typography>
+                        <Typography className={classes.accordionHeading}>Wie funktioniert die App?</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
-                            Blabla
-                        </Typography>
+                        <HowToSteps/>
                     </AccordionDetails>
                 </Accordion>
                 <Accordion className={classes.accordion}
@@ -87,7 +87,7 @@ export default function HowToGuide() {
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel3bh-content"
                         id="panel3bh-header">
-                        <Typography className={classes.heading}>Impressum</Typography>
+                        <Typography className={classes.accordionHeading}>Impressum</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
