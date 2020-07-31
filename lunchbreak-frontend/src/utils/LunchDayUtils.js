@@ -1,5 +1,3 @@
-import React from "react";
-
 export function translateLunchday(englishLunchday) {
     switch (englishLunchday) {
         case "monday":
