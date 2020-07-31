@@ -26,12 +26,6 @@ const useStyles = makeStyles((theme) => ({
     logo: {
         width: "150px",
         height: "150px"
-    },
-    accordion: {
-        boxShadow: "none"
-    },
-    accordionHeading: {
-        fontSize: "20px"
     }
 }));
 

@@ -9,6 +9,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 const useStyles = makeStyles((theme) => ({
     accordion: {
         boxShadow: "none"
+    },
+    accordionHeading: {
+        fontSize: "20px"
     }
 }));
 
