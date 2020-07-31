@@ -34,6 +34,7 @@ public class ProfileService {
         newColleague.setLastName(lastName);
         newColleague.setJob("");
         newColleague.setSubsidiary("");
+        newColleague.setLocation("");
         newColleague.setFavoriteFood("");
         newColleague.setHobbies("");
         newColleague.setPhoneNumber("");
@@ -59,7 +60,7 @@ public class ProfileService {
         updatedColleague.setPhoneNumber(phoneNumber);
         lunchdayUtils.validateLunchdays(lunchdays);
         updatedColleague.setLunchdays(lunchdays);
-        if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank()
+        if (!firstName.isBlank() && !lastName.isBlank() && !job.isBlank() && !subsidiary.isBlank() && !location.isBlank()
                 && !favoriteFood.isBlank() && !hobbies.isBlank() && !phoneNumber.isBlank() && !lunchdays.isEmpty()) {
             updatedColleague.setProfileFilled(true);
         } else {
