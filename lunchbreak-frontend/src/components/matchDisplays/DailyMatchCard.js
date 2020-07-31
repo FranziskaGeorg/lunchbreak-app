@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
         },
         '@media (min-width: 506px)': {
             flexDirection: "row",
+            alignItems: "center"
         },
         width: "100%"
     },
@@ -29,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "400px",
         height: "100%",
         borderRadius: "10px",
-        paddingTop: theme.spacing(2)
+        paddingTop: theme.spacing(2),
+        '@media (min-width: 506px)': {
+            minHeight: "300px",
+            marginTop: theme.spacing(4)
+        },
     },
     bigBox: {
         paddingLeft: theme.spacing(3),
