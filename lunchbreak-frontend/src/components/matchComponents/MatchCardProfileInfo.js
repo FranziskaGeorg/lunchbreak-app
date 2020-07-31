@@ -5,8 +5,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
-        marginRight: theme.spacing(2),
-        fontSize: "22px"
+        marginRight: theme.spacing(1),
+        fontSize: "20px"
     }
 }));
 
@@ -18,7 +18,7 @@ export default function MatchCardProfileInfo({icon, profileInput}) {
             <SvgIcon className={classes.icon} color="primary">
                 {icon}
             </SvgIcon>
-            <Typography variant="body1">
+            <Typography variant="body2">
                 {profileInput}
             </Typography>
         </>

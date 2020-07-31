@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     },
     lunchdayText: {
         marginLeft: theme.spacing(0.5)
+    },
+    accordion: {
+        boxShadow: "0px 2px 5px 0px #CDE7E4"
     }
 }));
 

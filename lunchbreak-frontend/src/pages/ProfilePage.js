@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         backgroundColor: "#ffffff",
+        boxShadow: "0px 2px 5px 0px #CDE7E4",
         borderRadius: "10px",
         padding: theme.spacing(4)
     }
