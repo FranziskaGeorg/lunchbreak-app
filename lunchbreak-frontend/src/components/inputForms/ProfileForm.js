@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "300px",
         borderRadius: "50%",
         objectFit: "cover",
-        boxShadow: "0px 2px 5px 0px #575757"
+        boxShadow: "0px 2px 5px 0px #989898"
     }
 }));
 

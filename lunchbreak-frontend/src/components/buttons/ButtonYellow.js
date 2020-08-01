@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Arimo",
         fontWeight: "bold",
         textTransform: "none",
-        borderRadius: "30px"
+        borderRadius: "30px",
+        boxShadow: "0px 1px 3px 0px #9F9682"
     }
 }));
 
