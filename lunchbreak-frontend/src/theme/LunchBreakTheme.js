@@ -47,6 +47,10 @@ const LunchBreakTheme = createMuiTheme({
         body1: {
             fontFamily: "Quicksand",
             color: "#575757"
+        },
+        body2: {
+            fontFamily: "Quicksand",
+            color: "#575757"
         }
     }
 

@@ -52,9 +52,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "0px 2px 5px 0px #575757"
     },
     profilePictureLight: {
-        minWidth: "100%",
-        maxWidth: "250px",
-        maxHeight: "250px",
+        width: "250px",
+        height: "250px",
         borderRadius: "50%",
         objectFit: "cover",
         opacity: "0.2",
