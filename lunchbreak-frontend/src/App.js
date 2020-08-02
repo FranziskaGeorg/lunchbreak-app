@@ -47,7 +47,7 @@ function Navigation() {
         <Header/>
         <Box className={classes.overallContainer}>
             <Switch>
-                <Route path="/login" component={LoginPage} exact/>
+                <Route path="/login" component={LoginPage}/>
                 <Route path="/register" component={RegistrationPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>

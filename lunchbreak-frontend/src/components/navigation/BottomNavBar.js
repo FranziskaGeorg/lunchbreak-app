@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
         position: "sticky",
         top: 'auto',
         bottom: "0",
-        boxShadow: "none"
+        boxShadow: "none",
+        backgroundColor: "#ffffff"
     }
 }));
 
@@ -45,7 +46,7 @@ export default function BottomNavBar() {
         )
     }
     return (
-        <AppBar color="info" className={classes.appBar}>
+        <AppBar className={classes.appBar}>
             <Toolbar>
                 <Grid container justify="space-between">
                     <Grid item>

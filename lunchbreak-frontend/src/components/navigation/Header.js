@@ -12,8 +12,7 @@ const useStyles = makeStyles((theme) => ({
         position: "sticky",
         flexGrow: 1,
         boxShadow: "none",
-        opacity: "100%",
-        backgroundColor: "#009899"
+        opacity: "100%"
     },
     logo: {
         margin: theme.spacing(0.5),
@@ -52,7 +51,7 @@ export default function Header() {
         )
     }
     return (
-        <AppBar position="static" color="info" className={classes.appBar}>
+        <AppBar className={classes.appBar} color="primary">
             <Toolbar>
                 <HeaderTitle currentPath="/dailymatch" titleText="Lunchen mit..."/>
                 <HeaderTitle currentPath="/profile" titleText="Dein Profil"/>
