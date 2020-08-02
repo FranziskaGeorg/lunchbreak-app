@@ -2,11 +2,14 @@ package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.MatchData;
+import de.lunchbreakapp.lunchbreakbackend.service.MailService;
 import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
+import de.lunchbreakapp.lunchbreakbackend.service.ProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
@@ -17,10 +20,14 @@ public class MatchController {
 
     private final MatchService matchService;
     private final ProfileController profileController;
+    private final ProfileService profileService;
+    private final MailService mailService;
 
-    public MatchController(MatchService matchService, ProfileController profileController) {
+    public MatchController(MatchService matchService, ProfileController profileController, ProfileService profileService, MailService mailService) {
         this.matchService = matchService;
         this.profileController = profileController;
+        this.profileService = profileService;
+        this.mailService = mailService;
     }
 
     @GetMapping
@@ -44,10 +51,19 @@ public class MatchController {
     }
 
     @GetMapping("{matchedUsername}")
-    public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) {
+    public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) throws IOException {
         Colleague loggedColleague = profileController.getColleagueByUsername(principal);
         String loggedUsername = loggedColleague.getUsername();
-        return matchService.isMatchMutual(loggedUsername, matchedUsername);
+        Boolean isMatchMutual = matchService.isMatchMutual(loggedUsername, matchedUsername);
+
+        if (isMatchMutual) {
+            String firstNameOfLoggedUser = loggedColleague.getFirstName();
+            Colleague matchedColleague = profileService.getColleagueByUsername(matchedUsername).get();
+            String firstNameOfMatchedUser = matchedColleague.getFirstName();
+            mailService.sendMatchMail(firstNameOfMatchedUser, firstNameOfLoggedUser);
+        }
+
+        return isMatchMutual;
     }
 
 }
