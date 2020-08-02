@@ -123,7 +123,7 @@ export default function ProfileForm() {
             <Box className={classes.nextTopic}>
                 <PhotoUploadForm setProfilePicture={setProfilePicture}/>
             </Box>
-            <Divider className={classes.divider} variant="fulLWidth"/>
+            <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Über Dich

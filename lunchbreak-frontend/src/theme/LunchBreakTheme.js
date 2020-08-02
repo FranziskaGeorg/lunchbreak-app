@@ -13,10 +13,6 @@ const LunchBreakTheme = createMuiTheme({
         error:
             {
                 main: '#eef5f6' // light turquoise
-            },
-        info:
-            {
-                main: '#ffffff' // white
             }
     },
 
