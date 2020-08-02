@@ -3,7 +3,6 @@ package de.lunchbreakapp.lunchbreakbackend.service;
 import de.lunchbreakapp.lunchbreakbackend.db.MatchMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
-import de.lunchbreakapp.lunchbreakbackend.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,14 +19,12 @@ public class MatchService {
 
     private final MongoTemplate mongoTemplate;
     private final MatchMongoDb matchMongoDb;
-    private final DateUtils dateUtils;
     private final HistoryService historyService;
 
     @Autowired
-    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, DateUtils dateUtils, HistoryService historyService) {
+    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, HistoryService historyService) {
         this.mongoTemplate = mongoTemplate;
         this.matchMongoDb = matchMongoDb;
-        this.dateUtils = dateUtils;
         this.historyService = historyService;
     }
 

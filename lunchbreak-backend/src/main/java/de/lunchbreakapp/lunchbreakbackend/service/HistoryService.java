@@ -28,6 +28,7 @@ public class HistoryService {
     public List<LunchMatch> getLunchMatchesByUsername(String loggedUsername) {
         List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(loggedUsername);
         if (!lunchMatches.isEmpty()) {
+            lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
             return lunchMatches;
         } else {
             return Collections.emptyList();

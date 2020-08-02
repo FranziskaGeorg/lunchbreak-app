@@ -61,7 +61,6 @@ export default function HistoryAccordion() {
         async function getMutualMatches() {
             const data = await getLunchMatchesFetch();
             const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchInHistoryIsMutualFetch(lunchMatch.matchedUsername))
-            console.log(mutualMatches);
             setLunchMatches(mutualMatches);
         };
         getMutualMatches();
