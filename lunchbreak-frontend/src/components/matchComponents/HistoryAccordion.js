@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {checkIfMatchInHistoryIsMutualFetch, getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
 import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import {checkIfMatchIsMutualFetch} from "../../utils/MatchFetchUtils";
 import {sortLunchdays, translateLunchday} from "../../utils/LunchDayUtils";
 
 const useStyles = makeStyles((theme) => ({
