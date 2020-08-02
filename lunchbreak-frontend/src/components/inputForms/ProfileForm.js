@@ -11,6 +11,7 @@ import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
 import PhotoUploadForm from "./PhotoUploadForm";
 import Divider from "@material-ui/core/Divider";
+import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -72,6 +73,8 @@ export default function ProfileForm() {
     })
     const [profilePicture, setProfilePicture] = useState();
 
+    const [showSnackbar, setShowSnackbar] = useState(false);
+
     useEffect(() => {
         initProfileDataFetch()
             .then(data => {
@@ -107,7 +110,10 @@ export default function ProfileForm() {
             lunchdays
         }
         saveProfileDataFetch(profileInput)
-            .then(data => console.log(data));
+            .then(data => {
+                console.log(data);
+                setShowSnackbar(true)
+            })
     }
 
     return (
@@ -142,7 +148,8 @@ export default function ProfileForm() {
                 <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
             </Box>
             <Box>
-                <InputTextField fieldName="location" label="Standort (Hennef, Bonn, ...)" value={location} setValue={setLocation}/>
+                <InputTextField fieldName="location" label="Standort (Hennef, Bonn, ...)" value={location}
+                                setValue={setLocation}/>
             </Box>
             <Box>
                 <InputTextField fieldName="favoriteFood" label="Lieblingsessen(srichtung)"
@@ -183,6 +190,7 @@ export default function ProfileForm() {
                               buttonSize="large"
                               buttonText="Speichern"/>
             </Box>
+            <SnackbarSaveSuccess showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
         </Box>
     )
 }
