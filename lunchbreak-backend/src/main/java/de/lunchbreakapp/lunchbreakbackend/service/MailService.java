@@ -18,9 +18,9 @@ public class MailService {
         String mailContent = "Hallo " + firstNameOfMatchedUser + "!\n\n" + firstNameOfLoggedUser + " möchte ebenfalls mit Dir lunchen gehen.\n\n" +
                 "Schaue in Dein Matchverzeichnis auf LunchBreak, um die Kontaktdaten und Lunchdays Deines Matches anzusehen.\n\n" +
                 "Viel Spaß beim Lunchen!";
-        Email from = new Email("test@example.com");
+        Email from = new Email("match@lunchbreak.de");
         String subject = "Neues Lunch-Match!";
-        Email to = new Email("franzi.georg@web.de");
+        Email to = new Email(System.getenv("TEST_MAIL"));
         Content content = new Content("text/plain", mailContent);
         Mail mail = new Mail(from, subject, to, content);
 
