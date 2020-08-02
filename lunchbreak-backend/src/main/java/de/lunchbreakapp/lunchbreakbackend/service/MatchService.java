@@ -3,13 +3,13 @@ package de.lunchbreakapp.lunchbreakbackend.service;
 import de.lunchbreakapp.lunchbreakbackend.db.MatchMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
-import de.lunchbreakapp.lunchbreakbackend.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -19,14 +19,12 @@ public class MatchService {
 
     private final MongoTemplate mongoTemplate;
     private final MatchMongoDb matchMongoDb;
-    private final DateUtils dateUtils;
     private final HistoryService historyService;
 
     @Autowired
-    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, DateUtils dateUtils, HistoryService historyService) {
+    public MatchService(MongoTemplate mongoTemplate, MatchMongoDb matchMongoDb, HistoryService historyService) {
         this.mongoTemplate = mongoTemplate;
         this.matchMongoDb = matchMongoDb;
-        this.dateUtils = dateUtils;
         this.historyService = historyService;
     }
 
@@ -64,7 +62,7 @@ public class MatchService {
         LunchMatch newLunchMatch = new LunchMatch();
         newLunchMatch.setLoggedUsername(loggedUsername);
         newLunchMatch.setMatchedUsername(matchedUsername);
-        newLunchMatch.setMatchDate(dateUtils.formatCurrentDate());
+        newLunchMatch.setMatchDate(LocalDate.now());
         return matchMongoDb.save(newLunchMatch);
     }
 

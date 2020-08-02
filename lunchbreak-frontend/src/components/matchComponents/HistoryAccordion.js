@@ -9,6 +9,7 @@ import {checkIfMatchInHistoryIsMutualFetch, getLunchMatchesFetch} from "../../ut
 import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import {sortLunchdays, translateLunchday} from "../../utils/LunchDayUtils";
+import getFormattedDate from "../../utils/DateFormatUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,7 +61,6 @@ export default function HistoryAccordion() {
         async function getMutualMatches() {
             const data = await getLunchMatchesFetch();
             const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchInHistoryIsMutualFetch(lunchMatch.matchedUsername))
-            console.log(mutualMatches);
             setLunchMatches(mutualMatches);
         };
         getMutualMatches();
@@ -82,7 +82,7 @@ export default function HistoryAccordion() {
                            expanded={expanded === 'panel' + index}
                            onChange={handleChange('panel' + index)}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                        <Typography className={classes.heading}>{lunchMatch.matchDate}</Typography>
+                        <Typography className={classes.heading}>{getFormattedDate(lunchMatch.matchDate)}</Typography>
                         {lunchMatch.profilePicUrl ?
                             <img className={classes.miniPicture}
                                  src={lunchMatch.profilePicUrl}

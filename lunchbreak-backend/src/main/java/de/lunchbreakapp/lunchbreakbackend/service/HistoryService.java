@@ -6,10 +6,9 @@ import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.HistoryData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -41,7 +40,7 @@ public class HistoryService {
         for (int i = 0; i < lunchMatches.size(); i++) {
             HistoryData lunchMatchDetails = new HistoryData();
             String matchedUsername = lunchMatches.get(i).getMatchedUsername();
-            String matchDate = lunchMatches.get(i).getMatchDate();
+            LocalDate matchDate = lunchMatches.get(i).getMatchDate();
             Colleague matchedColleague = colleagueMongoDb.findByUsername(matchedUsername).get();
             lunchMatchDetails.setMatchedUsername(matchedUsername);
             lunchMatchDetails.setFirstName(matchedColleague.getFirstName());
