@@ -5,10 +5,9 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
+import {checkIfMatchInHistoryIsMutualFetch, getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
 import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import {checkIfMatchIsMutualFetch} from "../../utils/MatchFetchUtils";
 import {sortLunchdays, translateLunchday} from "../../utils/LunchDayUtils";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +59,7 @@ export default function HistoryAccordion() {
     useEffect(() => {
         async function getMutualMatches() {
             const data = await getLunchMatchesFetch();
-            const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchIsMutualFetch(lunchMatch.matchedUsername))
+            const mutualMatches = await filter(data, async lunchMatch => await checkIfMatchInHistoryIsMutualFetch(lunchMatch.matchedUsername))
             console.log(mutualMatches);
             setLunchMatches(mutualMatches);
         };
