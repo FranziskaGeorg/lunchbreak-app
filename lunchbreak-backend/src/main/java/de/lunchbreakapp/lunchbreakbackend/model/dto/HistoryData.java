@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,7 +13,7 @@ import java.util.List;
 public class HistoryData {
 
     private String matchedUsername;
-    private String matchDate;
+    private LocalDate matchDate;
     private String firstName;
     private String lastName;
     private String phoneNumber;

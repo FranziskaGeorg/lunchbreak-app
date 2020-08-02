@@ -4,13 +4,11 @@ import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.HistoryData;
 import de.lunchbreakapp.lunchbreakbackend.service.HistoryService;
 import de.lunchbreakapp.lunchbreakbackend.service.MatchService;
-import de.lunchbreakapp.lunchbreakbackend.service.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
