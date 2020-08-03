@@ -2,6 +2,7 @@ package de.lunchbreakapp.lunchbreakbackend.service;
 
 import com.sendgrid.Method;
 import com.sendgrid.Request;
+import com.sendgrid.Response;
 import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
@@ -40,7 +41,8 @@ public class MailService {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            sg.api(request);
+            Response response = sg.api(request);
+            log.info(response.getBody());
             log.info("E-mail notification successfully delivered.");
         } catch (IOException ex) {
             throw new IllegalStateException("E-mail notification could not be delivered.");
