@@ -30,7 +30,7 @@ public class MatchController {
 
     @GetMapping
     public Colleague getMatchingColleague(Principal principal) {
-        String loggedUsername = principal.toString();
+        String loggedUsername = principal.getName();
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
         Optional<Colleague> optionalColleague = matchService.getMatchingColleague(loggedUsername, lunchdays);
@@ -42,14 +42,14 @@ public class MatchController {
 
     @PostMapping
     public void saveLunchMatch(Principal principal, @RequestBody MatchData data) {
-        String loggedUsername = principal.toString();
+        String loggedUsername = principal.getName();
         String matchedUsername = data.getMatchedUsername();
         matchService.saveNewLunchMatchToDb(loggedUsername, matchedUsername);
     }
 
     @GetMapping("{matchedUsername}")
     public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) throws IOException {
-        String loggedUsername = principal.toString();
+        String loggedUsername = principal.getName();
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Boolean isMatchMutual = matchService.isMatchMutual(loggedUsername, matchedUsername);
 
