@@ -33,8 +33,7 @@ export default function SnackbarFillProfile({showSnackbar}) {
         <Snackbar
             className={classes.snackbar}
             anchorOrigin={{vertical: "top", horizontal: "center"}}
-            open={showSnackbar}
-        >
+            open={showSnackbar}>
             <Link className={classes.link} href={"/profile"}>
                 <SnackbarContent
                     className={classes.snackbarContent}

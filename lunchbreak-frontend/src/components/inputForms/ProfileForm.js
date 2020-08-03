@@ -12,6 +12,9 @@ import Box from "@material-ui/core/Box";
 import PhotoUploadForm from "./PhotoUploadForm";
 import Divider from "@material-ui/core/Divider";
 import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
+import ButtonGrey from "../buttons/ButtonGrey";
+import {FaUserAltSlash} from "react-icons/all";
+import ButtonTurquoise from "../buttons/ButtonTurquoise";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -47,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "50%",
         objectFit: "cover",
         boxShadow: "0px 2px 5px 0px #989898"
-    }
+    },
+    nextTopicAndCenterItem: {
+        paddingTop: theme.spacing(3),
+        textAlign: "center"
+    },
 }));
 
 export default function ProfileForm() {
@@ -189,6 +196,9 @@ export default function ProfileForm() {
                 <ButtonYellow handleClick={handleSave}
                               buttonSize="large"
                               buttonText="Speichern"/>
+            </Box>
+            <Box className={classes.nextTopicAndCenterItem}>
+            <ButtonGrey handleClick={handleSave} buttonSize="small" buttonText="Nutzerprofil löschen" icon={<FaUserAltSlash/>}/>
             </Box>
             <SnackbarSaveSuccess showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
         </Box>
