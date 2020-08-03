@@ -2,7 +2,7 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import nerdLogo from "../../images/happytoast_nerd.png";
 import Box from "@material-ui/core/Box";
-import {AboutText, HowToSteps} from "./HowToTextSnippets";
+import {AboutText, HowToSteps, Imprint} from "./HowToTextSnippets";
 import HowToAccordion from "./HowToAccordion";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +40,7 @@ export default function HowToGuide() {
             <Box>
                 <HowToAccordion panelNumber="1" headingText="Über LunchBreak" howToContent={<AboutText/>}/>
                 <HowToAccordion panelNumber="2" headingText="Wie funktioniert die App?" howToContent={<HowToSteps/>}/>
-                <HowToAccordion panelNumber="3" headingText="Impressum" howToContent="Blabla"/>
+                <HowToAccordion panelNumber="3" headingText="Impressum" howToContent={<Imprint/>}/>
             </Box>
         </Box>
     )
