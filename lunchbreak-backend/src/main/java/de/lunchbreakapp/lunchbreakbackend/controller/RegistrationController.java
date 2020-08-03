@@ -3,6 +3,7 @@ package de.lunchbreakapp.lunchbreakbackend.controller;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.RegistrationData;
 import de.lunchbreakapp.lunchbreakbackend.service.ProfileService;
+import de.lunchbreakapp.lunchbreakbackend.service.RegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @RequestMapping("auth/register")
 public class RegistrationController {
 
+    private final RegistrationService registrationService;
     private final ProfileService profileService;
 
-    public RegistrationController(ProfileService profileService) {
+    public RegistrationController(RegistrationService registrationService, ProfileService profileService) {
+        this.registrationService = registrationService;
         this.profileService = profileService;
     }
 
@@ -25,7 +28,7 @@ public class RegistrationController {
         String usernameInput = data.getUsername();
         Optional<Colleague> optionalColleague = profileService.getColleagueByUsername(usernameInput);
         if (optionalColleague.isEmpty()) {
-            Colleague newColleague = profileService.saveNewColleagueToDb(data.getUsername(), data.getFirstName(), data.getLastName());
+            Colleague newColleague = registrationService.saveNewColleagueToDb(data.getUsername(), data.getPassword(), data.getFirstName(), data.getLastName());
             return newColleague;
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with e-mail address " + usernameInput + " does already exsist in database");

@@ -15,8 +15,8 @@ import java.util.Map;
 public class Colleague {
 
     @Id
-    private String id;
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String job;
