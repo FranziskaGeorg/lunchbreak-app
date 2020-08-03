@@ -25,10 +25,19 @@ public class HistoryService {
         this.profileService = profileService;
     }
 
-    public List<LunchMatch> getLunchMatchesByUsername(String loggedUsername) {
+    public List<LunchMatch> getLunchMatchesByLoggedUsername(String loggedUsername) {
         List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(loggedUsername);
         if (!lunchMatches.isEmpty()) {
             lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
+            return lunchMatches;
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<LunchMatch> getLunchMatchesByMatchedUsername(String matchedUsername) {
+        List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(matchedUsername);
+        if (!lunchMatches.isEmpty()) {
             return lunchMatches;
         } else {
             return Collections.emptyList();
@@ -55,7 +64,7 @@ public class HistoryService {
     }
 
     public List<HistoryData> getDetailsForLunchMatches(String loggedUsername) {
-        List<LunchMatch> lunchMatches = getLunchMatchesByUsername(loggedUsername);
+        List<LunchMatch> lunchMatches = getLunchMatchesByLoggedUsername(loggedUsername);
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         return getLunchMatchDetails(lunchMatches, loggedColleague);
     }

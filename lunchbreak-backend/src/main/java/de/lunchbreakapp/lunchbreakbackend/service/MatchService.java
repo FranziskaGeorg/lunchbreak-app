@@ -67,7 +67,7 @@ public class MatchService {
     }
 
     public Boolean isMatchMutual(String loggedUsername, String matchedUsername) {
-        List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByUsername(matchedUsername);
+        List<LunchMatch> lunchMatchesOfMatchedUser = historyService.getLunchMatchesByLoggedUsername(matchedUsername);
         for (LunchMatch match : lunchMatchesOfMatchedUser) {
             if (match.getMatchedUsername().equals(loggedUsername)) {
                 return true;

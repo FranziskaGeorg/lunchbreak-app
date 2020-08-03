@@ -43,6 +43,14 @@ public class ProfileController {
         }
     }
 
+    @DeleteMapping
+    public void deleteColleageWithMatches(Principal principal) {
+        String loggedUsername = principal.getName();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
+        profileService.deleteMatchesByUsername(loggedUsername);
+        profileService.deleteColleague(loggedColleague);
+    }
+
     @GetMapping("status")
     public Boolean getProfileStatus(Principal principal) {
         Colleague loggedColleague = getColleagueByUsername(principal);
