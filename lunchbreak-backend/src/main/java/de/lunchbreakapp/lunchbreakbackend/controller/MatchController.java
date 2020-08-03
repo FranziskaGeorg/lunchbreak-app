@@ -19,13 +19,11 @@ import java.util.Optional;
 public class MatchController {
 
     private final MatchService matchService;
-    private final ProfileController profileController;
     private final ProfileService profileService;
     private final MailService mailService;
 
-    public MatchController(MatchService matchService, ProfileController profileController, ProfileService profileService, MailService mailService) {
+    public MatchController(MatchService matchService, ProfileService profileService, MailService mailService) {
         this.matchService = matchService;
-        this.profileController = profileController;
         this.profileService = profileService;
         this.mailService = mailService;
     }
@@ -44,16 +42,15 @@ public class MatchController {
 
     @PostMapping
     public void saveLunchMatch(Principal principal, @RequestBody MatchData data) {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.toString();
         String matchedUsername = data.getMatchedUsername();
         matchService.saveNewLunchMatchToDb(loggedUsername, matchedUsername);
     }
 
     @GetMapping("{matchedUsername}")
     public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) throws IOException {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.toString();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Boolean isMatchMutual = matchService.isMatchMutual(loggedUsername, matchedUsername);
 
         if (isMatchMutual) {
