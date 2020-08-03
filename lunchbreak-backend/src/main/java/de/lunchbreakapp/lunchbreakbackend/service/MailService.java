@@ -7,6 +7,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,17 +15,25 @@ import java.io.IOException;
 @Service
 public class MailService {
 
-    public void sendMatchMail(String firstNameOfMatchedUser, String firstNameOfLoggedUser) throws IOException {
+    private final String sendGridPlaceholder;
+    private final String mailPlaceholder;
+
+    public MailService(@Value("${sendgrid.apikey}") String sendGridPlaceholder, @Value("${test.mail}") String mailPlaceholder) {
+        this.sendGridPlaceholder = sendGridPlaceholder;
+        this.mailPlaceholder = mailPlaceholder;
+    }
+
+    public void sendMatchMail(String firstNameOfMatchedUser, String firstNameOfLoggedUser) {
         String mailContent = "Hallo " + firstNameOfMatchedUser + "!\n\n" + firstNameOfLoggedUser + " möchte ebenfalls mit Dir lunchen gehen.\n\n" +
                 "Schaue in Dein Matchverzeichnis auf LunchBreak, um die Kontaktdaten und Lunchdays Deines Matches anzusehen.\n\n" +
                 "Viel Spaß beim Lunchen!";
         Email from = new Email("match@lunchbreak.de");
         String subject = "Neues Lunch-Match!";
-        Email to = new Email(System.getenv("TEST_MAIL"));
+        Email to = new Email(mailPlaceholder);
         Content content = new Content("text/plain", mailContent);
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid(System.getenv("SENDGRID_APIKEY"));
+        SendGrid sg = new SendGrid(sendGridPlaceholder);
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
@@ -35,7 +44,7 @@ public class MailService {
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
         } catch (IOException ex) {
-            throw ex;
+            throw new IllegalStateException("E-mail notification could not be delivered.");
         }
     }
 
