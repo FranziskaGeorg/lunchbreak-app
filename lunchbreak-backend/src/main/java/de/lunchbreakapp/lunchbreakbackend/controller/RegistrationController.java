@@ -28,8 +28,7 @@ public class RegistrationController {
         String usernameInput = data.getUsername();
         Optional<Colleague> optionalColleague = profileService.getColleagueByUsername(usernameInput);
         if (optionalColleague.isEmpty()) {
-            Colleague newColleague = registrationService.saveNewColleagueToDb(data.getUsername(), data.getPassword(), data.getFirstName(), data.getLastName());
-            return newColleague;
+            return registrationService.saveNewColleagueToDb(data.getUsername(), data.getPassword(), data.getFirstName(), data.getLastName());
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with e-mail address " + usernameInput + " does already exsist in database");
         }
