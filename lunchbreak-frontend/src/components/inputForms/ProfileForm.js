@@ -15,6 +15,7 @@ import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
 import ButtonGrey from "../buttons/ButtonGrey";
 import {FaUserAltSlash} from "react-icons/all";
 import ButtonTurquoise from "../buttons/ButtonTurquoise";
+import PopupDeleteProfile from "../popups/PopupDeleteProfile";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -81,6 +82,7 @@ export default function ProfileForm() {
     const [profilePicture, setProfilePicture] = useState();
 
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         initProfileDataFetch()
@@ -121,6 +123,10 @@ export default function ProfileForm() {
                 console.log(data);
                 setShowSnackbar(true)
             })
+    }
+
+    function handleDeleteProfile() {
+        setShowPopup(true);
     }
 
     return (
@@ -198,9 +204,10 @@ export default function ProfileForm() {
                               buttonText="Speichern"/>
             </Box>
             <Box className={classes.nextTopicAndCenterItem}>
-            <ButtonGrey handleClick={handleSave} buttonSize="small" buttonText="Nutzerprofil löschen" icon={<FaUserAltSlash/>}/>
+            <ButtonGrey handleClick={handleDeleteProfile} buttonSize="small" buttonText="Nutzerprofil löschen" icon={<FaUserAltSlash/>}/>
             </Box>
             <SnackbarSaveSuccess showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
+            <PopupDeleteProfile showPopup={showPopup} setShowPopup={setShowPopup}/>
         </Box>
     )
 }
