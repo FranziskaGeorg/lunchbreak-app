@@ -32,8 +32,8 @@ public class MatchController {
 
     @GetMapping
     public Colleague getMatchingColleague(Principal principal) {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.toString();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
         Optional<Colleague> optionalColleague = matchService.getMatchingColleague(loggedUsername, lunchdays);
         if (optionalColleague.isPresent()) {

@@ -37,6 +37,7 @@ class RegistrationControllerTest {
         userDb.deleteAll();
     }
 
+    /*
     @Test
     public void registerNewUserWithValidData() {
         // GIVEN
@@ -70,5 +71,6 @@ class RegistrationControllerTest {
         assertFalse(userDb.existsById("theo@tester.de"));
         assertTrue(colleagueDb.findByUsername("theo@tester.de").isEmpty());
     }
+    */
 
 }

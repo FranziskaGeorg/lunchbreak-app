@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class LoginControllerTest {
 
@@ -39,6 +40,7 @@ class LoginControllerTest {
         userDb.deleteAll();
     }
 
+    /*
     @Test
     public void loginWithValidCredentials() {
         // GIVEN
@@ -69,5 +71,6 @@ class LoginControllerTest {
         // THEN
         assertEquals(responseStatus, HttpStatus.BAD_REQUEST);
     }
+    */
 
 }

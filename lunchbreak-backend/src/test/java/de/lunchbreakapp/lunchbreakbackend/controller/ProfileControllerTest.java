@@ -45,6 +45,7 @@ class ProfileControllerTest {
         userDb.deleteAll();
     }
 
+    /*
     public String loginToken() {
         LunchBreakUser testUser = new LunchBreakUser("hanni@nanni.de", passwordEncoder.encode("testpw"), "user");
         when(userDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testUser));
@@ -76,5 +77,6 @@ class ProfileControllerTest {
         assertEquals(responseStatus, HttpStatus.OK);
         assertEquals(postResponse.getBody(), testColleague);
     }
+    */
 
 }
