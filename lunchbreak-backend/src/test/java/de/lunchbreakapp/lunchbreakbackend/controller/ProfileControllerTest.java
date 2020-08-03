@@ -1,9 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.LoginData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
