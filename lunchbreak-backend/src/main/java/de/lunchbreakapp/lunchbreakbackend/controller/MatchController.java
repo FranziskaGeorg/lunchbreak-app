@@ -19,21 +19,19 @@ import java.util.Optional;
 public class MatchController {
 
     private final MatchService matchService;
-    private final ProfileController profileController;
     private final ProfileService profileService;
     private final MailService mailService;
 
-    public MatchController(MatchService matchService, ProfileController profileController, ProfileService profileService, MailService mailService) {
+    public MatchController(MatchService matchService, ProfileService profileService, MailService mailService) {
         this.matchService = matchService;
-        this.profileController = profileController;
         this.profileService = profileService;
         this.mailService = mailService;
     }
 
     @GetMapping
     public Colleague getMatchingColleague(Principal principal) {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.getName();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Map<String, Boolean> lunchdays = loggedColleague.getLunchdays();
         Optional<Colleague> optionalColleague = matchService.getMatchingColleague(loggedUsername, lunchdays);
         if (optionalColleague.isPresent()) {
@@ -44,16 +42,15 @@ public class MatchController {
 
     @PostMapping
     public void saveLunchMatch(Principal principal, @RequestBody MatchData data) {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.getName();
         String matchedUsername = data.getMatchedUsername();
         matchService.saveNewLunchMatchToDb(loggedUsername, matchedUsername);
     }
 
     @GetMapping("{matchedUsername}")
     public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) throws IOException {
-        Colleague loggedColleague = profileController.getColleagueByUsername(principal);
-        String loggedUsername = loggedColleague.getUsername();
+        String loggedUsername = principal.getName();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Boolean isMatchMutual = matchService.isMatchMutual(loggedUsername, matchedUsername);
 
         if (isMatchMutual) {

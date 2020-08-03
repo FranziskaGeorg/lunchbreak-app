@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.security;
 
-import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
+import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
+import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,22 +16,22 @@ import java.util.Optional;
 @Service
 public class MongoDbUserDetailsService implements UserDetailsService {
 
-    private final UserMongoDb userMongoDb;
+    private final ColleagueMongoDb colleagueMongoDb;
 
     @Autowired
-    public MongoDbUserDetailsService(UserMongoDb userMongoDb) {
-        this.userMongoDb = userMongoDb;
+    public MongoDbUserDetailsService(ColleagueMongoDb colleagueMongoDb) {
+        this.colleagueMongoDb = colleagueMongoDb;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<LunchBreakUser> optionalUser = userMongoDb.findById(username);
-        if (optionalUser.isEmpty()){
+        Optional<Colleague> optionalColleague = colleagueMongoDb.findById(username);
+        if (optionalColleague.isEmpty()){
             throw new UsernameNotFoundException("user with username: \""+username+"\" not found");
         }
 
-        LunchBreakUser user = optionalUser.get();
+        Colleague colleague = optionalColleague.get();
 
-        return new User(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority("admin")));
+        return new User(colleague.getUsername(), colleague.getPassword(), List.of(new SimpleGrantedAuthority("admin")));
     }
 }

@@ -1,7 +1,6 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.RegistrationData;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,20 +26,18 @@ class RegistrationControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private UserMongoDb userDb;
-
-    @Autowired
     private ColleagueMongoDb colleagueDb;
 
     @BeforeEach
     public void resetDb() {
-        userDb.deleteAll();
+        colleagueDb.deleteAll();
     }
+
 
     @Test
     public void registerNewUserWithValidData() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "test@test.de", "Theo", "Tester", "", "", "", "", "", "", new HashMap<>(), false, "");
+        Colleague testColleague = new Colleague("test@test.de", "Testpw123", "Theo", "Tester", "", "", "", "", "", "", new HashMap<>(), false, "");
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/register";
@@ -49,10 +46,8 @@ class RegistrationControllerTest {
 
         // THEN
         assertEquals(responseStatus, HttpStatus.OK);
-        assertTrue(userDb.existsById("test@test.de"));
         assertEquals(postResponse.getBody(), colleagueDb.findByUsername("test@test.de").get());
-
-        postResponse.getBody().setId("123");
+        postResponse.getBody().setPassword("Testpw123");
         assertEquals(postResponse.getBody(), testColleague);
     }
 
@@ -67,8 +62,8 @@ class RegistrationControllerTest {
 
         // THEN
         assertEquals(responseStatus, HttpStatus.BAD_REQUEST); // since password is too short
-        assertFalse(userDb.existsById("theo@tester.de"));
         assertTrue(colleagueDb.findByUsername("theo@tester.de").isEmpty());
     }
+
 
 }

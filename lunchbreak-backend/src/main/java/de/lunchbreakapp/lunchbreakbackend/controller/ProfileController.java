@@ -46,8 +46,7 @@ public class ProfileController {
     @GetMapping("status")
     public Boolean getProfileStatus(Principal principal) {
         Colleague loggedColleague = getColleagueByUsername(principal);
-        Boolean profileFilled = loggedColleague.getProfileFilled();
-        return profileFilled;
+        return loggedColleague.getProfileFilled();
     }
 
     @PostMapping("picture")
@@ -61,8 +60,7 @@ public class ProfileController {
     @GetMapping("picture")
     public String getProfilePictureUrl(Principal principal) {
         Colleague loggedColleague = getColleagueByUsername(principal);
-        String profilePicUrl = loggedColleague.getProfilePicUrl();
-        return profilePicUrl;
+        return loggedColleague.getProfilePicUrl();
     }
 
     @DeleteMapping("picture")

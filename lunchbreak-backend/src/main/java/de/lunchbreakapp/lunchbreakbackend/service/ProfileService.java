@@ -27,23 +27,6 @@ public class ProfileService {
         this.cloudinaryUrl = cloudinaryUrl;
     }
 
-    public Colleague saveNewColleagueToDb(String username, String firstName, String lastName) {
-        Colleague newColleague = new Colleague();
-        newColleague.setUsername(username);
-        newColleague.setFirstName(firstName);
-        newColleague.setLastName(lastName);
-        newColleague.setJob("");
-        newColleague.setSubsidiary("");
-        newColleague.setLocation("");
-        newColleague.setFavoriteFood("");
-        newColleague.setHobbies("");
-        newColleague.setPhoneNumber("");
-        newColleague.setLunchdays(new HashMap<>());
-        newColleague.setProfileFilled(false);
-        newColleague.setProfilePicUrl("");
-        return colleagueMongoDb.save(newColleague);
-    }
-
     public Optional<Colleague> getColleagueByUsername(String username) {
         return colleagueMongoDb.findByUsername(username);
     }

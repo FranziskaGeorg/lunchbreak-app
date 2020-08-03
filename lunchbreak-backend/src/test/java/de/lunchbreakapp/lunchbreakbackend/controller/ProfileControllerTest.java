@@ -1,9 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.LoginData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,27 +31,21 @@ class ProfileControllerTest {
     @MockBean
     private ColleagueMongoDb colleagueDb;
 
-    @MockBean
-    private UserMongoDb userDb;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void resetDatabase() {
         colleagueDb.deleteAll();
-        userDb.deleteAll();
     }
 
     public String loginToken() {
-        LunchBreakUser testUser = new LunchBreakUser("hanni@nanni.de", passwordEncoder.encode("testpw"), "user");
-        when(userDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testUser));
-
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", "", new HashMap<>(), false, "");
+        Colleague testColleague = new Colleague("hanni@nanni.de", passwordEncoder.encode("Testpw123"), "Hanni", "Nanni", "", "", "", "", "", "", new HashMap<>(), false, "");
+        when(colleagueDb.findById("hanni@nanni.de")).thenReturn(Optional.of(testColleague));
         when(colleagueDb.findByUsername("hanni@nanni.de")).thenReturn(Optional.of(testColleague));
 
         String url = "http://localhost:" + port + "/auth/login";
-        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("hanni@nanni.de", "testpw"), String.class);
+        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("hanni@nanni.de", "Testpw123"), String.class);
         return postResponse.getBody();
     }
 
@@ -61,7 +53,7 @@ class ProfileControllerTest {
     // getColleagueByUsername
     public void shouldReturnColleagueMatchingUsernameFromToken() {
         // GIVEN
-        Colleague testColleague = new Colleague("123", "hanni@nanni.de", "Hanni", "Nanni", "", "", "", "", "", "", new HashMap<>(), false, "");
+        Colleague testColleague = new Colleague("hanni@nanni.de", "Testpw123", "Hanni", "Nanni", "", "", "", "", "", "", new HashMap<>(), false, "");
         String userToken = loginToken();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setBearerAuth(userToken);
@@ -74,6 +66,7 @@ class ProfileControllerTest {
 
         // THEN
         assertEquals(responseStatus, HttpStatus.OK);
+        postResponse.getBody().setPassword("Testpw123");
         assertEquals(postResponse.getBody(), testColleague);
     }
 
