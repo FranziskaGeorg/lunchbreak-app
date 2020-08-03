@@ -48,7 +48,7 @@ public class MatchController {
     }
 
     @GetMapping("{matchedUsername}")
-    public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) throws IOException {
+    public Boolean checkIfMatchIsMutual(Principal principal, @PathVariable String matchedUsername) {
         String loggedUsername = principal.getName();
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         Boolean isMatchMutual = matchService.isMatchMutual(loggedUsername, matchedUsername);
