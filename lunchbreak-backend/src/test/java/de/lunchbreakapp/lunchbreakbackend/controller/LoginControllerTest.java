@@ -1,7 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
-import de.lunchbreakapp.lunchbreakbackend.db.UserMongoDb;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchBreakUser;
+import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
+import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.model.dto.LoginData;
 import de.lunchbreakapp.lunchbreakbackend.security.JWTUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +13,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,26 +32,26 @@ class LoginControllerTest {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserMongoDb userDb;
+    private ColleagueMongoDb colleagueDb;
 
     @Autowired
     private JWTUtils jwtUtils;
 
     @BeforeEach
     public void resetDb() {
-        userDb.deleteAll();
+        colleagueDb.deleteAll();
     }
 
-    /*
+
     @Test
     public void loginWithValidCredentials() {
         // GIVEN
-        LunchBreakUser testUser = new LunchBreakUser("test@test.de", passwordEncoder.encode("testpw"), "user");
-        userDb.save(testUser);
+        Colleague testColleague = new Colleague("test@test.de", passwordEncoder.encode("Testpw123"), "Theo", "Tester", "", "", "", "", "", "", new HashMap<>(), false, "");
+        colleagueDb.save(testColleague);
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/login";
-        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("test@test.de", "testpw"), String.class);
+        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("test@test.de", "Testpw123"), String.class);
         HttpStatus responseStatus = postResponse.getStatusCode();
 
         // THEN
@@ -60,17 +62,16 @@ class LoginControllerTest {
     @Test
     public void loginWithInvalidCredentials() {
         // GIVEN
-        LunchBreakUser testUser = new LunchBreakUser("test@test.de", passwordEncoder.encode("testpw"), "user");
-        userDb.save(testUser);
+        Colleague testColleague = new Colleague("test@test.de", passwordEncoder.encode("Testpw123"), "Theo", "Tester", "", "", "", "", "", "", new HashMap<>(), false, "");
+        colleagueDb.save(testColleague);
 
         // WHEN
         String url = "http://localhost:" + port + "/auth/login";
-        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("test@testing.de", "testpw"), String.class);
+        ResponseEntity<String> postResponse = restTemplate.postForEntity(url, new LoginData("test@testing.de", "Testpw123"), String.class);
         HttpStatus responseStatus = postResponse.getStatusCode();
 
         // THEN
         assertEquals(responseStatus, HttpStatus.BAD_REQUEST);
     }
-    */
 
 }
