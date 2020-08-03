@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import Typography from "@material-ui/core/Typography";
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
@@ -13,6 +13,7 @@ import {Redirect} from "react-router-dom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 import startLogo from '../../images/happytoast_startlogo.png';
+import SnackbarLoginFailed from "../popups/SnackbarLoginFailed";
 
 const useStyles = makeStyles((theme) => ({
     buttonNonContained: {
@@ -53,6 +54,8 @@ export default function LoginForm() {
 
     const dispatch = useContext(UserDispatchContext);
 
+    const [showSnackbar, setShowSnackbar] = useState(false);
+
     function login(username, password) {
         dispatch({type: LOGIN});
         performLogin(username, password)
@@ -63,6 +66,7 @@ export default function LoginForm() {
             })
             .catch(() => {
                 dispatch({type: LOGIN_FAILED});
+                setShowSnackbar(true);
             });
     }
 
@@ -126,6 +130,7 @@ export default function LoginForm() {
                     )
                 }}
             </Formik>
+            <SnackbarLoginFailed showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
         </Box>
     )
 }
