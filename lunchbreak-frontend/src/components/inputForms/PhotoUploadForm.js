@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import ButtonTurquoiseNoAction from "../buttons/ButtonTurquoiseNoAction";
 import {
     deleteProfilePictureFetch,
     getProfilePictureFetch,
@@ -12,6 +11,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {FaFolder, FaFileUpload, FaTrash} from "react-icons/all";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
+import Button from "@material-ui/core/Button";
+import {TooltipYellow} from "../tooltips/TooltipYellow";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -37,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
         height: "250px",
         borderRadius: "50%",
         objectFit: "cover"
+    },
+    fileSelectionButton: {
+        fontFamily: "Arimo",
+        fontWeight: "bold",
+        textTransform: "none"
     }
 }));
 
@@ -111,12 +117,18 @@ export default function PhotoUploadForm({setProfilePicture}) {
                     id="upload-photo"
                     name="upload-photo"
                     type="file"
+                    accept="image/png, image/jpeg"
                     onChange={handleFileSelection}
                     onClick={event => event.target.value = null}/>
                 <Box className={classes.nextTopic}>
-                    <ButtonTurquoiseNoAction buttonSize="small"
-                                             buttonText="Bild auswählen"
-                                             icon={<FaFolder/>}/>
+                    <TooltipYellow title="Zulässige Dateiformate: .png, .jpg, .jpeg" placement="bottom-start">
+                        <Button className={classes.fileSelectionButton}
+                                color="primary"
+                                size="small"
+                                startIcon={<FaFolder/>}>
+                            Bild auswählen
+                        </Button>
+                    </TooltipYellow>
                 </Box>
                 {selectedFile && <PopupPicturePreview/>}
                 <Box className={classes.nextTopic}>
