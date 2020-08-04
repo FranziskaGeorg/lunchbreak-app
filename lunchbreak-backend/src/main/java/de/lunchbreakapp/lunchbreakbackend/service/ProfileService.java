@@ -6,7 +6,6 @@ import com.cloudinary.utils.ObjectUtils;
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.db.MatchMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
-import de.lunchbreakapp.lunchbreakbackend.model.LunchMatch;
 import de.lunchbreakapp.lunchbreakbackend.utils.LunchdayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ProfileService {
@@ -23,16 +20,12 @@ public class ProfileService {
     private final ColleagueMongoDb colleagueMongoDb;
     private final LunchdayUtils lunchdayUtils;
     private final String cloudinaryUrl;
-    private final HistoryService historyService;
-    private final MatchMongoDb matchMongoDb;
 
     @Autowired
-    public ProfileService(ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils, @Value("${cloudinary.url}") String cloudinaryUrl, HistoryService historyService, MatchMongoDb matchMongoDb) {
+    public ProfileService(ColleagueMongoDb colleagueMongoDb, LunchdayUtils lunchdayUtils, @Value("${cloudinary.url}") String cloudinaryUrl) {
         this.colleagueMongoDb = colleagueMongoDb;
         this.lunchdayUtils = lunchdayUtils;
         this.cloudinaryUrl = cloudinaryUrl;
-        this.historyService = historyService;
-        this.matchMongoDb = matchMongoDb;
     }
 
     public Optional<Colleague> getColleagueByUsername(String username) {
@@ -81,15 +74,6 @@ public class ProfileService {
 
     public void deleteColleague(Colleague loggedColleague) {
         colleagueMongoDb.delete(loggedColleague);
-    }
-
-    public void deleteMatchesByUsername(String loggedUsername) {
-        List<LunchMatch> lunchMatchesByLoggedUsername = historyService.getLunchMatchesByLoggedUsername(loggedUsername);
-        List<LunchMatch> lunchMatchesByMatchedUsername = historyService.getLunchMatchesByMatchedUsername(loggedUsername);
-        List<LunchMatch> allLunchMatchesByUser = Stream.of(lunchMatchesByLoggedUsername, lunchMatchesByMatchedUsername)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-        matchMongoDb.deleteAll(allLunchMatchesByUser);
     }
 
 }

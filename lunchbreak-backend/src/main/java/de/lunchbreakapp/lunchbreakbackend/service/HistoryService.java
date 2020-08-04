@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class HistoryService {
@@ -36,7 +38,7 @@ public class HistoryService {
     }
 
     public List<LunchMatch> getLunchMatchesByMatchedUsername(String matchedUsername) {
-        List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(matchedUsername);
+        List<LunchMatch> lunchMatches = matchMongoDb.findAllByMatchedUsername(matchedUsername);
         if (!lunchMatches.isEmpty()) {
             return lunchMatches;
         } else {
@@ -92,6 +94,18 @@ public class HistoryService {
             return commonLunchdays;
         } else {
             return Collections.emptyList();
+        }
+    }
+
+    public void deleteMatchesByUsername(String loggedUsername) {
+        List<LunchMatch> lunchMatchesByLoggedUsername = getLunchMatchesByLoggedUsername(loggedUsername);
+        List<LunchMatch> lunchMatchesByMatchedUsername = getLunchMatchesByMatchedUsername(loggedUsername);
+        List<LunchMatch> allLunchMatchesByUser = Stream.of(lunchMatchesByLoggedUsername, lunchMatchesByMatchedUsername)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        for (int i = 0; i < allLunchMatchesByUser.size(); i++) {
+            System.out.println(allLunchMatchesByUser.get(i));
+            matchMongoDb.delete(allLunchMatchesByUser.get(i));
         }
     }
 
