@@ -103,9 +103,10 @@ public class HistoryService {
         List<LunchMatch> allLunchMatchesByUser = Stream.of(lunchMatchesByLoggedUsername, lunchMatchesByMatchedUsername)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        for (int i = 0; i < allLunchMatchesByUser.size(); i++) {
-            System.out.println(allLunchMatchesByUser.get(i));
-            matchMongoDb.delete(allLunchMatchesByUser.get(i));
+        if (!allLunchMatchesByUser.isEmpty()) {
+            for (LunchMatch lunchMatch : allLunchMatchesByUser) {
+                matchMongoDb.delete(lunchMatch);
+            }
         }
     }
 

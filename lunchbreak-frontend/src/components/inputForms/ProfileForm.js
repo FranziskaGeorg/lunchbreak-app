@@ -14,7 +14,6 @@ import Divider from "@material-ui/core/Divider";
 import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
 import ButtonGrey from "../buttons/ButtonGrey";
 import {FaUserAltSlash} from "react-icons/all";
-import ButtonTurquoise from "../buttons/ButtonTurquoise";
 import PopupDeleteProfile from "../popups/PopupDeleteProfile";
 
 const useStyles = makeStyles((theme) => ({

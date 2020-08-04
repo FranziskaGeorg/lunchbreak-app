@@ -7,6 +7,7 @@ import {UserDispatchContext} from "./context/user/UserContext";
 import {getDecodedJWTToken, isJWTTokenValid} from "./utils/JWTUtils";
 import DailyMatch from "./pages/DailyMatch";
 import ProfilePage from "./pages/ProfilePage";
+import LogoutPage from "./pages/LogoutPage";
 import Header from "./components/navigation/Header";
 import LunchBreakTheme from "./theme/LunchBreakTheme";
 import {ThemeProvider} from '@material-ui/styles';
@@ -20,7 +21,6 @@ import HowToPage from "./pages/HowToPage";
 const useStyles = makeStyles((theme) => ({
     overallContainer: {
         background: "linear-gradient(180deg, rgba(241,246,247,1) 0%, rgba(238,245,246,1) 20%, rgba(192,227,220,0.6) 100%)",
-            // "linear-gradient(0deg, rgba(238,245,246,1) 0%, rgba(149,208,197,1) 90%, rgba(0,159,149,1) 100%)",
         height: "100vh",
         display: "flex",
         flexDirection: "row",
@@ -51,8 +51,9 @@ function Navigation() {
                 <Route path="/register" component={RegistrationPage} exact/>
                 <PrivateRoute path="/dailymatch" component={DailyMatch} exact/>
                 <PrivateRoute path="/profile" component={ProfilePage} exact/>
-                <PrivateRoute path="/history"component={LunchHistory} exact/>
+                <PrivateRoute path="/history" component={LunchHistory} exact/>
                 <PrivateRoute path="/howto" component={HowToPage} exact/>
+                <Route path="/logout" component={LogoutPage} exact/>
             </Switch>
         </Box>
         <BottomNavBar/>
