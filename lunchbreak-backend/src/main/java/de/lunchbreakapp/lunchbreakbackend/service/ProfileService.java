@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import de.lunchbreakapp.lunchbreakbackend.db.ColleagueMongoDb;
+import de.lunchbreakapp.lunchbreakbackend.db.MatchMongoDb;
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
 import de.lunchbreakapp.lunchbreakbackend.utils.LunchdayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,10 @@ public class ProfileService {
     public Colleague deleteProfilePic(Colleague loggedColleague) {
         loggedColleague.setProfilePicUrl("");
         return colleagueMongoDb.save(loggedColleague);
+    }
+
+    public void deleteColleague(Colleague loggedColleague) {
+        colleagueMongoDb.delete(loggedColleague);
     }
 
 }

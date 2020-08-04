@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class HistoryService {
@@ -25,10 +27,19 @@ public class HistoryService {
         this.profileService = profileService;
     }
 
-    public List<LunchMatch> getLunchMatchesByUsername(String loggedUsername) {
+    public List<LunchMatch> getLunchMatchesByLoggedUsername(String loggedUsername) {
         List<LunchMatch> lunchMatches = matchMongoDb.findAllByLoggedUsername(loggedUsername);
         if (!lunchMatches.isEmpty()) {
             lunchMatches.sort(Comparator.comparing(LunchMatch::getMatchDate).reversed());
+            return lunchMatches;
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<LunchMatch> getLunchMatchesByMatchedUsername(String matchedUsername) {
+        List<LunchMatch> lunchMatches = matchMongoDb.findAllByMatchedUsername(matchedUsername);
+        if (!lunchMatches.isEmpty()) {
             return lunchMatches;
         } else {
             return Collections.emptyList();
@@ -55,7 +66,7 @@ public class HistoryService {
     }
 
     public List<HistoryData> getDetailsForLunchMatches(String loggedUsername) {
-        List<LunchMatch> lunchMatches = getLunchMatchesByUsername(loggedUsername);
+        List<LunchMatch> lunchMatches = getLunchMatchesByLoggedUsername(loggedUsername);
         Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
         return getLunchMatchDetails(lunchMatches, loggedColleague);
     }
@@ -83,6 +94,19 @@ public class HistoryService {
             return commonLunchdays;
         } else {
             return Collections.emptyList();
+        }
+    }
+
+    public void deleteMatchesByUsername(String loggedUsername) {
+        List<LunchMatch> lunchMatchesByLoggedUsername = getLunchMatchesByLoggedUsername(loggedUsername);
+        List<LunchMatch> lunchMatchesByMatchedUsername = getLunchMatchesByMatchedUsername(loggedUsername);
+        List<LunchMatch> allLunchMatchesByUser = Stream.of(lunchMatchesByLoggedUsername, lunchMatchesByMatchedUsername)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        if (!allLunchMatchesByUser.isEmpty()) {
+            for (LunchMatch lunchMatch : allLunchMatchesByUser) {
+                matchMongoDb.delete(lunchMatch);
+            }
         }
     }
 

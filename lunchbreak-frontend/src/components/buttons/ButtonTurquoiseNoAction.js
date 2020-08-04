@@ -19,8 +19,7 @@ export default function ButtonTurquoiseNoAction({buttonText, buttonSize, icon}) 
             className={classes.buttonNonContained}
             size={buttonSize}
             component="span"
-            startIcon={icon}
-        >
+            startIcon={icon}>
             {buttonText}
         </Button>
     )

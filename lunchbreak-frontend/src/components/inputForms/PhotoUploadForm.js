@@ -114,15 +114,15 @@ export default function PhotoUploadForm({setProfilePicture}) {
                     onChange={handleFileSelection}
                 />
                 <Box className={classes.nextTopic}>
-                    <ButtonTurquoiseNoAction buttonSize="medium"
-                                             buttonText="Profilbild auswählen"
+                    <ButtonTurquoiseNoAction buttonSize="small"
+                                             buttonText="Bild auswählen"
                                              icon={<FaFolder/>}/>
                 </Box>
                 {selectedFile && <PopupPicturePreview/>}
                 <Box className={classes.nextTopic}>
                     <ButtonTurquoise handleClick={handleFileDeletion}
-                                     buttonSize="medium"
-                                     buttonText="Profilbild löschen"
+                                     buttonSize="small"
+                                     buttonText="Bild löschen"
                                      icon={<FaTrash/>}/>
                 </Box>
             </label>

@@ -12,6 +12,9 @@ import Box from "@material-ui/core/Box";
 import PhotoUploadForm from "./PhotoUploadForm";
 import Divider from "@material-ui/core/Divider";
 import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
+import ButtonGrey from "../buttons/ButtonGrey";
+import {FaUserAltSlash} from "react-icons/all";
+import PopupDeleteProfile from "../popups/PopupDeleteProfile";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -47,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "50%",
         objectFit: "cover",
         boxShadow: "0px 2px 5px 0px #989898"
-    }
+    },
+    nextTopicAndCenterItem: {
+        paddingTop: theme.spacing(3),
+        textAlign: "center"
+    },
 }));
 
 export default function ProfileForm() {
@@ -74,6 +81,7 @@ export default function ProfileForm() {
     const [profilePicture, setProfilePicture] = useState();
 
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         initProfileDataFetch()
@@ -114,6 +122,10 @@ export default function ProfileForm() {
                 console.log(data);
                 setShowSnackbar(true)
             })
+    }
+
+    function handleDeleteProfile() {
+        setShowPopup(true);
     }
 
     return (
@@ -190,7 +202,11 @@ export default function ProfileForm() {
                               buttonSize="large"
                               buttonText="Speichern"/>
             </Box>
+            <Box className={classes.nextTopicAndCenterItem}>
+            <ButtonGrey handleClick={handleDeleteProfile} buttonSize="small" buttonText="Nutzerprofil löschen" icon={<FaUserAltSlash/>}/>
+            </Box>
             <SnackbarSaveSuccess showSnackbar={showSnackbar} setShowSnackbar={setShowSnackbar}/>
+            <PopupDeleteProfile showPopup={showPopup} setShowPopup={setShowPopup}/>
         </Box>
     )
 }

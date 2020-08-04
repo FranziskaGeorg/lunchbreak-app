@@ -8,5 +8,6 @@ import java.util.List;
 public interface MatchMongoDb extends PagingAndSortingRepository<LunchMatch, String> {
 
     public List<LunchMatch> findAllByLoggedUsername(String loggedUsername);
+    public List<LunchMatch> findAllByMatchedUsername(String matchedUsername);
 
 }

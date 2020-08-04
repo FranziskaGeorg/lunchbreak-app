@@ -1,6 +1,7 @@
 package de.lunchbreakapp.lunchbreakbackend.controller;
 
 import de.lunchbreakapp.lunchbreakbackend.model.Colleague;
+import de.lunchbreakapp.lunchbreakbackend.service.HistoryService;
 import de.lunchbreakapp.lunchbreakbackend.service.ProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final HistoryService historyService;
 
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, HistoryService historyService) {
         this.profileService = profileService;
+        this.historyService = historyService;
     }
 
     @GetMapping
@@ -41,6 +44,14 @@ public class ProfileController {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Colleague with e-mail address " + profileData.getUsername() + " does not exist.");
         }
+    }
+
+    @DeleteMapping
+    public void deleteColleageWithMatches(Principal principal) {
+        String loggedUsername = principal.getName();
+        Colleague loggedColleague = profileService.getColleagueByUsername(loggedUsername).get();
+        historyService.deleteMatchesByUsername(loggedUsername);
+        profileService.deleteColleague(loggedColleague);
     }
 
     @GetMapping("status")
