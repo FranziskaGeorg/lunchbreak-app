@@ -112,7 +112,7 @@ export default function PhotoUploadForm({setProfilePicture}) {
                     name="upload-photo"
                     type="file"
                     onChange={handleFileSelection}
-                />
+                    onClick={event => event.target.value = null}/>
                 <Box className={classes.nextTopic}>
                     <ButtonTurquoiseNoAction buttonSize="small"
                                              buttonText="Bild auswählen"

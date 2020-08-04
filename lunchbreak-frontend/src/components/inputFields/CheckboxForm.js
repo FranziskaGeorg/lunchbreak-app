@@ -17,7 +17,6 @@ export default function CheckboxForm({lunchdays, setLunchdays}) {
 
     function handleLunchdayChange(event) {
         setLunchdays({...lunchdays, [event.target.name]: event.target.checked});
-        console.log(lunchdays);
     }
 
     function LunchdayCheckbox({checked, fieldName, label}) {
