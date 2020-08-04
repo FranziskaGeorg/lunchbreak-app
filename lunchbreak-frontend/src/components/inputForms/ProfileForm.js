@@ -9,12 +9,12 @@ import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
 import Box from "@material-ui/core/Box";
-import PhotoUploadForm from "./PhotoUploadForm";
 import Divider from "@material-ui/core/Divider";
 import SnackbarSaveSuccess from "../popups/SnackbarSaveSuccess";
 import ButtonGrey from "../buttons/ButtonGrey";
 import {FaUserAltSlash} from "react-icons/all";
 import PopupDeleteProfile from "../popups/PopupDeleteProfile";
+import ProfilePicForm from "./ProfilePicForm";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -139,7 +139,7 @@ export default function ProfileForm() {
                 </Typography>
             </Box>
             <Box className={classes.nextTopic}>
-                <PhotoUploadForm setProfilePicture={setProfilePicture}/>
+                <ProfilePicForm setProfilePicture={setProfilePicture}/>
             </Box>
             <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
