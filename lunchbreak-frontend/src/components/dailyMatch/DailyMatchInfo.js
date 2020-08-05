@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function MatchCardProfileInfo({icon, profileInput}) {
+export default function DailyMatchInfo({icon, profileInput}) {
     const classes = useStyles();
 
     return (

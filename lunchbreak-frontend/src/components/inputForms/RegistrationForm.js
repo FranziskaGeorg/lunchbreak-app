@@ -96,8 +96,7 @@ export default function RegistrationForm() {
                         matchingPassword: Yup.string()
                             .required("Pflichtfeld")
                             .oneOf([Yup.ref("password"), null], "Passwörter stimmen nicht überein")
-                    })}
-            >
+                    })}>
                 {props => {
                     return <RegistrationFormFields formikProps={props}/>
                 }}

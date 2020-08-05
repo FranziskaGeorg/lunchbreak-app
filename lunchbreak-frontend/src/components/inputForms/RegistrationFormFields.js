@@ -52,12 +52,10 @@ export default function RegistrationFormFields({formikProps}) {
             <Box className={classes.buttonBox}>
                 <ButtonYellow handleClick={() => history.push("/login")}
                               buttonSize="medium"
-                              buttonText="Abbrechen"
-                />
+                              buttonText="Abbrechen"/>
                 <ButtonYellow handleClick={formikProps.handleSubmit}
                               buttonSize="medium"
-                              buttonText="Account erstellen"
-                />
+                              buttonText="Account erstellen"/>
             </Box>
         </Form>
     )
