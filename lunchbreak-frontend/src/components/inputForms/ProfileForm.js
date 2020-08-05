@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import InputTextField from "../inputFields/InputTextField";
-import DropdownField from "../inputFields/DropdownField";
 import Typography from "@material-ui/core/Typography";
 import {initProfileDataFetch, saveProfileDataFetch} from "../../utils/ProfileFetchUtils";
-import InputTextFieldDisabled from "../inputFields/InputTextFieldDisabled";
 import ButtonYellow from "../buttons/ButtonYellow";
 import {useHistory} from "react-router";
 import CheckboxForm from "../inputFields/CheckboxForm";
@@ -15,6 +12,8 @@ import ButtonGrey from "../buttons/ButtonGrey";
 import {FaUserAltSlash} from "react-icons/all";
 import PopupDeleteProfile from "../popups/PopupDeleteProfile";
 import ProfilePicForm from "./ProfilePicForm";
+import ProfileFormAboutFields from "./ProfileFormAboutFields";
+import ProfileFormContactFields from "./ProfileFormContactFields";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -147,44 +146,18 @@ export default function ProfileForm() {
                     Über Dich
                 </Typography>
             </Box>
-            <Box className={classes.nextTopic}>
-                <InputTextField fieldName="firstName" label="Vorname" value={firstName} setValue={setFirstName}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="lastName" label="Nachname" value={lastName} setValue={setLastName}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="job" label="Tätigkeit bei CONET" value={job} setValue={setJob}/>
-            </Box>
-            <Box>
-                <DropdownField subsidiary={subsidiary} setSubsidiary={setSubsidiary}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="location" label="Standort (Hennef, Bonn, ...)" value={location}
-                                setValue={setLocation}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="favoriteFood" label="Lieblingsessen(srichtung)"
-                                value={favoriteFood} setValue={setFavoriteFood}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="hobbies" label="Hobbies oder Interessen" value={hobbies}
-                                setValue={setHobbies}/>
-            </Box>
+            <ProfileFormAboutFields firstName={firstName} setFirstName={setFirstName} lastName={lastName} setLastName={setLastName}
+                                    job={job} setJob={setJob} subsidiary={subsidiary} setSubsidiary={setSubsidiary}
+                                    location={location} setLocation={setLocation} favoriteFood={favoriteFood}
+                                    setFavoriteFood={setFavoriteFood} hobbies={hobbies} setHobbies={setHobbies}/>
             <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">
                     Kontaktdaten
                 </Typography>
             </Box>
-            <Box className={classes.nextTopic}>
-                <InputTextFieldDisabled fieldName="username" label="E-Mail-Adresse" value={username}
-                                        setValue={setUsername}/>
-            </Box>
-            <Box>
-                <InputTextField fieldName="phoneNumber" label="Handynummer" value={phoneNumber}
-                                setValue={setPhoneNumber}/>
-            </Box>
+            <ProfileFormContactFields username={username} setUsername={setUsername}
+                                      phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber}/>
             <Divider className={classes.divider} variant="fullWidth"/>
             <Box className={classes.nextTopic}>
                 <Typography variant="h5">

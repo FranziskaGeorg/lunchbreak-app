@@ -62,6 +62,5 @@ export default function PopupRegistrationSuccess({openStatus}) {
                 </Box>
             </Box>
         </Dialog>
-
     )
 }
