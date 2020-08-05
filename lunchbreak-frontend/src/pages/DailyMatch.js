@@ -1,5 +1,5 @@
 import React from "react";
-import DailyMatchCard from "../components/matchComponents/DailyMatchCard";
+import DailyMatchCard from "../components/dailyMatch/DailyMatchCard";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 

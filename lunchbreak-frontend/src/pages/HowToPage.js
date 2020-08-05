@@ -1,5 +1,5 @@
 import React from "react";
-import HowToGuide from "../components/howToComponents/HowToGuide";
+import HowToGuide from "../components/howTo/HowToGuide";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
 

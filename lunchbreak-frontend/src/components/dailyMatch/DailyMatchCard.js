@@ -8,7 +8,8 @@ import {FaBriefcase, FaThumbsUp, FaUtensils, FaMapMarkerAlt} from "react-icons/a
 import SnackbarFillProfile from "../popups/SnackbarFillProfile";
 import ButtonYellowPacifico from "../buttons/ButtonYellowPacifico";
 import {getProfileStatusFetch} from "../../utils/ProfileFetchUtils";
-import MatchCardProfileInfo from "./MatchCardProfileInfo";
+import DailyMatchInfo from "./DailyMatchInfo";
+import DailyMatchPhoto from "./DailyMatchPhoto";
 
 const useStyles = makeStyles((theme) => ({
     cardBox: {
@@ -22,20 +23,6 @@ const useStyles = makeStyles((theme) => ({
         },
         width: "100%"
     },
-    pictureBox: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        width: "100%",
-        maxWidth: "400px",
-        height: "100%",
-        borderRadius: "10px",
-        paddingTop: theme.spacing(2),
-        '@media (min-width: 506px)': {
-            minHeight: "300px",
-            marginTop: theme.spacing(4)
-        },
-    },
     bigBox: {
         display: "flex",
         flexDirection: "column",
@@ -43,21 +30,6 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(3),
         paddingBottom: theme.spacing(2),
         paddingTop: theme.spacing(1)
-    },
-    profilePicture: {
-        width: "250px",
-        height: "250px",
-        borderRadius: "50%",
-        objectFit: "cover",
-        boxShadow: "0px 2px 5px 0px #989898"
-    },
-    profilePictureLight: {
-        width: "250px",
-        height: "250px",
-        borderRadius: "50%",
-        objectFit: "cover",
-        opacity: "0.2",
-        filter: "grayscale(100%)"
     },
     buttonBox: {
         display: "flex",
@@ -70,10 +42,6 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
         alignItems: "center",
         paddingTop: theme.spacing(1)
-    },
-    icon: {
-        marginRight: theme.spacing(2),
-        fontSize: "22px"
     }
 }));
 
@@ -106,40 +74,23 @@ export default function DailyMatchCard() {
 
     return (
         <Box className={classes.cardBox}>
-            <Box className={classes.pictureBox}>
-                {dailyMatch.profilePicUrl && profileFilled &&
-                <img className={classes.profilePicture}
-                     src={dailyMatch.profilePicUrl}
-                     alt="custom user avatar"/>}
-                {dailyMatch.profilePicUrl && !profileFilled &&
-                <img className={classes.profilePictureLight}
-                     src={dailyMatch.profilePicUrl}
-                     alt="custom user avatar"/>}
-                {!dailyMatch.profilePicUrl && profileFilled &&
-                <img className={classes.profilePicture}
-                     src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
-                     alt="custom user avatar"/>}
-                {!dailyMatch.profilePicUrl && !profileFilled &&
-                < img className={classes.profilePictureLight}
-                      src="https://res.cloudinary.com/hql1hvgt9/image/upload/v1595940220/happytoast_profilepicture_rhovob.png"
-                      alt="custom user avatar"/>}
-            </Box>
+            <DailyMatchPhoto dailyMatch={dailyMatch} profileFilled={profileFilled}/>
             <Box className={classes.bigBox}>
                 <Box>
                     <Typography variant="h5">
                         {dailyMatch.firstName}
                     </Typography>
                     <Box className={classes.infoBox}>
-                        <MatchCardProfileInfo icon={<FaBriefcase/>} profileInput={dailyMatch.job + " (" + dailyMatch.subsidiary +")"}/>
+                        <DailyMatchInfo icon={<FaBriefcase/>} profileInput={dailyMatch.job + " (" + dailyMatch.subsidiary +")"}/>
                     </Box>
                     <Box className={classes.infoBox}>
-                        <MatchCardProfileInfo icon={<FaMapMarkerAlt/>} profileInput={dailyMatch.location}/>
+                        <DailyMatchInfo icon={<FaMapMarkerAlt/>} profileInput={dailyMatch.location}/>
                     </Box>
                     <Box className={classes.infoBox}>
-                        <MatchCardProfileInfo icon={<FaUtensils/>} profileInput={dailyMatch.favoriteFood}/>
+                        <DailyMatchInfo icon={<FaUtensils/>} profileInput={dailyMatch.favoriteFood}/>
                     </Box>
                     <Box className={classes.infoBox}>
-                        <MatchCardProfileInfo icon={<FaThumbsUp/>} profileInput={dailyMatch.hobbies}/>
+                        <DailyMatchInfo icon={<FaThumbsUp/>} profileInput={dailyMatch.hobbies}/>
                     </Box>
                 </Box>
                 <Box className={classes.buttonBox}>

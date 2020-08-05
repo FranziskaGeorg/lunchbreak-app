@@ -4,15 +4,15 @@ const LunchBreakTheme = createMuiTheme({
     palette: {
         primary:
             {
-                main: '#009899' // turquoise
+                main: "#009899" // turquoise
             },
         secondary:
             {
-                main: '#dfa528' // sandy yellow
+                main: "#dfa528" // sandy yellow
             },
         error:
             {
-                main: '#eef5f6' // light turquoise
+                main: "#eef5f6" // light turquoise
             }
     },
 
@@ -23,7 +23,7 @@ const LunchBreakTheme = createMuiTheme({
             textShadow: "none"
         },
         h4: {
-            fontFamily: 'Pacifico'
+            fontFamily: "Pacifico"
         },
         h5: {
             fontFamily: "Quicksand",

@@ -1,7 +1,7 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Box from "@material-ui/core/Box";
-import HistoryAccordion from "../components/matchComponents/HistoryAccordion";
+import HistoryAccordion from "../components/matchHistory/HistoryAccordion";
 
 const useStyles = makeStyles((theme) => ({
     overallBox: {
