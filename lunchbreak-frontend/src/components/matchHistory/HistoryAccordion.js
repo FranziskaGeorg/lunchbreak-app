@@ -6,10 +6,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {checkIfMatchInHistoryIsMutualFetch, getLunchMatchesFetch} from "../../utils/HistoryFetchUtils";
-import {FaEnvelope, FaPhone, FaCalendarCheck} from "react-icons/all";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import {sortLunchdays, translateLunchday} from "../../utils/LunchDayUtils";
 import getFormattedDate from "../../utils/DateFormatUtils";
+import HistoryDetails from "./HistoryDetails";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,27 +22,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: theme.typography.pxToRem(15),
         color: theme.palette.text.secondary,
     },
-    link: {
-        color: "#009899",
-        textDecoration: "none",
-        '&:hover': {
-            color: "#dfa528"
-        }
-    },
     miniPicture: {
         width: "50px",
         height: "50px",
         borderRadius: "50%",
         marginRight: theme.spacing(2)
-    },
-    icon: {
-        marginRight: theme.spacing(1),
-        fontSize: "20px",
-        position: "relative",
-        top: "5px"
-    },
-    lunchdayText: {
-        marginLeft: theme.spacing(0.5)
     },
     accordion: {
         boxShadow: "0px 2px 5px 0px #CDE7E4"
@@ -96,29 +78,7 @@ export default function HistoryAccordion() {
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
-                            <SvgIcon className={classes.icon} color="primary">
-                                <FaEnvelope/>
-                            </SvgIcon>
-                            <a className={classes.link} href={`mailto:${lunchMatch.matchedUsername}`}>
-                                {lunchMatch.matchedUsername}</a>
-                            <br/><br/>
-                            <SvgIcon className={classes.icon} color="primary">
-                                <FaPhone/>
-                            </SvgIcon>
-                            <a className={classes.link} href={`tel:${lunchMatch.phoneNumber}`}>
-                                {lunchMatch.phoneNumber}</a>
-                            <br/><br/>
-                            <SvgIcon className={classes.icon} color="primary">
-                                <FaCalendarCheck/>
-                            </SvgIcon>
-                            Gemeinsame Lunchdays:
-                            <ul>
-                                {lunchMatch.commonLunchdays.sort(sortLunchdays).map(commonLunchday =>
-                                    <li className={classes.lunchdayText}>{translateLunchday(commonLunchday)}</li>
-                                )}
-                            </ul>
-                        </Typography>
+                        <HistoryDetails lunchMatch={lunchMatch}/>
                     </AccordionDetails>
                 </Accordion>)}
         </div>
