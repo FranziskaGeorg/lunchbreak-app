@@ -11,6 +11,8 @@ import {
     uploadProfilePictureFetch
 } from "../../utils/ProfileFetchUtils";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {TooltipYellow} from "../tooltips/TooltipYellow";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     nextTopic: {
@@ -118,24 +120,31 @@ export default function ProfilePicForm({setProfilePicture}) {
         <Box className={classes.uploadBox}>
             <input
                 style={{display: 'none'}}
-                id="photo"
+                id="upload-photo"
                 type="file"
+                accept="image/png, image/jpeg"
                 ref={inputFile}
                 onChange={handleFileSelection}
                 onClick={event => event.target.value = null}/>
-            <label htmlFor="photo">
+            <label htmlFor="upload-photo">
                 <Box className={classes.nextTopic}>
-                    <ButtonTurquoise handleClick={showFileBrowser}
-                                     buttonSize="small"
-                                     buttonText="Bild auswählen"
-                                     icon={<FaFolder/>}/>
+                    <TooltipYellow title="Zulässige Dateiformate: .png, .jpg, .jpeg" placement="bottom-start">
+                        <Button color="primary"
+                                onClick={showFileBrowser}
+                                buttonSize="small"
+                                startIcon={<FaFolder/>}>
+                            Bild auswählen
+                        </Button>
+                    </TooltipYellow>
                 </Box>
                 {selectedFile && <PopupPicturePreview/>}
                 <Box className={classes.nextTopic}>
-                    <ButtonTurquoise handleClick={handleFileDeletion}
-                                     buttonSize="small"
-                                     buttonText="Bild löschen"
-                                     icon={<FaTrash/>}/>
+                    <Button color="primary"
+                            onClick={handleFileDeletion}
+                            buttonSize="small"
+                            startIcon={<FaTrash/>}>
+                        Bild löschen
+                    </Button>
                 </Box>
             </label>
         </Box>
