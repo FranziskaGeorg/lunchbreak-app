@@ -11,6 +11,7 @@ export default function LogoutButton() {
     function logout() {
         dispatch({type: LOGOUT});
         removeJWTToken();
+        window.location.href = "/logout";
     }
 
     return (
