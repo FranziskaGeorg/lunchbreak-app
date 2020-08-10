@@ -8,10 +8,9 @@ import {removeJWTToken} from "../../utils/JWTUtils";
 export default function LogoutButton() {
     const dispatch = useContext(UserDispatchContext);
 
-    function logout() {
+    async function logout() {
         dispatch({type: LOGOUT});
         removeJWTToken();
-        window.location.href = "/logout";
     }
 
     return (
