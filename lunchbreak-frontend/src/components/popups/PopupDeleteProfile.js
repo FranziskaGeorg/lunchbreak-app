@@ -41,7 +41,6 @@ export default function PopupDeleteProfile({showPopup, setShowPopup}) {
     function logout() {
         dispatch({type: LOGOUT});
         removeJWTToken();
-        window.location.href = "/logout";
     }
 
     function handleProfileDeletion() {

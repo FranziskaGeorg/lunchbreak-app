@@ -26,7 +26,7 @@ function reducer(state, action) {
         case LOGIN_FAILED:
             return { ...state, authStatus: 'FAILED' };
         case LOGOUT:
-            return { };
+            return { ...state, authStatus: 'LOGOUT' };
         case REGISTRATION:
             return { ...state, registrationStatus: 'PENDING' };
         case REGISTRATION_SUCCESS:

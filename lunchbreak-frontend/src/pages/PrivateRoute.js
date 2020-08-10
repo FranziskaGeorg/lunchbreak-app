@@ -27,6 +27,9 @@ export default function PrivateRoute({component: Component, ...rest}) {
                 if (authStatus === 'FAILED' || !authStatus) {
                     return <Redirect to={'/login'}/>;
                 }
+                if (authStatus === 'LOGOUT') {
+                    return <Redirect to={'/logout'}/>;
+                }
                 if (authStatus === 'SUCCESS') {
                     if (new Date().getTime() / 1000 >= userData.exp) {
                         return <Redirect to={'/login'}/>;
